@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MagicLamp</string>
+    <string name="app_name">神灯</string>
 
     <string name="msg_network_error">当前网络不可用，请检查网络设置</string>
     <string name="msg_network_loading">加载中…</string>
