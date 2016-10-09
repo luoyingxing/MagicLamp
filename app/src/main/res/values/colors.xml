@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme_color">#17afcb</color>
+    <color name="home_bottom_tab_color">#555555</color>
+
+
+    <color name="actionBar_background">#00000000</color>
+
+    <!-- 通用颜色  -->
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="gray_21">#212121</color>
+    <color name="gray_33">#333333</color>
+    <color name="gray_66">#666666</color>
+    <color name="gray_70">#707070</color>
+    <color name="gray_72">#727272</color>
+    <color name="gray_80">#808080</color>
+    <color name="gray_a8">#a8a8a8</color>
+    <color name="gray_b8">#b8b8b8</color>
+    <color name="gray_da">#dadada</color>
+    <color name="gray_dc">#dcdcdc</color>
+    <color name="gray_f7">#f7f7f7</color>
+    <color name="gray_f1">#f1f1f1</color>
+    <color name="gray_ee">#eeeeee</color>
+    <color name="gray_e3">#e3e3e3</color>
+    <color name="gray_ed">#ededed</color>
+    <color name="gray_d8">#d8d8d8</color>
+    <color name="gray_d2">#d2d2d2</color>
+
+    <color name="blue_d6">#d6f1ff</color>
+    <color name="blue_03">#03a9f4</color>
+    <color name="blue_a6">#a6e3ff</color>
+    <color name="blue_c7">#c7fffc</color>
+
+    <color name="primary_red">#f44336</color>
+    <color name="primary_pink">#e91e63</color>
+
+    <color name="primary_purple">#9c27b0</color>
+    <color name="primary_deep_purple">#673ab7</color>
+    <color name="primary_indigo">#3f51b5</color>
+    <color name="primary_blue">#2196f3</color>
+    <color name="primary_light_blue">#03a9f4</color>
+    <color name="primary_cyan">#00bcd4</color>
+    <color name="primary_teal">#009688</color>
+    <color name="primary_green">#4caf50</color>
+    <color name="primary_light_green">#8bc34a</color>
+    <color name="green_9ccc65">#9ccc65</color>
+    <color name="green_b6ccb0">#b6ccb0</color>
+    <color name="primary_lime">#cddc39</color>
+    <color name="primary_yellow">#ffeb3b</color>
+    <color name="primary_amber">#ffc107</color>
+    <color name="primary_orange">#ff9800</color>
+    <color name="primary_deep_orange">#ff5722</color>
+    <color name="orange_ff7043">#ff7043</color>
+    <color name="orange_ffb290">#ffb290</color>
+    <color name="primary_brown">#795548</color>
+    <color name="primary_grey">#9e9e9e</color>
+    <color name="primary_blue_grey">#607d8b</color>
+</resources>
