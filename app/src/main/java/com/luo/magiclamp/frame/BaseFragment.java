@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.luo.magiclamp.R;
+import com.luo.magiclamp.frame.network.MyNoHttp;
 import com.luo.magiclamp.utils.Logger;
 import com.luo.magiclamp.utils.NetworkUtils;
 
@@ -86,6 +87,7 @@ public class BaseFragment extends HandleFragment {
         super.onDestroyView();
         hideIME();
         hideDialog();
+        MyNoHttp.cancelAll();
         mActivity.getRightImage().setImageDrawable(null);
         mActivity.setOnRightImageClick(null);
         mActivity.getRightText().setText("");
