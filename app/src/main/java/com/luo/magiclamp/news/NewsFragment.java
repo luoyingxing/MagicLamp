@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.BaseFragment;
-import com.luo.magiclamp.frame.ui.view.ViewPageFragment;
 import com.luo.magiclamp.frame.ui.view.ViewPagerIndicator;
 
 import java.util.ArrayList;
@@ -28,8 +27,9 @@ public class NewsFragment extends BaseFragment {
     private List<Fragment> mTabContents = new ArrayList<>();
     private FragmentPagerAdapter mAdapter;
     private ViewPager mViewPager;
-    private List<String> mDatas = Arrays.asList("社会", "体育", "探索", "数码",
-            "游戏", "财经", "股票", "热点", "民生");
+
+    private List<String> mData = Arrays.asList("头条", "娱乐", "军事", "汽车",
+            "财经", "笑话", "体育", "科技");
 
     private ViewPagerIndicator mIndicator;
 
@@ -51,14 +51,13 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-
     }
 
     private void init() {
         findView();
         initData();
         //设置Tab上的标题
-        mIndicator.setTabItemTitles(mDatas);
+        mIndicator.setTabItemTitles(mData);
         mViewPager.setAdapter(mAdapter);
         //设置关联的ViewPager
         mIndicator.setViewPager(mViewPager, 0);
@@ -72,8 +71,8 @@ public class NewsFragment extends BaseFragment {
 
     private void initData() {
         mTabContents.clear();
-        for (String data : mDatas) {
-            ViewPageFragment fragment = ViewPageFragment.newInstance(data);
+        for (int i = 0; i < mData.size(); i++) {
+            ViewPageFragment fragment = ViewPageFragment.newInstance(i + 1);
             mTabContents.add(fragment);
         }
 

@@ -6,5 +6,6 @@ package com.luo.magiclamp;
  */
 public class ApiURL {
     public static String SERVER_HOST = "";
-    public static final String API = "/upload/image";
+
+    public static final String API_NEWS_GET_NEWS = "http://api.dagoogle.cn/news/get-news";
 }
