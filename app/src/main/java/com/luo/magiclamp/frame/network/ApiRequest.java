@@ -1,6 +1,8 @@
 package com.luo.magiclamp.frame.network;
 
 import com.luo.magiclamp.Constant;
+import com.luo.magiclamp.MainApplication;
+import com.yolanda.nohttp.Headers;
 
 import java.util.Map;
 
@@ -26,4 +28,15 @@ public class ApiRequest<T> extends GsonRequest<T> {
         }
     }
 
+    @Override
+    public Headers headers() {
+        String cookie = MainApplication.getApp().getLoginCookie();
+        if (cookie == null) {
+            return super.headers();
+        }
+
+        Headers headers = super.headers();
+        headers.add("Cookie", cookie);
+        return headers;
+    }
 }
