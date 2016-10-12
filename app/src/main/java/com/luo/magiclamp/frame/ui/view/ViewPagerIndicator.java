@@ -31,6 +31,7 @@ import java.util.List;
  * create by luoyingxing on 2016/10/09
  */
 public class ViewPagerIndicator extends LinearLayout {
+    private static final String TAG = ViewPagerIndicator.class.getSimpleName();
     /**
      * 绘制三角形的画笔
      */
@@ -366,7 +367,7 @@ public class ViewPagerIndicator extends LinearLayout {
      */
     @Override
     protected void onFinishInflate() {
-        Log.e("TAG", "onFinishInflate");
+        Log.e(TAG, "onFinishInflate");
         super.onFinishInflate();
 
         int cCount = getChildCount();
