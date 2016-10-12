@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.yolanda.nohttp.Headers;
 import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Response;
 import com.yolanda.nohttp.rest.RestRequest;
 import com.yolanda.nohttp.tools.LinkedMultiValueMap;
 import com.yolanda.nohttp.tools.MultiValueMap;
@@ -140,7 +141,6 @@ public class GsonRequest<T> extends RestRequest<T> {
     @Override
     public T parseResponse(String url, Headers responseHeaders, byte[] responseBody) {
         if (responseBody == null || responseBody.length == 0) {
-            onFinish();
             return null;
         }
 
@@ -153,30 +153,54 @@ public class GsonRequest<T> extends RestRequest<T> {
         }
 
         if (json == null) {
-            onFinish();
             return null;
         }
 
-        onResponse(responseHeaders, responseBody);
-        Log.e(TAG, "Response= " + json);
-
-        if (ApiMsg.isApiMsg(json)) {
-            onError(new Gson().fromJson(json, ApiMsg.class));
-            onFinish();
+        try {
+            return new Gson().fromJson(json, getType());
+        } catch (JsonSyntaxException e) {
             return null;
-        } else {
-            try {
-                T obj = new Gson().fromJson(json, getType());
-                onSuccess(obj);
-                onFinish();
-                return obj;
+        }
+    }
 
-            } catch (JsonSyntaxException e) {
-                onError(ErrMsg.parseError());
-                onFinish();
-                return null;
+    /**
+     * 结果回调方法，运行在主线程的方法，可以直接更新UI
+     *
+     * @param response 服务器返回的结果
+     * @return 实体类型
+     */
+    public void parseResponse(Response<T> response) {
+        Headers responseHeaders = response.getHeaders();
+        byte[] responseBody = response.getByteArray();
+
+        if (responseBody != null && responseBody.length != 0) {
+            String json = null;
+
+            try {
+                json = new String(responseBody, getParamsEncoding());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            if (json != null) {
+                onResponse(responseHeaders, responseBody);
+                Log.e(TAG, "parseResponse= " + json);
+
+                if (ApiMsg.isApiMsg(json)) {
+                    onError(new Gson().fromJson(json, ApiMsg.class));
+                } else {
+                    try {
+                        T obj = new Gson().fromJson(json, getType());
+                        onSuccess(obj);
+                    } catch (JsonSyntaxException e) {
+                        onError(ErrMsg.parseError());
+                    }
+                }
             }
         }
+    }
+
+    protected void onStart(int what) {
     }
 
     protected void onSuccess(T result) {
@@ -185,10 +209,13 @@ public class GsonRequest<T> extends RestRequest<T> {
     protected void onError(ApiMsg apiMsg) {
     }
 
-    protected void onFinish() {
+    protected void onFinish(int what) {
     }
 
     protected void onResponse(Headers headers, byte[] responseBody) {
+    }
+
+    protected void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
     }
 
     @SuppressWarnings("unchecked")
