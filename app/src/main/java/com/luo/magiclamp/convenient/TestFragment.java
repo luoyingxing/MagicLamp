@@ -21,7 +21,7 @@ public class TestFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_health, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_test, container, false);
         init();
         return mRootView;
     }
