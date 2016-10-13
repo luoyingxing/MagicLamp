@@ -115,7 +115,7 @@ public class NewsImageView extends ImageView {
             lp.width = width / 5 * 2;
             lp.height = lp.width / 3 * 2;
         } else {
-            lp.width = (width - DpiUtils.dipTopx(16 + 18)) / 3;
+            lp.width = (width - DpiUtils.dipTopx(16 + 8)) / 3;
             lp.height = lp.width / 3 * 2;
         }
 
