@@ -114,11 +114,6 @@ public class NewsView implements Serializable {
             super(context, 0, newsLists);
         }
 
-        //        @Override
-//        public int getCount() {
-//            return super.getCount();
-//        }
-//
         @Override
         public int getItemViewType(int position) {
             return position % 2 == 0 ? 0 : 1;
@@ -141,28 +136,37 @@ public class NewsView implements Serializable {
                     case 0:
                         convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news_details_one, null);
                         viewHolderOne = new ViewHolderOne();
-                        viewHolderOne.title = (TextView) convertView.findViewById(R.id.tv_item_news_details_title);
+                        viewHolderOne.titleTV = (TextView) convertView.findViewById(R.id.tv_item_news_details_title);
                         viewHolderOne.imageView = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img);
+                        viewHolderOne.sourceTV = (TextView) convertView.findViewById(R.id.tv_item_news_details_source_one);
+                        viewHolderOne.replyTV = (TextView) convertView.findViewById(R.id.tv_item_news_details_reply_one);
                         convertView.setTag(viewHolderOne);
 
                         NewsDetails newsDetails = getItem(position);
 
-                        viewHolderOne.title.setText(newsDetails.getTitle());
+                        viewHolderOne.titleTV.setText(newsDetails.getTitle());
                         viewHolderOne.imageView.setHttpUri(Uri.parse(newsDetails.getTopImage()));
+                        viewHolderOne.sourceTV.setText(newsDetails.getSource());
+
+                        viewHolderOne.replyTV.setText(newsDetails.getReplyCount() + "");
 
                         break;
                     case 1:
                         convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news_details_two, null);
                         viewHolderTwo = new ViewHolderTwo();
-                        viewHolderTwo.title = (TextView) convertView.findViewById(R.id.tv_item_news_details_title_two);
+                        viewHolderTwo.titleTV = (TextView) convertView.findViewById(R.id.tv_item_news_details_title_two);
                         viewHolderTwo.imageViewOne = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img_one);
                         viewHolderTwo.imageViewTwo = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img_two);
                         viewHolderTwo.imageViewThree = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img_three);
+                        viewHolderTwo.sourceTV = (TextView) convertView.findViewById(R.id.tv_item_news_details_source_two);
+                        viewHolderTwo.replyTV = (TextView) convertView.findViewById(R.id.tv_item_news_details_reply_two);
                         convertView.setTag(viewHolderTwo);
 
                         NewsDetails newsTwo = getItem(position);
 
-                        viewHolderTwo.title.setText(newsTwo.getTitle());
+                        viewHolderTwo.titleTV.setText(newsTwo.getTitle());
+                        viewHolderTwo.sourceTV.setText(newsTwo.getSource());
+                        viewHolderTwo.replyTV.setText(newsTwo.getReplyCount() + "");
                         viewHolderTwo.imageViewOne.setHttpUri(Uri.parse(newsTwo.getTopImage()));
                         viewHolderTwo.imageViewTwo.setHttpUri(Uri.parse(newsTwo.getTextImage0()));
                         viewHolderTwo.imageViewThree.setHttpUri(Uri.parse(newsTwo.getTextImage1()));
@@ -176,7 +180,7 @@ public class NewsView implements Serializable {
 
                         NewsDetails newsOne = getItem(position);
 
-                        viewHolderOne.title.setText(newsOne.getTitle());
+                        viewHolderOne.titleTV.setText(newsOne.getTitle());
                         viewHolderOne.imageView.setHttpUri(Uri.parse(newsOne.getTopImage()));
 
                         break;
@@ -185,7 +189,9 @@ public class NewsView implements Serializable {
 
                         NewsDetails newsTwo = getItem(position);
 
-                        viewHolderTwo.title.setText(newsTwo.getTitle());
+                        viewHolderTwo.titleTV.setText(newsTwo.getTitle());
+                        viewHolderTwo.sourceTV.setText(newsTwo.getSource());
+                        viewHolderTwo.replyTV.setText(newsTwo.getReplyCount() + "");
                         viewHolderTwo.imageViewOne.setHttpUri(Uri.parse(newsTwo.getTopImage()));
                         viewHolderTwo.imageViewTwo.setHttpUri(Uri.parse(newsTwo.getTextImage0()));
                         viewHolderTwo.imageViewThree.setHttpUri(Uri.parse(newsTwo.getTextImage1()));
@@ -198,12 +204,16 @@ public class NewsView implements Serializable {
         }
 
         class ViewHolderOne {
-            TextView title;
+            TextView titleTV;
+            TextView sourceTV;
+            TextView replyTV;
             NewsImageView imageView;
         }
 
         class ViewHolderTwo {
-            TextView title;
+            TextView titleTV;
+            TextView sourceTV;
+            TextView replyTV;
             NewsImageView imageViewOne;
             NewsImageView imageViewTwo;
             NewsImageView imageViewThree;

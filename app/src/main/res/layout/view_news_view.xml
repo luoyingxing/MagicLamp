@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/divider_line_color"
-        android:dividerHeight="2dp" />
+        android:dividerHeight="2dp"
+        android:scrollbarStyle="outsideOverlay" />
 
     <include layout="@layout/pull_load_more" />
 
