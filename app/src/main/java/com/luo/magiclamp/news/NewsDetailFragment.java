@@ -1,13 +1,19 @@
 package com.luo.magiclamp.news;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.NewsDetails;
 import com.luo.magiclamp.frame.BaseFragment;
+import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
+import com.luo.magiclamp.utils.TimeUtils;
 
 /**
  * NewsDetailFragment
@@ -17,6 +23,14 @@ import com.luo.magiclamp.frame.BaseFragment;
 public class NewsDetailFragment extends BaseFragment {
     public static final String PARAM = "newsDetails";
     private View mRootView;
+
+    private TextView mTitleTV;
+    private TextView mSourceTV;
+    private TextView mDigestTV;
+    private TextView mContentV;
+    private NewsDetailImageView mImageOne;
+    private NewsDetailImageView mImageTwo;
+    private NewsDetailImageView mImageThree;
 
     private NewsDetails mNewsDetails;
 
@@ -49,9 +63,50 @@ public class NewsDetailFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivity.setTitle(mNewsDetails.getTitle());
+        mActivity.setTitle("详情");
     }
 
     private void init() {
+        findView();
+        initData();
     }
+
+    private void findView() {
+        mTitleTV = (TextView) mRootView.findViewById(R.id.tv_news_details_title);
+        mSourceTV = (TextView) mRootView.findViewById(R.id.tv_news_details_source);
+        mDigestTV = (TextView) mRootView.findViewById(R.id.tv_news_details_digest);
+        mContentV = (TextView) mRootView.findViewById(R.id.tv_news_details_content);
+        mImageOne = (NewsDetailImageView) mRootView.findViewById(R.id.iv_news_details_image_one);
+        mImageTwo = (NewsDetailImageView) mRootView.findViewById(R.id.iv_news_details_image_two);
+        mImageThree = (NewsDetailImageView) mRootView.findViewById(R.id.iv_news_details_image_three);
+    }
+
+    private void initData() {
+        mTitleTV.setText(mNewsDetails.getTitle());
+        mSourceTV.setText(String.format("%s  %s", mNewsDetails.getSource(),
+                TimeUtils.longToMonthDay(System.currentTimeMillis())));
+        mDigestTV.setText(mNewsDetails.getDigest());
+        mContentV.setText(Html.fromHtml(mNewsDetails.getContent()));
+
+
+        if (TextUtils.isEmpty(mNewsDetails.getTopImage())) {
+            mImageOne.setVisibility(View.GONE);
+        } else {
+            mImageOne.setHttpUri(Uri.parse(mNewsDetails.getTopImage()));
+        }
+
+        if (TextUtils.isEmpty(mNewsDetails.getTextImage0())) {
+            mImageTwo.setVisibility(View.GONE);
+        } else {
+            mImageTwo.setHttpUri(Uri.parse(mNewsDetails.getTextImage0()));
+        }
+
+        if (TextUtils.isEmpty(mNewsDetails.getTextImage1())) {
+            mImageThree.setVisibility(View.GONE);
+        } else {
+            mImageThree.setHttpUri(Uri.parse(mNewsDetails.getTextImage1()));
+        }
+    }
+
+
 }
