@@ -20,6 +20,10 @@ import com.luo.magiclamp.R;
 public class WindowUtils {
 
     public static void statusBar(AppCompatActivity activity) {
+        statusBar(activity, R.color.theme_color);
+    }
+
+    public static void statusBar(AppCompatActivity activity, int color) {
         // only for sdk >= 19
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = activity.getWindow();
@@ -31,7 +35,7 @@ public class WindowUtils {
 
             View mTopView = mContentView != null ? mContentView.getChildAt(0) : null;
             if (mTopView != null && mTopView.getLayoutParams() != null && mTopView.getLayoutParams().height == statusBarHeight) {
-                mTopView.setBackgroundColor(activity.getApplicationContext().getResources().getColor(R.color.theme_color));
+                mTopView.setBackgroundColor(activity.getApplicationContext().getResources().getColor(color));
                 return;
             }
             if (mTopView != null) {
@@ -40,7 +44,7 @@ public class WindowUtils {
 
             mTopView = new View(activity.getApplicationContext());
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
-            mTopView.setBackgroundColor(activity.getApplicationContext().getResources().getColor(R.color.theme_color));
+            mTopView.setBackgroundColor(activity.getApplicationContext().getResources().getColor(color));
             if (mContentView != null) {
                 mContentView.addView(mTopView, 0, lp);
             }
