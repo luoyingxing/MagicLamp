@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
-import com.luo.magiclamp.convenient.TestFragment;
 import com.luo.magiclamp.entity.News;
 import com.luo.magiclamp.entity.NewsDetails;
 import com.luo.magiclamp.frame.BaseActivity;
@@ -84,7 +83,8 @@ public class NewsView implements Serializable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, BaseActivity.class);
-                intent.putExtra(Constant.ARGS_FRAGMENT_NAME, TestFragment.class.getName());
+                intent.putExtra(Constant.ARGS_FRAGMENT_NAME, NewsDetailFragment.class.getName());
+                intent.putExtra(NewsDetailFragment.PARAM, mListViewAdapter.getItem(position));
                 mContext.startActivity(intent);
             }
         });
