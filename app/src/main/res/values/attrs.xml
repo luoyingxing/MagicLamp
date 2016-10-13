@@ -5,4 +5,8 @@
         <attr name="count" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="NewsImageView">
+        <attr name="single" format="boolean" />
+    </declare-styleable>
+
 </resources>

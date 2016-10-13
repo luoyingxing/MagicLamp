@@ -59,11 +59,19 @@
 
     </LinearLayout>
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:contentDescription="@string/app_name"
-        android:src="@mipmap/bg_main_top" />
+        android:layout_weight="3">
+
+        <com.luo.magiclamp.frame.ui.view.NewsImageView
+            android:id="@+id/iv_item_news_details_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/bg_main_top" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.luo.magiclamp.news;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.luo.magiclamp.frame.network.ApiMsg;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
+import com.luo.magiclamp.frame.ui.view.NewsImageView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class NewsView implements Serializable {
     private View mRootView;
     private Context mContext;
     private int mTableNum;
+
+    private int mPage = 1;
 
     private ListViewAdapter mListViewAdapter;
 
@@ -90,14 +94,16 @@ public class NewsView implements Serializable {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 Log.e(TAG, "onRefresh");
-                viewHolder.pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                mListViewAdapter.clear();
+                mPage = 1;
+                loadNews();
 
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 Log.e(TAG, "onLoadMore");
-                viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                loadNews();
             }
         });
     }
@@ -130,6 +136,7 @@ public class NewsView implements Serializable {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news_details, null);
                 viewHolder = new ViewHolder();
                 viewHolder.title = (TextView) convertView.findViewById(R.id.tv_item_news_details_title);
+                viewHolder.imageView = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -138,12 +145,14 @@ public class NewsView implements Serializable {
             NewsDetails newsDetails = getItem(position);
 
             viewHolder.title.setText(newsDetails.getTitle());
+            viewHolder.imageView.setHttpUri(Uri.parse(newsDetails.getTopImage()));
 
             return convertView;
         }
 
         class ViewHolder {
             TextView title;
+            NewsImageView imageView;
         }
     }
 
@@ -151,7 +160,13 @@ public class NewsView implements Serializable {
         new ApiRequest<News>(ApiURL.API_NEWS_GET_NEWS) {
             @Override
             protected void onSuccess(News result) {
+                if (result.getData().size() == Constant.PAGE_SIZE_DEFAULT) {
+                    mPage++;
+                }
+
                 mListViewAdapter.addAll(result.getData());
+                viewHolder.pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
@@ -165,6 +180,7 @@ public class NewsView implements Serializable {
             }
 
         }.addParam("tableNum", mTableNum)
+                .addParam("page", mPage)
                 .addParam("pagesize", Constant.PAGE_SIZE_DEFAULT)
                 .get();
 
