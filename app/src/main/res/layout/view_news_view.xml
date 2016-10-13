@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pl_news_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
+    <include layout="@layout/pull_refresh_head" />
+
+    <com.luo.magiclamp.frame.ui.pullableview.PullListView
         android:id="@+id/lv_news_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:divider="@color/divider_line_color"
         android:dividerHeight="2dp" />
 
-</LinearLayout>
+    <include layout="@layout/pull_load_more" />
+
+</com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout>

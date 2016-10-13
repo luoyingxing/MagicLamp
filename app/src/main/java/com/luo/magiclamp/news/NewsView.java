@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.luo.magiclamp.ApiURL;
@@ -20,6 +19,8 @@ import com.luo.magiclamp.entity.NewsDetails;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.network.ApiMsg;
 import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.ui.pullableview.PullListView;
+import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -63,7 +64,8 @@ public class NewsView implements Serializable {
         if (mRootView == null) {
             mRootView = LayoutInflater.from(mContext).inflate(R.layout.view_news_view, null);
             viewHolder = new ViewHolder();
-            viewHolder.listView = (ListView) mRootView.findViewById(R.id.lv_news_details);
+            viewHolder.listView = (PullListView) mRootView.findViewById(R.id.lv_news_details);
+            viewHolder.pullToRefreshLayout = (PullToRefreshLayout) mRootView.findViewById(R.id.pl_news_details);
             mRootView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) mRootView.getTag();
@@ -80,7 +82,22 @@ public class NewsView implements Serializable {
                 Intent intent = new Intent(mContext, BaseActivity.class);
                 intent.putExtra(Constant.ARGS_FRAGMENT_NAME, TestFragment.class.getName());
                 mContext.startActivity(intent);
-//                Log.e(TAG, "setAdapter");
+            }
+        });
+
+
+        viewHolder.pullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                Log.e(TAG, "onRefresh");
+                viewHolder.pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+
+            }
+
+            @Override
+            public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+                Log.e(TAG, "onLoadMore");
+                viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
     }
@@ -154,6 +171,7 @@ public class NewsView implements Serializable {
     }
 
     private class ViewHolder {
-        ListView listView;
+        PullListView listView;
+        PullToRefreshLayout pullToRefreshLayout;
     }
 }
