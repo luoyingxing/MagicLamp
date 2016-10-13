@@ -1,8 +1,6 @@
 package com.luo.magiclamp.news;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.ui.view.ViewPagerIndicator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,11 +21,10 @@ import java.util.List;
 public class NewsFragment extends BaseFragment {
     private View mRootView;
 
-    private List<Fragment> mTabContents = new ArrayList<>();
-    private FragmentPagerAdapter mAdapter;
+    private ViewPagerAdapter mAdapter;
     private ViewPager mViewPager;
 
-    private List<String> mData = Arrays.asList("头条", "娱乐", "军事", "汽车",
+    private List<String> mTitles = Arrays.asList("头条", "娱乐", "军事", "汽车",
             "财经", "笑话", "体育", "科技");
 
     private ViewPagerIndicator mIndicator;
@@ -55,13 +51,7 @@ public class NewsFragment extends BaseFragment {
 
     private void init() {
         findView();
-        initData();
-        //设置Tab上的标题
-        mIndicator.setTabItemTitles(mData);
-        mViewPager.setAdapter(mAdapter);
-        //设置关联的ViewPager
-        mIndicator.setViewPager(mViewPager, 0);
-
+        setAdapter();
     }
 
     private void findView() {
@@ -69,25 +59,14 @@ public class NewsFragment extends BaseFragment {
         mIndicator = (ViewPagerIndicator) mRootView.findViewById(R.id.news_indicator);
     }
 
-    private void initData() {
-        mTabContents.clear();
-        for (int i = 0; i < mData.size(); i++) {
-            ViewPageFragment fragment = ViewPageFragment.newInstance(i + 1);
-            mTabContents.add(fragment);
-        }
+    private void setAdapter() {
+        mAdapter = new ViewPagerAdapter(getContext(), mTitles);
 
-        mAdapter = new FragmentPagerAdapter(mActivity.getSupportFragmentManager()) {
-            @Override
-            public int getCount() {
-                return mTabContents.size();
-            }
-
-            @Override
-            public Fragment getItem(int position) {
-                return mTabContents.get(position);
-            }
-        };
+        //设置Tab上的标题
+        mIndicator.setTabItemTitles(mTitles);
+        mViewPager.setAdapter(mAdapter);
+        //设置关联的ViewPager
+        mIndicator.setViewPager(mViewPager, 0);
     }
-
 
 }
