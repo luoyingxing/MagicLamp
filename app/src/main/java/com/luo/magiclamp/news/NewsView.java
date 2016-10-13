@@ -114,45 +114,99 @@ public class NewsView implements Serializable {
             super(context, 0, newsLists);
         }
 
-//        @Override
+        //        @Override
 //        public int getCount() {
 //            return super.getCount();
 //        }
 //
-//        @Override
-//        public int getItemViewType(int position) {
-//            return ITEM_VIEW_TYPE;
-//        }
-//
-//        @Override
-//        public int getViewTypeCount() {
-//            return ITEM_VIEW_TYPE;
-//        }
+        @Override
+        public int getItemViewType(int position) {
+            return position % 2 == 0 ? 0 : 1;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 2;
+        }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
+            ViewHolderOne viewHolderOne;
+            ViewHolderTwo viewHolderTwo;
+
+            int type = getItemViewType(position);
             if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news_details, null);
-                viewHolder = new ViewHolder();
-                viewHolder.title = (TextView) convertView.findViewById(R.id.tv_item_news_details_title);
-                viewHolder.imageView = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img);
-                convertView.setTag(viewHolder);
+
+                switch (type) {
+                    case 0:
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news_details_one, null);
+                        viewHolderOne = new ViewHolderOne();
+                        viewHolderOne.title = (TextView) convertView.findViewById(R.id.tv_item_news_details_title);
+                        viewHolderOne.imageView = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img);
+                        convertView.setTag(viewHolderOne);
+
+                        NewsDetails newsDetails = getItem(position);
+
+                        viewHolderOne.title.setText(newsDetails.getTitle());
+                        viewHolderOne.imageView.setHttpUri(Uri.parse(newsDetails.getTopImage()));
+
+                        break;
+                    case 1:
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_news_details_two, null);
+                        viewHolderTwo = new ViewHolderTwo();
+                        viewHolderTwo.title = (TextView) convertView.findViewById(R.id.tv_item_news_details_title_two);
+                        viewHolderTwo.imageViewOne = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img_one);
+                        viewHolderTwo.imageViewTwo = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img_two);
+                        viewHolderTwo.imageViewThree = (NewsImageView) convertView.findViewById(R.id.iv_item_news_details_img_three);
+                        convertView.setTag(viewHolderTwo);
+
+                        NewsDetails newsTwo = getItem(position);
+
+                        viewHolderTwo.title.setText(newsTwo.getTitle());
+                        viewHolderTwo.imageViewOne.setHttpUri(Uri.parse(newsTwo.getTopImage()));
+                        viewHolderTwo.imageViewTwo.setHttpUri(Uri.parse(newsTwo.getTextImage0()));
+                        viewHolderTwo.imageViewThree.setHttpUri(Uri.parse(newsTwo.getTextImage1()));
+
+                        break;
+                }
             } else {
-                viewHolder = (ViewHolder) convertView.getTag();
+                switch (type) {
+                    case 0:
+                        viewHolderOne = (ViewHolderOne) convertView.getTag();
+
+                        NewsDetails newsOne = getItem(position);
+
+                        viewHolderOne.title.setText(newsOne.getTitle());
+                        viewHolderOne.imageView.setHttpUri(Uri.parse(newsOne.getTopImage()));
+
+                        break;
+                    case 1:
+                        viewHolderTwo = (ViewHolderTwo) convertView.getTag();
+
+                        NewsDetails newsTwo = getItem(position);
+
+                        viewHolderTwo.title.setText(newsTwo.getTitle());
+                        viewHolderTwo.imageViewOne.setHttpUri(Uri.parse(newsTwo.getTopImage()));
+                        viewHolderTwo.imageViewTwo.setHttpUri(Uri.parse(newsTwo.getTextImage0()));
+                        viewHolderTwo.imageViewThree.setHttpUri(Uri.parse(newsTwo.getTextImage1()));
+                        break;
+                }
             }
 
-            NewsDetails newsDetails = getItem(position);
-
-            viewHolder.title.setText(newsDetails.getTitle());
-            viewHolder.imageView.setHttpUri(Uri.parse(newsDetails.getTopImage()));
 
             return convertView;
         }
 
-        class ViewHolder {
+        class ViewHolderOne {
             TextView title;
             NewsImageView imageView;
+        }
+
+        class ViewHolderTwo {
+            TextView title;
+            NewsImageView imageViewOne;
+            NewsImageView imageViewTwo;
+            NewsImageView imageViewThree;
         }
     }
 
