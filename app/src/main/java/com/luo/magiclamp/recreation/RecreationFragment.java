@@ -140,12 +140,6 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 mTextJokeList.addAll(result.getShowApiResBody().getContentlist());
             }
 
-
-            @Override
-            protected void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
-                super.onFailed(what, url, tag, exception, responseCode, networkMillis);
-            }
-
             @Override
             protected void onFinish(int what) {
                 loadImgJoke();
@@ -162,7 +156,6 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 mPage++;
                 mImgJokeList.clear();
                 mImgJokeList.addAll(result.getShowApiResBody().getContentlist());
-                showJoke();
             }
 
             @Override
@@ -170,6 +163,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 hideDialog();
                 mPullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                showJoke();
             }
 
         }.addParam("page", mPage)
