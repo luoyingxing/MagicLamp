@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_recreation_joke_text"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_item_joke_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="今天上厕所忘带纸了"
+        android:textColor="@color/gray_33"
+        android:textSize="16sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="3dp" />
+
+    <TextView
+        android:id="@+id/tv_item_joke_text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="今天上厕所忘带纸了，好在我够机智，打电话说：喂，给我来份外卖啊！\r\n外卖小哥说：好的，请问先生您的地址在哪？\r\n我说：就在你家店的东边的公厕右手边的第三个坑，记得多带点餐巾纸啊。。。"
+        android:textSize="16sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+</LinearLayout>

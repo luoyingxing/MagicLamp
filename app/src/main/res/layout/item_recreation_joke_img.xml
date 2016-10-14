@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_joke_img_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="今天上厕所忘带纸了"
+        android:textColor="@color/gray_33"
+        android:textSize="16sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="3dp" />
+
+    <com.luo.magiclamp.frame.ui.view.NewsDetailImageView
+        android:id="@+id/tv_item_joke_img_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/bg_main_top" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+</LinearLayout>
