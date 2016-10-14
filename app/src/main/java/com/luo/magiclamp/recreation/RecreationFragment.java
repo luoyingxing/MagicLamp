@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.luo.magiclamp.ApiURL;
@@ -23,6 +23,8 @@ import com.luo.magiclamp.entity.Joke;
 import com.luo.magiclamp.entity.JokeList;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.ui.pullableview.PullListView;
+import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
 import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
 
 import java.util.ArrayList;
@@ -36,7 +38,8 @@ import java.util.List;
 public class RecreationFragment extends BaseFragment implements View.OnTouchListener {
     private View mRootView;
     private GridView mGridView;
-    private ListView mListView;
+    private PullListView mListView;
+    private PullToRefreshLayout mPullToRefreshLayout;
 
     private GridViewAdapter mGridViewAdapter;
     private ListViewAdapter mListViewAdapter;
@@ -80,7 +83,29 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
     private void findView() {
         mGridView = (GridView) mRootView.findViewById(R.id.gv_recreation_top);
-        mListView = (ListView) mRootView.findViewById(R.id.lv_recreation_content);
+        mPullToRefreshLayout = (PullToRefreshLayout) mRootView.findViewById(R.id.pl_recreation_content);
+        mListView = (PullListView) mRootView.findViewById(R.id.lv_recreation_content);
+
+        mPullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                mLog.e("onRefresh");
+                mListViewAdapter.clear();
+                mJokeList.clear();
+                mTextJokeList.clear();
+                mImgJokeList.clear();
+                mPage = 1;
+                loadTextJoke();
+
+            }
+
+            @Override
+            public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+                mLog.e("onLoadMore");
+                mJokeList.clear();
+                loadTextJoke();
+            }
+        });
     }
 
     private void setAdapter() {
@@ -113,13 +138,16 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
             protected void onSuccess(Joke result) {
                 mTextJokeList.clear();
                 mTextJokeList.addAll(result.getShowApiResBody().getContentlist());
-                loadImgJoke();
             }
 
 
             @Override
             protected void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
                 super.onFailed(what, url, tag, exception, responseCode, networkMillis);
+            }
+
+            @Override
+            protected void onFinish(int what) {
                 loadImgJoke();
             }
 
@@ -135,12 +163,13 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 mImgJokeList.clear();
                 mImgJokeList.addAll(result.getShowApiResBody().getContentlist());
                 showJoke();
-
             }
 
             @Override
             protected void onFinish(int what) {
                 hideDialog();
+                mPullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
         }.addParam("page", mPage)

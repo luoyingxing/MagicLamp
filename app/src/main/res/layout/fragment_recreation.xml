@@ -14,14 +14,26 @@
         android:scrollbars="none"
         android:stretchMode="columnWidth" />
 
-    <ListView
-        android:id="@+id/lv_recreation_content"
+    <com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout
+        android:id="@+id/pl_recreation_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/white"
-        android:dividerHeight="16dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:scrollbarStyle="outsideOverlay" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/pull_refresh_head" />
+
+        <com.luo.magiclamp.frame.ui.pullableview.PullListView
+            android:id="@+id/lv_recreation_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/white"
+            android:dividerHeight="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:scrollbarStyle="outsideOverlay" />
+
+        <include layout="@layout/pull_load_more" />
+
+    </com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout>
 
 </LinearLayout>
