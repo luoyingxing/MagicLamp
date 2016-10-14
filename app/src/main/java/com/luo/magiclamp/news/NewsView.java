@@ -229,13 +229,12 @@ public class NewsView implements Serializable {
                 }
 
                 mListViewAdapter.addAll(result.getData());
-                viewHolder.pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-                viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
             protected void onFinish(int what) {
-                super.onFinish(what);
+                viewHolder.pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
