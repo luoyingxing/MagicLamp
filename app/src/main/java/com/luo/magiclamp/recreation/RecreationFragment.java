@@ -3,6 +3,7 @@ package com.luo.magiclamp.recreation;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -17,9 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luo.magiclamp.ApiURL;
+import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Joke;
 import com.luo.magiclamp.entity.JokeList;
+import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
@@ -202,8 +205,26 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            showToast(mGridViewAdapter.getItem(position).getTitle());
+            switch (position) {
+                case 0:
+                    switchFragment(ChatFragment.class);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
         }
+    }
+
+    private void switchFragment(Class<?> clazz) {
+        Intent intent = new Intent(mActivity, BaseActivity.class);
+        intent.putExtra(Constant.ARGS_FRAGMENT_NAME, clazz.getName());
+        startActivity(intent);
     }
 
     private class ListClickListener implements AdapterView.OnItemClickListener {
