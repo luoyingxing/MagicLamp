@@ -119,6 +119,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
     }
 
     private void loadGridViewData() {
+        mTitleList.clear();
         mTitleList.add(new Title("神灯聊天", R.mipmap.ic_launcher));
         mTitleList.add(new Title("星座运势", R.mipmap.ic_launcher));
         mTitleList.add(new Title("星座配对", R.mipmap.ic_launcher));
