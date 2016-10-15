@@ -6,7 +6,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -138,6 +137,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
             @Override
             protected void onSuccess(Joke result) {
                 mTextJokeList.clear();
+                mLog.e("text -- " + result.getShowApiResBody().getContentlist().size());
                 mTextJokeList.addAll(result.getShowApiResBody().getContentlist());
             }
 
@@ -156,7 +156,9 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
             protected void onSuccess(Joke result) {
                 mPage++;
                 mImgJokeList.clear();
+                mLog.e("Img -- " + result.getShowApiResBody().getContentlist().size());
                 mImgJokeList.addAll(result.getShowApiResBody().getContentlist());
+                showJoke();
             }
 
             @Override
@@ -164,7 +166,6 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 hideDialog();
                 mPullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
-                showJoke();
             }
 
         }.addParam("page", mPage)
@@ -193,6 +194,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 mJokeList.add(mImgJokeList.get(j));
             }
         }
+
         mListViewAdapter.addAll(mJokeList);
     }
 
