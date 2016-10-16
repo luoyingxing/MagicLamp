@@ -2,26 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/icon_chat_photo_app" />
 
-    <TextView
-        android:id="@+id/tv_item_chat_app_content"
+    <Space
+        android:layout_width="6dp"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="没人愿意和说起来没完的人聊天。没人愿意和说起来没完的人聊天。"
-        android:textSize="16sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="小图:" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />
+
+        <TextView
+            android:id="@+id/tv_item_chat_app_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chat_app"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <Space
-        android:layout_width="60dp"
+        android:layout_width="66dp"
         android:layout_height="match_parent" />
 
 </LinearLayout>

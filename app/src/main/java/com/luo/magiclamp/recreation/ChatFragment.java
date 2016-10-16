@@ -85,6 +85,7 @@ public class ChatFragment extends BaseFragment implements View.OnTouchListener {
     private void setAdapter() {
         mListViewAdapter = new ListViewAdapter(getActivity());
         mListView.setAdapter(mListViewAdapter);
+        mListViewAdapter.add(new Chat("主人您来啦，要问宝宝什么问题呢？", 0));
     }
 
     @Override
