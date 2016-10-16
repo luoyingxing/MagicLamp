@@ -34,5 +34,9 @@ public class Constant {
      * turing id
      */
     public static final String API_TURING_ID = "eb2edb736";
+    /**
+     * constellation chart key
+     */
+    public static final String API_KEY_CONSTELLATON_CHART = "9cf1b4ca6d7a47b885ab01173b6fffcc";
 
 }
