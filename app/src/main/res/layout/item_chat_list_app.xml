@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:clickable="false"
     android:paddingBottom="8dp"
     android:paddingTop="8dp">
 
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="小图:" />
+            android:text="小神灯:" />
 
         <Space
             android:layout_width="match_parent"
