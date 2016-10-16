@@ -3,9 +3,8 @@ package com.luo.magiclamp.recreation;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,14 +15,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.luo.magiclamp.ApiURL;
+import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Chat;
-import com.luo.magiclamp.entity.JokeList;
 import com.luo.magiclamp.frame.BaseFragment;
-import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
+import com.luo.magiclamp.frame.network.ApiRequest;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * ChatFragment
@@ -31,10 +31,10 @@ import java.util.List;
  * Created by Administrator on 2016/10/15.
  */
 public class ChatFragment extends BaseFragment implements View.OnTouchListener {
+    private static final int TYPE = 1;
     private View mRootView;
     private ListView mListView;
     private EditText mContentEd;
-    private ImageView mSendIV;
 
     private ListViewAdapter mListViewAdapter;
 
@@ -62,23 +62,22 @@ public class ChatFragment extends BaseFragment implements View.OnTouchListener {
         setAdapter();
     }
 
-    private int type = 0;
-
     private void findView() {
         mListView = (ListView) mRootView.findViewById(R.id.lv_chat_view);
         mContentEd = (EditText) mRootView.findViewById(R.id.ed_chat_content);
-        mSendIV = (ImageView) mRootView.findViewById(R.id.iv_chat_send);
+        ImageView mSendIV = (ImageView) mRootView.findViewById(R.id.iv_chat_send);
         mSendIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("send");
-                if (type == 0){
-                    type++;
-                    mListViewAdapter.add(new Chat("空气为什么是蓝色的", type));
-                }else {
-                    type --;
-                    mListViewAdapter.add(new Chat("阳光进入大气时阳光进入大气时,阳光进入大气时", type));
+                String content = mContentEd.getText().toString().trim();
+                mContentEd.setText("");
+                if (TextUtils.isEmpty(content)) {
+                    showToast("请输入内容！");
+                } else {
+                    mListViewAdapter.add(new Chat(content, TYPE));
+                    loadTuringJoke(content);
                 }
+
             }
         });
     }
@@ -98,6 +97,31 @@ public class ChatFragment extends BaseFragment implements View.OnTouchListener {
                 break;
         }
         return false;
+    }
+
+    private void loadTuringJoke(String info) {
+        String infoString = null;
+        try {
+            infoString = URLEncoder.encode(info, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        new ApiRequest<Chat>(ApiURL.API_CHAT_TURING, true) {
+
+            @Override
+            protected void onSuccess(Chat result) {
+                mListViewAdapter.add(result);
+                mListView.setSelection(mListViewAdapter.getCount() - 1);
+            }
+
+            @Override
+            protected void onFinish(int what) {
+            }
+
+        }.addParam("key", Constant.API_TURING_KEY)
+                .addParam("userid", Constant.API_TURING_ID)
+                .addParam("info", infoString)
+                .get();
     }
 
 

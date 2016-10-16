@@ -26,5 +26,13 @@ public class Constant {
      * apiKey
      */
     public static final String API_KEY = "apikey";
+    /**
+     * turing key
+     */
+    public static final String API_TURING_KEY = "879a6cb3afb84dbf4fc84a1df2ab7319";
+    /**
+     * turing id
+     */
+    public static final String API_TURING_ID = "eb2edb736";
 
 }
