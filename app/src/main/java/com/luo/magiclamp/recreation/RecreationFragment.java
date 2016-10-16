@@ -210,6 +210,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                     switchFragment(ChatFragment.class);
                     break;
                 case 1:
+                    switchFragment(ConstellationChartFragment.class);
                     break;
                 case 2:
                     break;
