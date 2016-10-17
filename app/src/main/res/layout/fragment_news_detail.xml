@@ -88,13 +88,10 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <TextView
-            android:id="@+id/tv_news_details_content"
+        <com.luo.magiclamp.frame.ui.scroll.ScrollWebView
+            android:id="@+id/wv_news_details_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="6dp"
-            android:text="洛伦扎纳不再准备明年的美菲联合军演洛伦扎纳不再准备明年的美菲联合军演"
-            android:textSize="17sp" />
+            android:layout_height="wrap_content" />
 
         <Space
             android:layout_width="match_parent"

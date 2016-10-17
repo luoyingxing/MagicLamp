@@ -2,18 +2,21 @@ package com.luo.magiclamp.news;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.widget.TextView;
 
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.NewsDetails;
 import com.luo.magiclamp.frame.BaseFragment;
+import com.luo.magiclamp.frame.ui.scroll.ScrollWebView;
 import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
 import com.luo.magiclamp.utils.TimeUtils;
+
+import cz.msebera.android.httpclient.util.EncodingUtils;
 
 /**
  * NewsDetailFragment
@@ -27,10 +30,10 @@ public class NewsDetailFragment extends BaseFragment {
     private TextView mTitleTV;
     private TextView mSourceTV;
     private TextView mDigestTV;
-    private TextView mContentV;
     private NewsDetailImageView mImageOne;
     private NewsDetailImageView mImageTwo;
     private NewsDetailImageView mImageThree;
+    private ScrollWebView mWebView;
 
     private NewsDetails mNewsDetails;
 
@@ -75,19 +78,29 @@ public class NewsDetailFragment extends BaseFragment {
         mTitleTV = (TextView) mRootView.findViewById(R.id.tv_news_details_title);
         mSourceTV = (TextView) mRootView.findViewById(R.id.tv_news_details_source);
         mDigestTV = (TextView) mRootView.findViewById(R.id.tv_news_details_digest);
-        mContentV = (TextView) mRootView.findViewById(R.id.tv_news_details_content);
         mImageOne = (NewsDetailImageView) mRootView.findViewById(R.id.iv_news_details_image_one);
         mImageTwo = (NewsDetailImageView) mRootView.findViewById(R.id.iv_news_details_image_two);
         mImageThree = (NewsDetailImageView) mRootView.findViewById(R.id.iv_news_details_image_three);
+        mWebView = (ScrollWebView) mRootView.findViewById(R.id.wv_news_details_content);
     }
 
     private void initData() {
         mTitleTV.setText(mNewsDetails.getTitle());
         mSourceTV.setText(String.format("%s  %s", mNewsDetails.getSource(),
                 TimeUtils.longToMonthDay(System.currentTimeMillis())));
-        mDigestTV.setText(mNewsDetails.getDigest());
-        mContentV.setText(Html.fromHtml(mNewsDetails.getContent()));
+        mDigestTV.setText("【摘要】" + mNewsDetails.getDigest() + "......");
 
+        WebSettings settings = mWebView.getSettings();
+        settings.setDefaultFontSize(17);
+
+        String strUrl = "<html> \n" +
+                "<head> \n" +
+                "<style type=\"text/css\"> \n" +
+                "body {text-align:justify; font-size: " + 17 + "px; line-height: " + 26 + "px; color:" + "#333333" + "}\n" +
+                "</style> \n" +
+                "</head> \n" +
+                "<body>" + EncodingUtils.getString(mNewsDetails.getContent().getBytes(), "UTF-8") + "</body> \n </html>";
+        mWebView.loadDataWithBaseURL(null, strUrl, "text/html; charset=UTF-8", null, null);
 
         if (TextUtils.isEmpty(mNewsDetails.getTopImage())) {
             mImageOne.setVisibility(View.GONE);
@@ -107,6 +120,5 @@ public class NewsDetailFragment extends BaseFragment {
             mImageThree.setHttpUri(Uri.parse(mNewsDetails.getTextImage1()));
         }
     }
-
 
 }
