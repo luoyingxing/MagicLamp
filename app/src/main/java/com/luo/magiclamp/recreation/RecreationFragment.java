@@ -126,7 +126,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         mTitleList.add(new Title("星座运势", R.mipmap.ic_launcher));
         mTitleList.add(new Title("星座配对", R.mipmap.ic_launcher));
         mTitleList.add(new Title("生肖配对", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("周公解梦", R.mipmap.ic_launcher));
+        mTitleList.add(new Title("姓氏起源", R.mipmap.ic_launcher));
         mGridViewAdapter.addAll(mTitleList);
     }
 
@@ -219,6 +219,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                     switchFragment(AnimalsFragment.class);
                     break;
                 case 4:
+                    switchFragment(NameOriginFragment.class);
                     break;
             }
         }
