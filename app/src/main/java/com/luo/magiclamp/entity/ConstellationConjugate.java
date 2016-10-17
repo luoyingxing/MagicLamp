@@ -8,7 +8,6 @@ import java.io.Serializable;
  * Created by luoyingxing on 16/10/17.
  */
 public class ConstellationConjugate implements Serializable {
-
     /**
      * xingzuo1 : 天蝎座
      * xingzuo2 : 天秤座
@@ -23,16 +22,16 @@ public class ConstellationConjugate implements Serializable {
      * 　　在性生活方面，应该是你俩最协调的一环，大家对性都很敏锐，知道对方什么时候需要然后加以配合，有时一些小小的事情也会将你们的性欲燃起。
      */
 
-    private ResultBean result;
+    private Result result;
 
     private int error_code;
     private String reason;
 
-    public ResultBean getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(ResultBean result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 
@@ -52,7 +51,7 @@ public class ConstellationConjugate implements Serializable {
         this.reason = reason;
     }
 
-    public static class ResultBean {
+    public static class Result {
         private String xingzuo1;
         private String xingzuo2;
         private String title;
