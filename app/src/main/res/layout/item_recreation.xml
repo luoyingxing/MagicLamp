@@ -24,4 +24,8 @@
         android:text="神灯聊天"
         android:textSize="14sp" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="6dp" />
+
 </LinearLayout>
