@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:orientation="vertical">
 
-        <GridView
+        <com.luo.magiclamp.frame.ui.scroll.ScrollGridView
             android:id="@+id/gv_constellation_chart_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,12 +47,13 @@
             android:id="@+id/tv_constellation_chart_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="幸运数字 6  幸运色  蓝色" />
+            android:gravity="center" />
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="综合指数(60%)" />
+                    android:text="综合指数（99%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="健康指数(60%)" />
+                    android:text="健康指数（99%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="爱情指数(60%)" />
+                    android:text="爱情指数（99%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="财运指数(60%)" />
+                    android:text="财运指数（99%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="工作指数(60%)" />
+                    android:text="工作指数（99%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -205,11 +205,12 @@
             android:id="@+id/tv_constellation_chart_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@color/theme_color"
             android:gravity="center"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="最佳陪：金牛座"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -221,7 +222,9 @@
             android:id="@+id/tv_constellation_chart_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="最佳陪：金牛座最佳陪：金牛座最佳陪：金牛座最佳陪：金牛座最佳陪：金牛座最佳陪：金牛座最佳陪：金牛座最佳陪：金牛座" />
+            android:lineSpacingExtra="6dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
 
     </LinearLayout>
 </ScrollView>

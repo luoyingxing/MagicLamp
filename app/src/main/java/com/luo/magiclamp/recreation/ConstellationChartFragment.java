@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +20,7 @@ import com.luo.magiclamp.entity.ConstellationChart;
 import com.luo.magiclamp.entity.ConstellationChartDetail;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.ui.scroll.ScrollGridView;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class ConstellationChartFragment extends BaseFragment implements View.OnTouchListener {
     private View mRootView;
-    private GridView mGridView;
+    private ScrollGridView mGridView;
 
     private ImageView mPhotoIV;
     private TextView mTitleTV;
@@ -88,7 +88,7 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
     }
 
     private void findView() {
-        mGridView = (GridView) mRootView.findViewById(R.id.gv_constellation_chart_top);
+        mGridView = (ScrollGridView) mRootView.findViewById(R.id.gv_constellation_chart_top);
         mPhotoIV = (ImageView) mRootView.findViewById(R.id.iv_constellation_chart_photo);
         mTitleTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_title);
         mAllTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_all);
@@ -131,39 +131,51 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
             switch (position) {
                 case 0:
                     name = "白羊座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 1:
                     name = "金牛座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 2:
                     name = "双子座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 3:
                     name = "巨蟹座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 4:
                     name = "狮子座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 5:
                     name = "处女座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 6:
                     name = "天秤座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 7:
                     name = "天蝎座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 8:
                     name = "射手座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 9:
                     name = "摩羯座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 10:
                     name = "双鱼座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
                 case 11:
                     name = "金牛座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
                     break;
             }
 
@@ -183,7 +195,13 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
             @Override
             protected void onSuccess(ConstellationChart result) {
                 ConstellationChartDetail detail = result.getResult1();
-                mTitleTV.setText(String.format("幸运数字  %s幸运颜色  %s", detail.getNumber(), detail.getColor()));
+                mTitleTV.setText(String.format("幸运数字  %s  幸运颜色  %s", detail.getNumber(), detail.getColor()));
+                mAllTV.setText("综合指数（" + detail.getAll() + "）");
+                mHealthTV.setText("健康指数（" + detail.getHealth() + "）");
+                mLoveTV.setText("爱情指数（" + detail.getLove() + "）");
+                mMoneyTV.setText("财运指数（" + detail.getMoney() + "）");
+                mWorkTV.setText("工作指数（" + detail.getWork() + "）");
+                mFriendTV.setText("最佳配对星座：" + detail.getQFriend());
                 mContentTV.setText(detail.getSummary());
             }
 
