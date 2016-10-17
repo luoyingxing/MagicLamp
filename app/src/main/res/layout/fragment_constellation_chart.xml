@@ -75,11 +75,11 @@
 
                 <ProgressBar
                     android:id="@+id/pb_constellation_chart_all"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Constellation_ProgressBar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="60" />
+                    android:progress="99" />
 
             </TableRow>
 
@@ -103,11 +103,11 @@
 
                 <ProgressBar
                     android:id="@+id/pb_constellation_chart_health"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Constellation_ProgressBar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="60" />
+                    android:progress="99" />
 
             </TableRow>
 
@@ -131,11 +131,11 @@
 
                 <ProgressBar
                     android:id="@+id/pb_constellation_chart_love"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Constellation_ProgressBar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="60" />
+                    android:progress="99" />
 
             </TableRow>
 
@@ -159,11 +159,11 @@
 
                 <ProgressBar
                     android:id="@+id/pb_constellation_chart_money"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Constellation_ProgressBar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="60" />
+                    android:progress="99" />
 
             </TableRow>
 
@@ -187,11 +187,11 @@
 
                 <ProgressBar
                     android:id="@+id/pb_constellation_chart_work"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Constellation_ProgressBar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="60" />
+                    android:progress="99" />
 
             </TableRow>
 

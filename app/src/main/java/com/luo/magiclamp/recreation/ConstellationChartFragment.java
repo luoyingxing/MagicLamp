@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.luo.magiclamp.ApiURL;
@@ -45,6 +46,11 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
     private TextView mWorkTV;
     private TextView mFriendTV;
     private TextView mContentTV;
+    private ProgressBar mAllBar;
+    private ProgressBar mHealthBar;
+    private ProgressBar mLoveBar;
+    private ProgressBar mMoneyBar;
+    private ProgressBar mWorkBar;
 
     private GridViewAdapter mGridViewAdapter;
     private List<Title> mTitleList = new ArrayList<>();
@@ -98,6 +104,11 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
         mWorkTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_work);
         mFriendTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_friend);
         mContentTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_content);
+        mAllBar = (ProgressBar) mRootView.findViewById(R.id.pb_constellation_chart_all);
+        mHealthBar = (ProgressBar) mRootView.findViewById(R.id.pb_constellation_chart_health);
+        mLoveBar = (ProgressBar) mRootView.findViewById(R.id.pb_constellation_chart_love);
+        mMoneyBar = (ProgressBar) mRootView.findViewById(R.id.pb_constellation_chart_money);
+        mWorkBar = (ProgressBar) mRootView.findViewById(R.id.pb_constellation_chart_work);
     }
 
     private void setAdapter() {
@@ -203,6 +214,12 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
                 mWorkTV.setText("工作指数（" + detail.getWork() + "）");
                 mFriendTV.setText("最佳配对星座：" + detail.getQFriend());
                 mContentTV.setText(detail.getSummary());
+
+                mAllBar.setProgress(Integer.valueOf(detail.getAll().replace("%", "").trim()));
+                mHealthBar.setProgress(Integer.valueOf(detail.getHealth().replace("%", "").trim()));
+                mLoveBar.setProgress(Integer.valueOf(detail.getLove().replace("%", "").trim()));
+                mMoneyBar.setProgress(Integer.valueOf(detail.getMoney().replace("%", "").trim()));
+                mWorkBar.setProgress(Integer.valueOf(detail.getWork().replace("%", "").trim()));
             }
 
             @Override
