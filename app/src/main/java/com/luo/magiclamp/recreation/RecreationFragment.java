@@ -150,7 +150,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
             }
 
         }.addParam("page", mPage)
-                .get();
+                .post();
     }
 
     private void loadImgJoke() {
@@ -172,7 +172,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
             }
 
         }.addParam("page", mPage)
-                .get();
+                .post();
     }
 
     private void showJoke() {
