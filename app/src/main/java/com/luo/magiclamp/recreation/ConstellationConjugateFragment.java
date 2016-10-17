@@ -15,10 +15,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.luo.magiclamp.ApiURL;
+import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
+import com.luo.magiclamp.entity.ConstellationConjugate;
 import com.luo.magiclamp.frame.BaseFragment;
+import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.scroll.ScrollGridView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +72,7 @@ public class ConstellationConjugateFragment extends BaseFragment implements View
         initMap();
         setAdapter();
         initData();
+        loadData("白羊座", "金牛座");
     }
 
     private void findView() {
@@ -81,9 +88,9 @@ public class ConstellationConjugateFragment extends BaseFragment implements View
             public void onClick(View view) {
                 if (checkMap()) {
                     if (mRequestContent.size() == 1) {
-                        showToast(getNameFromPosition(mRequestContent.get(0)));
+                        loadData(getNameFromPosition(mRequestContent.get(0)), getNameFromPosition(mRequestContent.get(0)));
                     } else {
-                        showToast(getNameFromPosition(mRequestContent.get(0)) + "和" + getNameFromPosition(mRequestContent.get(1)));
+                        loadData(getNameFromPosition(mRequestContent.get(0)), getNameFromPosition(mRequestContent.get(1)));
                     }
                 } else {
                     showToast("请选择1到2个星座进行匹配");
@@ -178,6 +185,40 @@ public class ConstellationConjugateFragment extends BaseFragment implements View
         mGridViewAdapter = new GridViewAdapter(getActivity());
         mGridView.setAdapter(mGridViewAdapter);
         mGridView.setOnItemClickListener(new ItemClickListener());
+    }
+
+    private void loadData(String nameOne, String nameTwo) {
+        showDialog();
+
+        String one = null;
+        String two = null;
+        try {
+            one = URLEncoder.encode(nameOne, "utf-8");
+            two = URLEncoder.encode(nameTwo, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        new ApiRequest<ConstellationConjugate>(ApiURL.API_CHAT_CONSTELLATION_CONJUGATE) {
+
+            @Override
+            protected void onSuccess(ConstellationConjugate result) {
+                if (result.getResult() != null) {
+                    mTitleTV.setText(result.getResult().getXingzuo1() + " 和 " + result.getResult().getXingzuo2());
+                    mContentOneTV.setText(result.getResult().getContent1());
+                    mContentTwoTV.setText(result.getResult().getContent2());
+                }
+            }
+
+            @Override
+            protected void onFinish(int what) {
+                hideDialog();
+            }
+
+        }.addParam("key", Constant.API_KEY_CONSTELLATON_CONJUGATE)
+                .addParam("xingzuo1", one)
+                .addParam("xingzuo2", two)
+                .get();
     }
 
     @Override
