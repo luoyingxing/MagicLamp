@@ -42,5 +42,9 @@ public class Constant {
      * constellation conjugate key
      */
     public static final String API_KEY_CONSTELLATON_CONJUGATE = "7155dbfb5c0341ebba670f6b5a5e2ac9";
+    /**
+     * animals key
+     */
+    public static final String API_KEY_ANIMALS = "2c7312fd416c476ebca0a60056a5c8ed";
 
 }

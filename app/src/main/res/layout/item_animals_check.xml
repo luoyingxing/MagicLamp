@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="4dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingTop="4dp">
+
+    <CheckBox
+        android:id="@+id/cb_item_animals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_constellation_conjugate_check"
+        android:button="@null"
+        android:drawableLeft="@mipmap/icon_chat_edit"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:text="鼠"
+        android:textColor="@drawable/color_constellation_conjugate_check" />
+
+</LinearLayout>
