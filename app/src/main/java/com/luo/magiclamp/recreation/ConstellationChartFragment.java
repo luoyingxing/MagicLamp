@@ -38,6 +38,7 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
     private ScrollGridView mGridView;
 
     private ImageView mPhotoIV;
+    private TextView mNameTV;
     private TextView mTitleTV;
     private TextView mAllTV;
     private TextView mHealthTV;
@@ -96,6 +97,7 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
     private void findView() {
         mGridView = (ScrollGridView) mRootView.findViewById(R.id.gv_constellation_chart_top);
         mPhotoIV = (ImageView) mRootView.findViewById(R.id.iv_constellation_chart_photo);
+        mNameTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_name);
         mTitleTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_title);
         mAllTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_all);
         mHealthTV = (TextView) mRootView.findViewById(R.id.tv_constellation_chart_health);
@@ -189,7 +191,7 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
                     mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_pisces);
                     break;
             }
-
+            mNameTV.setText(name);
             loadChart(name);
         }
     }
