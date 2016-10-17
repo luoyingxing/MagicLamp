@@ -119,18 +119,18 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
 
     private void loadGridViewData() {
         mTitleList.clear();
-        mTitleList.add(new Title("白羊座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("金牛座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("双子座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("巨蟹座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("狮子座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("处女座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("天秤座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("天蝎座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("射手座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("摩羯座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("水瓶座", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("双鱼座", R.mipmap.ic_launcher));
+        mTitleList.add(new Title("白羊座", R.mipmap.icon_constellation_chart_aries));
+        mTitleList.add(new Title("金牛座", R.mipmap.icon_constellation_chart_taurus));
+        mTitleList.add(new Title("双子座", R.mipmap.icon_constellation_chart_gemini));
+        mTitleList.add(new Title("巨蟹座", R.mipmap.icon_constellation_chart_cancer));
+        mTitleList.add(new Title("狮子座", R.mipmap.icon_constellation_chart_leo));
+        mTitleList.add(new Title("处女座", R.mipmap.icon_constellation_chart_virgo));
+        mTitleList.add(new Title("天秤座", R.mipmap.icon_constellation_chart_libra));
+        mTitleList.add(new Title("天蝎座", R.mipmap.icon_constellation_chart_scorpio));
+        mTitleList.add(new Title("射手座", R.mipmap.icon_constellation_chart_sagittarius));
+        mTitleList.add(new Title("摩羯座", R.mipmap.icon_constellation_chart_capricornus));
+        mTitleList.add(new Title("水瓶座", R.mipmap.icon_constellation_chart_aquarius));
+        mTitleList.add(new Title("双鱼座", R.mipmap.icon_constellation_chart_pisces));
         mGridViewAdapter.addAll(mTitleList);
     }
 
@@ -142,51 +142,51 @@ public class ConstellationChartFragment extends BaseFragment implements View.OnT
             switch (position) {
                 case 0:
                     name = "白羊座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_aries);
                     break;
                 case 1:
                     name = "金牛座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_taurus);
                     break;
                 case 2:
                     name = "双子座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_gemini);
                     break;
                 case 3:
                     name = "巨蟹座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_cancer);
                     break;
                 case 4:
                     name = "狮子座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_leo);
                     break;
                 case 5:
                     name = "处女座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_virgo);
                     break;
                 case 6:
                     name = "天秤座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_libra);
                     break;
                 case 7:
                     name = "天蝎座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_scorpio);
                     break;
                 case 8:
                     name = "射手座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_sagittarius);
                     break;
                 case 9:
                     name = "摩羯座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_capricornus);
                     break;
                 case 10:
-                    name = "双鱼座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    name = "水瓶座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_aquarius);
                     break;
                 case 11:
-                    name = "金牛座";
-                    mPhotoIV.setImageResource(R.mipmap.icon_chat_photo_app);
+                    name = "双鱼座";
+                    mPhotoIV.setImageResource(R.mipmap.icon_constellation_chart_pisces);
                     break;
             }
 
