@@ -17,4 +17,6 @@ public class ApiURL {
     public static final String API_CHAT_CONSTELLATION_CONJUGATE = "http://api.avatardata.cn/XingZuoPeiDui/Lookup"; //星座配对
     public static final String API_CHAT_ANIMALS = "http://api.avatardata.cn/ShengXiaoPeiDui/Lookup"; //生肖配对
     public static final String API_NAME_ORIGIN = "http://api.avatardata.cn/XingShiQiYuan/LookUp"; //姓氏起源
+
+    public static final String API_HEALTH_CLASSIFY = "http://apis.baidu.com/tngou/lore/classify"; //健康知识分类
 }

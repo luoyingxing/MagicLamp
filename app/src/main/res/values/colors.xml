@@ -6,6 +6,11 @@
 
     <color name="divider_line_color">#f1f1f1</color>
 
+    <color name="bg_blue_color">#56abe4</color>
+    <color name="bg_green_color">#00bb9c</color>
+    <color name="bg_purple_color">#9d55b8</color>
+    <color name="bg_yellow_color">#f4c600</color>
+    <color name="bg_orange_color">#ea8081</color>
 
     <color name="actionBar_background">#00000000</color>
 
