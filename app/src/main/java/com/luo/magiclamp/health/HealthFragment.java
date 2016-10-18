@@ -79,7 +79,6 @@ public class HealthFragment extends BaseFragment {
             @Override
             protected void onSuccess(Health result) {
                 if (result.getHealthDetails() != null) {
-                    mLog.e(" -- - - -" + result.getHealthDetails().size());
                     mListViewAdapter.addAll(result.getHealthDetails());
                 }
             }
