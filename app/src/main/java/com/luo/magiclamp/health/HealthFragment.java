@@ -1,6 +1,7 @@
 package com.luo.magiclamp.health;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.luo.magiclamp.ApiURL;
+import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Health;
 import com.luo.magiclamp.entity.HealthDetails;
+import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
 
@@ -68,7 +71,11 @@ public class HealthFragment extends BaseFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showToast(mListViewAdapter.getItem(position).getTitle());
+                Intent intent = new Intent(mActivity, BaseActivity.class);
+                intent.putExtra(Constant.ARGS_FRAGMENT_NAME, HealthListFragment.class.getName());
+                intent.putExtra(HealthListFragment.PARAM, mListViewAdapter.getItem(position).getId());
+                intent.putExtra(HealthListFragment.TITLE, mListViewAdapter.getItem(position).getTitle());
+                mActivity.startActivity(intent);
             }
         });
     }
