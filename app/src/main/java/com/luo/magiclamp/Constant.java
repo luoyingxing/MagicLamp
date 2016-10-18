@@ -46,5 +46,9 @@ public class Constant {
      * animals key
      */
     public static final String API_KEY_ANIMALS = "2c7312fd416c476ebca0a60056a5c8ed";
+    /**
+     * name origin key
+     */
+    public static final String API_KEY_NAME_ORIGIN = "0a35307d0765414aaa3ce9b380726a95";
 
 }
