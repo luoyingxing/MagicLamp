@@ -122,7 +122,7 @@ public class ChatFragment extends BaseFragment implements View.OnTouchListener {
         }.addParam("key", Constant.API_TURING_KEY)
                 .addParam("userid", Constant.API_TURING_ID)
                 .addParam("info", infoString)
-                .get();
+                .post();
     }
 
 
