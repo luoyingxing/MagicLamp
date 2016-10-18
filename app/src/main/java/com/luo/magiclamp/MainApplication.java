@@ -10,6 +10,8 @@ import com.luo.magiclamp.utils.FileUtils;
 import com.luo.magiclamp.utils.Logger;
 import com.umeng.analytics.MobclickAgent;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * MainApplication
  * <p/>
@@ -37,8 +39,8 @@ public class MainApplication extends Application {
         MyNoHttp.initialize(this);
         Fresco.initialize(mApp);
 
-//        JPushInterface.setDebugMode(true);
-//        JPushInterface.init(this);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
 //        MobclickAgent.setCatchUncaughtExceptions(false);
     }
 
