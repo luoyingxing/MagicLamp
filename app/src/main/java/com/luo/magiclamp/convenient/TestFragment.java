@@ -33,5 +33,15 @@ public class TestFragment extends BaseFragment {
     }
 
     private void init() {
+        findView();
+        setAdapter();
+    }
+
+    private void findView() {
+
+    }
+
+    private void setAdapter() {
+
     }
 }
