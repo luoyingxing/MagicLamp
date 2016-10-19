@@ -4,9 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.widget.TextView;
 
+import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.R;
+import com.luo.magiclamp.entity.HealthDetails;
 import com.luo.magiclamp.frame.BaseFragment;
+import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.ui.scroll.ScrollWebView;
+
+import cz.msebera.android.httpclient.util.EncodingUtils;
 
 /**
  * HealthDetailsFragment
@@ -17,6 +25,11 @@ public class HealthDetailsFragment extends BaseFragment {
     public static final String PARAM = "id";
 
     private View mRootView;
+    private ScrollWebView mWebView;
+    private TextView mTitleTV;
+    private TextView mVisitTV;
+    private TextView mCollectTV;
+    private TextView mDiscussTV;
 
     private int mId = 0;
 
@@ -55,14 +68,53 @@ public class HealthDetailsFragment extends BaseFragment {
 
     private void init() {
         findView();
-        setAdapter();
+        loadDetails();
     }
 
     private void findView() {
-
+        mWebView = (ScrollWebView) mRootView.findViewById(R.id.wv_health_details);
+        mTitleTV = (TextView) mRootView.findViewById(R.id.tv_health_details_title);
+        mVisitTV = (TextView) mRootView.findViewById(R.id.tv_health_details_count);
+        mCollectTV = (TextView) mRootView.findViewById(R.id.tv_health_details_collect);
+        mDiscussTV = (TextView) mRootView.findViewById(R.id.tv_health_details_discuss);
     }
 
-    private void setAdapter() {
+    private void loadDetails() {
+        showDialog();
+        new ApiRequest<HealthDetails>(ApiURL.API_HEALTH_DETAILS, true) {
+            @Override
+            protected void onSuccess(HealthDetails result) {
+                if (result != null) {
+                    show(result.getMessage());
+                    mTitleTV.setText(result.getTitle());
+                    mVisitTV.setText("" + result.getCount());
+                    mCollectTV.setText("" + result.getFcount());
+                    mDiscussTV.setText("" + result.getRcount());
+                }
+            }
 
+            @Override
+            protected void onFinish(int what) {
+                hideDialog();
+            }
+
+        }.addParam("id", mId)
+                .get();
     }
+
+    private void show(String content) {
+        WebSettings settings = mWebView.getSettings();
+        settings.setDefaultFontSize(17);
+        settings.setJavaScriptEnabled(true);
+
+        String strUrl = "<html> \n" +
+                "<head> \n" +
+                "<style type=\"text/css\"> \n" +
+                "body {text-align:justify; font-size: " + 17 + "px; line-height: " + 26 + "px; color:" + "#333333" + "}\n" +
+                "</style> \n" +
+                "</head> \n" +
+                "<body>" + EncodingUtils.getString(content.getBytes(), "UTF-8") + "</body> \n </html>";
+        mWebView.loadDataWithBaseURL(null, strUrl, "text/html; charset=UTF-8", null, null);
+    }
+
 }

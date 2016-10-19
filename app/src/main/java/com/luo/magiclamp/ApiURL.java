@@ -21,4 +21,5 @@ public class ApiURL {
     public static final String API_HEALTH_CLASSIFY = "http://apis.baidu.com/tngou/lore/classify"; //健康知识分类
     public static final String API_HEALTH_LIST_IMAGE = "http://tnfs.tngou.net/image"; //健康知识列表图片的前缀
     public static final String API_HEALTH_LIST = "http://apis.baidu.com/tngou/lore/list"; //健康知识列表
+    public static final String API_HEALTH_DETAILS = "http://apis.baidu.com/tngou/lore/show"; //健康知识详情
 }
