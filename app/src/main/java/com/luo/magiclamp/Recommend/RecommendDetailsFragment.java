@@ -54,8 +54,6 @@ public class RecommendDetailsFragment extends BaseFragment {
         initData();
     }
 
-    private int mJumpCount = 0;  //记录跳转的次数，标记页面
-
     private void findView() {
         mWebView = (WebView) mRootView.findViewById(R.id.wv_recommend_details);
 
@@ -73,5 +71,9 @@ public class RecommendDetailsFragment extends BaseFragment {
         mWebView.loadUrl(mUrl);
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        mWebView.reload();
+    }
 }
