@@ -12,7 +12,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.luo.magiclamp.convenient.ConvenientFragment;
+import com.luo.magiclamp.Recommend.RecommendFragment;
 import com.luo.magiclamp.focus.FocusFragment;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.health.HealthFragment;
@@ -31,9 +31,9 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
     private int[] mTabIcon = {R.drawable.tab_icon_selector_news,
             R.drawable.tab_icon_selector_recreation,
             R.drawable.tab_icon_selector_focus,
-            R.drawable.tab_icon_selector_health,
-            R.drawable.tab_icon_selector_convenient};
-    private String[] mTabText = {"新闻", "娱乐", "热点", "健康", "便捷"};
+            R.drawable.tab_icon_selector_recommend,
+            R.drawable.tab_icon_selector_health};
+    private String[] mTabText = {"新闻", "娱乐", "热点", "精选", "健康"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
@@ -64,9 +64,9 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
                 FocusFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[3]).setIndicator(getIndicatorView(3)),
-                HealthFragment.class, null);
+                RecommendFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[4]).setIndicator(getIndicatorView(4)),
-                ConvenientFragment.class, null);
+                HealthFragment.class, null);
         mTabHost.getTabWidget().setDividerDrawable(android.R.color.white);
 
         mCurrentTabTag = mTabText[0];
@@ -141,12 +141,12 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             case 3:
                 setTopImage(R.mipmap.bg_main_top);
                 setTopImageParams(100);
-                mLog.e("健康");
+                mLog.e("精选");
                 break;
             case 4:
                 setTopImage(R.drawable.main_iamge_bg);
                 setTopImageParams(100);
-                mLog.e("便捷");
+                mLog.e("健康");
                 break;
         }
     }
