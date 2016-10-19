@@ -27,4 +27,6 @@ public class ApiURL {
     public static final String API_FOCUS_CLASSIFY = "http://apis.baidu.com/tngou/top/classify"; //天狗热点分类
     public static final String API_FOCUS_LIST = "http://apis.baidu.com/tngou/top/list"; //天狗热点列表
     public static final String API_FOCUS_DETAILS = "http://apis.baidu.com/tngou/top/show"; //天狗热点详情
+
+    public static final String API_RECOMMEND = "http://v.juhe.cn/weixin/query"; //微信精选
 }

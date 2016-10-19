@@ -29,11 +29,11 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
 
     private long mExitTime;
     private int[] mTabIcon = {R.drawable.tab_icon_selector_news,
-            R.drawable.tab_icon_selector_recreation,
-            R.drawable.tab_icon_selector_focus,
             R.drawable.tab_icon_selector_recommend,
+            R.drawable.tab_icon_selector_focus,
+            R.drawable.tab_icon_selector_recreation,
             R.drawable.tab_icon_selector_health};
-    private String[] mTabText = {"新闻", "娱乐", "热点", "精选", "健康"};
+    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
@@ -60,11 +60,11 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[0]).setIndicator(getIndicatorView(0)),
                 NewsFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[1]).setIndicator(getIndicatorView(1)),
-                RecreationFragment.class, null);
+                RecommendFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
                 FocusFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[3]).setIndicator(getIndicatorView(3)),
-                RecommendFragment.class, null);
+                RecreationFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[4]).setIndicator(getIndicatorView(4)),
                 HealthFragment.class, null);
         mTabHost.getTabWidget().setDividerDrawable(android.R.color.white);
@@ -131,7 +131,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             case 1:
                 setTopImage(R.mipmap.bg_main_top);
                 setTopImageParams(100);
-                mLog.e("娱乐");
+                mLog.e("精选");
                 break;
             case 2:
                 setTopImage(R.drawable.main_iamge_bg);
@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             case 3:
                 setTopImage(R.mipmap.bg_main_top);
                 setTopImageParams(100);
-                mLog.e("精选");
+                mLog.e("娱乐");
                 break;
             case 4:
                 setTopImage(R.drawable.main_iamge_bg);

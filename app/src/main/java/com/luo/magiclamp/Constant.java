@@ -50,5 +50,9 @@ public class Constant {
      * name origin key
      */
     public static final String API_KEY_NAME_ORIGIN = "0a35307d0765414aaa3ce9b380726a95";
+    /**
+     * recommend key
+     */
+    public static final String API_KEY_RECOMMEND = "3992ea829db75d176a0f0ddde168bc5a";
 
 }
