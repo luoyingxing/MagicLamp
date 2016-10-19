@@ -113,7 +113,7 @@ public class HealthListFragment extends BaseFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showToast(mListViewAdapter.getItem(position).getTitle());
+                mActivity.switchFragment(HealthDetailsFragment.newInstance(mListViewAdapter.getItem(position).getId()), true);
             }
         });
     }

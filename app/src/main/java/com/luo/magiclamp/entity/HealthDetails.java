@@ -3,7 +3,7 @@ package com.luo.magiclamp.entity;
 import java.io.Serializable;
 
 /**
- * HealthDetails
+ * HealthDetailsFragment
  * <p/>
  * Created by Administrator on 2016/10/18.
  */
