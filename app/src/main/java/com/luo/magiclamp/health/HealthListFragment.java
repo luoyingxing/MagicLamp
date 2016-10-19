@@ -20,6 +20,7 @@ import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
 import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
+import com.luo.magiclamp.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,6 +164,10 @@ public class HealthListFragment extends BaseFragment {
                 viewHolder.titleTV = (TextView) convertView.findViewById(R.id.tv_item_health_list_list_title);
                 viewHolder.imageView = (NewsDetailImageView) convertView.findViewById(R.id.iv_item_health_list_list_image);
                 viewHolder.descriptionTV = (TextView) convertView.findViewById(R.id.tv_item_health_list_list_description);
+                viewHolder.visitTV = (TextView) convertView.findViewById(R.id.tv_item_health_list_list_count);
+                viewHolder.collectTV = (TextView) convertView.findViewById(R.id.tv_item_health_list_list_collect);
+                viewHolder.discussTV = (TextView) convertView.findViewById(R.id.tv_item_health_list_list_discuss);
+                viewHolder.timeTV = (TextView) convertView.findViewById(R.id.tv_item_health_list_list_time);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -173,6 +178,10 @@ public class HealthListFragment extends BaseFragment {
             viewHolder.titleTV.setText(details.getTitle());
             viewHolder.imageView.setHttpUri(Uri.parse(ApiURL.API_HEALTH_LIST_IMAGE + details.getImg()));
             viewHolder.descriptionTV.setText(details.getDescription());
+            viewHolder.visitTV.setText("" + details.getCount());
+            viewHolder.collectTV.setText("" + details.getFcount());
+            viewHolder.discussTV.setText("" + details.getRcount());
+            viewHolder.timeTV.setText(TimeUtils.showTime(details.getTime()));
 
             return convertView;
         }
@@ -182,6 +191,10 @@ public class HealthListFragment extends BaseFragment {
             TextView titleTV;
             NewsDetailImageView imageView;
             TextView descriptionTV;
+            TextView visitTV;
+            TextView collectTV;
+            TextView discussTV;
+            TextView timeTV;
         }
     }
 }
