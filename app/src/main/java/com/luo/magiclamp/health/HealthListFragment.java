@@ -197,4 +197,10 @@ public class HealthListFragment extends BaseFragment {
             TextView timeTV;
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mPage = 1;
+    }
 }
