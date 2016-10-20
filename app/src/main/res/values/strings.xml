@@ -28,4 +28,18 @@
     <string name="error_network">网络连接异常,初始化失败 请检查网络！</string>
     <string name="logining">程序在后台执行, 请查看日志！</string>
     <string name="setting_su">设置成功</string>
+
+    <string name="about_us_string_1">联系我们</string>
+    <string name="about_us_string_2">官方网站</string>
+    <string name="about_us_string_3">客服热线</string>
+    <string name="about_us_string_4">客服QQ</string>
+    <string name="about_us_string_5">luoyingxing@126.com</string>
+    <string name="about_us_string_6">www.shengdeng.con</string>
+    <string name="about_us_string_7">15820154544</string>
+    <string name="about_us_string_8">602390502</string>
+    <string name="about_us_string_9">神灯&#160;&#160;版权所有</string>
+    <string name="about_us_string_10">Copyrightⓒluoyingxing</string>
+    <string name="about_us_string_11">All Rights Reserved</string>
+    <string name="about_us_string_12">版本号&#160;V</string>
+
 </resources>
