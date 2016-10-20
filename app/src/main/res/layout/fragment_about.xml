@@ -80,13 +80,6 @@
             android:layout_marginRight="8dp"
             android:background="@color/gray_da" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@color/gray_da" />
-
         <RelativeLayout
             android:id="@+id/item_fragment_about_us_3"
             android:layout_width="match_parent"
