@@ -1,6 +1,7 @@
 package com.luo.magiclamp.personal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import com.iflytek.autoupdate.IFlytekUpdate;
 import com.iflytek.autoupdate.IFlytekUpdateListener;
 import com.iflytek.autoupdate.UpdateInfo;
+import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
+import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.ui.scroll.ScrollListView;
 
@@ -79,17 +82,17 @@ public class PersonalFragment extends BaseFragment {
                         showToast("暂无任何工具");
                         break;
                     case 1:
-//                        Intent intent2 = new Intent(getActivity(), BaseActivity.class);
-//                        intent2.putExtra(Constant.ARGS_FRAGMENT_NAME, CollectFragment.class.getName());
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(getActivity(), BaseActivity.class);
+                        intent2.putExtra(Constant.ARGS_FRAGMENT_NAME, AboutFragment.class.getName());
+                        startActivity(intent2);
                         break;
                     case 2:
                         updateApp();
                         break;
                     case 3:
-//                        Intent intent4 = new Intent(getActivity(), BaseActivity.class);
-//                        intent4.putExtra(Constant.ARGS_FRAGMENT_NAME, ChangeGradeFragment.class.getName());
-//                        startActivity(intent4);
+                        Intent intent4 = new Intent(getActivity(), BaseActivity.class);
+                        intent4.putExtra(Constant.ARGS_FRAGMENT_NAME, HelpFragment.class.getName());
+                        startActivity(intent4);
                         break;
                 }
             }
