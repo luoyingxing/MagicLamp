@@ -28,6 +28,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
+        <!--讯飞自动更新-->
+        <meta-data
+            android:name="IFLYTEK_APPKEY"
+            android:value="580867bb" />
+        <meta-data
+            android:name="IFLYTEK_CHANNEL"
+            android:value="your_channel" />
+
+        <activity android:name="com.iflytek.autoupdate.IFlytekUpdateDialog" />
+        <service android:name="com.iflytek.autoupdate.IFlytekDownloadService" />
+
+        <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="57f9ecdbe0f55ae7a9002521" />

@@ -2,6 +2,8 @@ package com.luo.magiclamp.personal;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.iflytek.autoupdate.IFlytekUpdate;
+import com.iflytek.autoupdate.IFlytekUpdateListener;
+import com.iflytek.autoupdate.UpdateInfo;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.ui.scroll.ScrollListView;
@@ -27,8 +32,9 @@ public class PersonalFragment extends BaseFragment {
 
     private ListAdapter mListAdapter;
 
-    public PersonalFragment() {
+    private Handler mHandler;
 
+    public PersonalFragment() {
     }
 
     @Override
@@ -47,6 +53,14 @@ public class PersonalFragment extends BaseFragment {
         findView();
         setAdapter();
         loadItemData();
+
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                showToast("正在检查更新...");
+            }
+        };
     }
 
     private void findView() {
@@ -70,9 +84,7 @@ public class PersonalFragment extends BaseFragment {
 //                        startActivity(intent2);
                         break;
                     case 2:
-//                        Intent intent3 = new Intent(getActivity(), BaseActivity.class);
-//                        intent3.putExtra(Constant.ARGS_FRAGMENT_NAME, ChangeGradeFragment.class.getName());
-//                        startActivity(intent3);
+                        updateApp();
                         break;
                     case 3:
 //                        Intent intent4 = new Intent(getActivity(), BaseActivity.class);
@@ -80,6 +92,15 @@ public class PersonalFragment extends BaseFragment {
 //                        startActivity(intent4);
                         break;
                 }
+            }
+        });
+    }
+
+    private void updateApp() {
+        IFlytekUpdate.getInstance(mActivity).forceUpdate(mActivity, new IFlytekUpdateListener() {
+            @Override
+            public void onResult(int i, UpdateInfo updateInfo) {
+                mHandler.sendEmptyMessage(88);
             }
         });
     }

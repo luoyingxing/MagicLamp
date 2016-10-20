@@ -52,4 +52,5 @@ dependencies {
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.yolanda.nohttp:nohttp:1.0.2'
     compile files('libs/jpush-android-2.2.0.jar')
+    compile files('libs/AutoUpdate_SDK.jar')
 }
