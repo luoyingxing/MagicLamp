@@ -17,6 +17,7 @@ import com.luo.magiclamp.focus.FocusFragment;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.health.HealthFragment;
 import com.luo.magiclamp.news.NewsFragment;
+import com.luo.magiclamp.personal.PersonalFragment;
 import com.luo.magiclamp.recreation.RecreationFragment;
 import com.luo.magiclamp.utils.WindowUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -32,8 +33,9 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             R.drawable.tab_icon_selector_recommend,
             R.drawable.tab_icon_selector_focus,
             R.drawable.tab_icon_selector_recreation,
-            R.drawable.tab_icon_selector_health};
-    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康"};
+            R.drawable.tab_icon_selector_health,
+            R.drawable.tab_icon_selector_personal};
+    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
@@ -67,6 +69,8 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 RecreationFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[4]).setIndicator(getIndicatorView(4)),
                 HealthFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(mTabText[5]).setIndicator(getIndicatorView(5)),
+                PersonalFragment.class, null);
         mTabHost.getTabWidget().setDividerDrawable(android.R.color.white);
 
         mCurrentTabTag = mTabText[0];
@@ -147,6 +151,11 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 setTopImage(R.drawable.main_iamge_bg);
                 setTopImageParams(100);
                 mLog.e("健康");
+                break;
+            case 5:
+                setTopImage(R.drawable.main_iamge_bg);
+                setTopImageParams(100);
+                mLog.e("个人");
                 break;
         }
     }
