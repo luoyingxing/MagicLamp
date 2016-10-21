@@ -138,8 +138,8 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 mLog.e("新闻");
                 break;
             case 1:
-                setTopImage(R.mipmap.bg_main_top);
-                setTopImageParams(100);
+                setTopImage(R.mipmap.bg_image_defualt);
+                setTopImageParams(180);
                 mLog.e("精选");
                 break;
             case 2:
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 mLog.e("热点");
                 break;
             case 3:
-                setTopImage(R.mipmap.bg_main_top);
+                setTopImage(R.mipmap.bg_image_defualt);
                 setTopImageParams(100);
                 mLog.e("娱乐");
                 break;
