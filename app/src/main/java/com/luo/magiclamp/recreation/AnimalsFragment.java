@@ -102,18 +102,18 @@ public class AnimalsFragment extends BaseFragment implements View.OnTouchListene
     private void initData() {
         // 鼠、牛、虎、兔、龙、蛇、马、羊、猴、鸡、狗、猪
         List<Check> checks = new ArrayList<>();
-        checks.add(new Check("鼠", R.mipmap.icon_chat_edit));
-        checks.add(new Check("牛", R.mipmap.icon_chat_edit));
-        checks.add(new Check("虎", R.mipmap.icon_chat_edit));
-        checks.add(new Check("兔", R.mipmap.icon_chat_edit));
-        checks.add(new Check("龙", R.mipmap.icon_chat_edit));
-        checks.add(new Check("蛇", R.mipmap.icon_chat_edit));
-        checks.add(new Check("马", R.mipmap.icon_chat_edit));
-        checks.add(new Check("羊", R.mipmap.icon_chat_edit));
-        checks.add(new Check("猴", R.mipmap.icon_chat_edit));
-        checks.add(new Check("鸡", R.mipmap.icon_chat_edit));
-        checks.add(new Check("狗", R.mipmap.icon_chat_edit));
-        checks.add(new Check("猪", R.mipmap.icon_chat_edit));
+        checks.add(new Check("鼠", R.mipmap.icon_conjugate_rat));
+        checks.add(new Check("牛", R.mipmap.icon_conjugate_cow));
+        checks.add(new Check("虎", R.mipmap.icon_conjugate_tiger));
+        checks.add(new Check("兔", R.mipmap.icon_conjugate_rabbit));
+        checks.add(new Check("龙", R.mipmap.icon_conjugate_dragon));
+        checks.add(new Check("蛇", R.mipmap.icon_conjugate_snake));
+        checks.add(new Check("马", R.mipmap.icon_conjugate_horse));
+        checks.add(new Check("羊", R.mipmap.icon_conjugate_sheep));
+        checks.add(new Check("猴", R.mipmap.icon_conjugate_monkey));
+        checks.add(new Check("鸡", R.mipmap.icon_conjugate_chicken));
+        checks.add(new Check("狗", R.mipmap.icon_conjugate_dog));
+        checks.add(new Check("猪", R.mipmap.icon_conjugate_pig));
         mGridViewAdapter.addAll(checks);
     }
 
