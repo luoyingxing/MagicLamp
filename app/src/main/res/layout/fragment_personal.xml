@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/app_name"
-                android:src="@mipmap/icon_chat_photo_user" />
+                android:src="@mipmap/icon_personal_photo" />
 
             <TextView
                 android:id="@+id/tv_personal_name"

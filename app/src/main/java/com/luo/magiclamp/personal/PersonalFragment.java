@@ -110,10 +110,10 @@ public class PersonalFragment extends BaseFragment {
 
     private void loadItemData() {
         ArrayList<Item> items = new ArrayList<>();
-        items.add(new Item("我的工具", R.mipmap.icon_chat_edit));
-        items.add(new Item("关于软件", R.mipmap.icon_chat_edit));
-        items.add(new Item("检测更新", R.mipmap.icon_chat_edit));
-        items.add(new Item("帮助", R.mipmap.icon_chat_edit));
+        items.add(new Item("我的工具", R.mipmap.icon_personal_tools));
+        items.add(new Item("关于软件", R.mipmap.icon_personal_about));
+        items.add(new Item("检测更新", R.mipmap.icon_personal_update));
+        items.add(new Item("帮助", R.mipmap.icon_personal_help));
         mListAdapter.clear();
         mListAdapter.addAll(items);
         mListAdapter.notifyDataSetChanged();
