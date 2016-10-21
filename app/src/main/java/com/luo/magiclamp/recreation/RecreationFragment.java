@@ -117,16 +117,15 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
         mListViewAdapter = new ListViewAdapter(getActivity(), new ArrayList<JokeList>());
         mListView.setAdapter(mListViewAdapter);
-        mListView.setOnItemClickListener(new ListClickListener());
     }
 
     private void loadGridViewData() {
         mTitleList.clear();
-        mTitleList.add(new Title("神灯聊天", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("星座运势", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("星座配对", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("生肖配对", R.mipmap.ic_launcher));
-        mTitleList.add(new Title("姓氏起源", R.mipmap.ic_launcher));
+        mTitleList.add(new Title("神灯聊天", R.mipmap.icon_recreation_chat));
+        mTitleList.add(new Title("星座运势", R.mipmap.icon_recreation_chart));
+        mTitleList.add(new Title("星座配对", R.mipmap.icon_recreation_conjugate));
+        mTitleList.add(new Title("生肖配对", R.mipmap.icon_recreation_animals));
+        mTitleList.add(new Title("姓氏起源", R.mipmap.icon_recreation_name));
         mGridViewAdapter.addAll(mTitleList);
     }
 
@@ -229,14 +228,6 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         Intent intent = new Intent(mActivity, BaseActivity.class);
         intent.putExtra(Constant.ARGS_FRAGMENT_NAME, clazz.getName());
         startActivity(intent);
-    }
-
-    private class ListClickListener implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            showToast(mListViewAdapter.getItem(position).getTitle());
-        }
     }
 
     private class GridViewAdapter extends ArrayAdapter<Title> {
