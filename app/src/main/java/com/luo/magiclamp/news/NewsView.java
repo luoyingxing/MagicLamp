@@ -21,6 +21,7 @@ import com.luo.magiclamp.frame.network.ApiMsg;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
+import com.luo.magiclamp.frame.ui.view.LoadingDialog;
 import com.luo.magiclamp.frame.ui.view.NewsImageView;
 
 import java.io.Serializable;
@@ -220,7 +221,25 @@ public class NewsView implements Serializable {
         }
     }
 
+    private LoadingDialog mLoadingDialog;
+
+    private void showDialog() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(mContext);
+            mLoadingDialog.setCanceledOnTouchOutside(true);
+        }
+        mLoadingDialog.show();
+    }
+
+    private void hideDialog() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
+    }
+
     private void loadNews() {
+        showDialog();
         new ApiRequest<News>(ApiURL.API_NEWS_GET_NEWS) {
             @Override
             protected void onSuccess(News result) {
@@ -233,6 +252,7 @@ public class NewsView implements Serializable {
 
             @Override
             protected void onFinish(int what) {
+                hideDialog();
                 viewHolder.pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
