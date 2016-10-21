@@ -14,7 +14,6 @@
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
         android:singleLine="true"
-        android:text="健康养生"
         android:textColor="@color/gray_21"
         android:textSize="17sp" />
 
@@ -22,8 +21,8 @@
         android:id="@+id/iv_item_focus_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/bg_main_top" />
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_image_defualt" />
 
     <TextView
         android:id="@+id/tv_item_focus_description"
@@ -33,8 +32,7 @@
         android:lineSpacingExtra="6dp"
         android:maxLines="2"
         android:paddingBottom="4dp"
-        android:paddingTop="4dp"
-        android:text="健健康养生健康养生康养生健康养生健康养生生健康养生健康养生康养生" />
+        android:paddingTop="4dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,15 +42,13 @@
             android:id="@+id/tv_item_focus_source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="新浪体育" />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/tv_item_focus_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="216-10-17 08:44" />
+            android:gravity="end" />
 
     </LinearLayout>
 

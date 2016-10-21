@@ -3,6 +3,7 @@ package com.luo.magiclamp.focus;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,7 +132,13 @@ public class FocusView implements Serializable {
             FocusDetails details = getItem(position);
 
             viewHolder.titleTV.setText(details.getTitle());
-            viewHolder.imageView.setHttpUri(Uri.parse(ApiURL.API_HEALTH_LIST_IMAGE + details.getImg()));
+
+            if (details.getImg().equalsIgnoreCase("/top/default.jpg")) {
+                viewHolder.imageView.setImageResource(R.mipmap.bg_image_defualt);
+            } else {
+                viewHolder.imageView.setHttpUri(Uri.parse(ApiURL.API_HEALTH_LIST_IMAGE + details.getImg()));
+            }
+
             viewHolder.descriptionTV.setText(details.getDescription());
             viewHolder.sourceTV.setText(details.getFromname());
             viewHolder.timeTV.setText(TimeUtils.showTime(details.getTime()));
