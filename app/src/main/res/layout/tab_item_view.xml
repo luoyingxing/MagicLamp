@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45dp"
-    android:background="@color/home_bottom_tab_color"
+    android:background="@color/white"
     android:gravity="center"
     android:paddingBottom="4dp"
     android:paddingTop="4dp">
