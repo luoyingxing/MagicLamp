@@ -102,18 +102,18 @@ public class ConstellationConjugateFragment extends BaseFragment implements View
     private void initData() {
         // 白羊座、金牛座、双子座、巨蟹座、狮子座、处女座、天秤座、天蝎座、射手座、摩羯座、水瓶座、双鱼座。
         List<Check> checks = new ArrayList<>();
-        checks.add(new Check("白羊座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("金牛座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("双子座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("巨蟹座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("狮子座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("处女座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("天秤座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("天蝎座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("射手座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("摩羯座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("水瓶座", R.mipmap.icon_chat_edit));
-        checks.add(new Check("双鱼座", R.mipmap.icon_chat_edit));
+        checks.add(new Check("白羊座", R.mipmap.icon_aries));
+        checks.add(new Check("金牛座", R.mipmap.icon_taurus));
+        checks.add(new Check("双子座", R.mipmap.icon_gemini));
+        checks.add(new Check("巨蟹座", R.mipmap.icon_cancer));
+        checks.add(new Check("狮子座", R.mipmap.icon_leo));
+        checks.add(new Check("处女座", R.mipmap.icon_virgo));
+        checks.add(new Check("天秤座", R.mipmap.icon_libra));
+        checks.add(new Check("天蝎座", R.mipmap.icon_scorpio));
+        checks.add(new Check("射手座", R.mipmap.icon_sagittarius));
+        checks.add(new Check("摩羯座", R.mipmap.icon_capricornus));
+        checks.add(new Check("水瓶座", R.mipmap.icon_aquarius));
+        checks.add(new Check("双鱼座", R.mipmap.icon_pisces));
         mGridViewAdapter.addAll(checks);
     }
 
