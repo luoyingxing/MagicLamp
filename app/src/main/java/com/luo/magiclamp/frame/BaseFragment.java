@@ -1,7 +1,6 @@
 package com.luo.magiclamp.frame;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.network.MyNoHttp;
+import com.luo.magiclamp.frame.ui.view.LoadingDialog;
 import com.luo.magiclamp.utils.Logger;
 import com.luo.magiclamp.utils.NetworkUtils;
 
@@ -27,7 +27,7 @@ public class BaseFragment extends HandleFragment {
     protected String mTag;
     protected Logger mLog;
     protected BaseActivity mActivity;
-    protected ProgressDialog mDialog;
+    protected LoadingDialog mDialog;
 
     @Override
     public void onAttach(Activity activity) {
@@ -144,8 +144,10 @@ public class BaseFragment extends HandleFragment {
 
     public void showDialog(String title, String message) {
         hideDialog();
-        mDialog = ProgressDialog.show(getActivity(), title, message);
+//        mDialog = ProgressDialog.show(getActivity(), title, message);
+        mDialog = new LoadingDialog(mActivity);
         mDialog.setCanceledOnTouchOutside(true);
+        mDialog.show();
     }
 
     public void hideDialog() {
