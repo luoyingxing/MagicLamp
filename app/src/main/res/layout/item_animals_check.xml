@@ -14,10 +14,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_constellation_conjugate_check"
         android:button="@null"
-        android:drawableLeft="@mipmap/icon_chat_edit"
         android:gravity="center_vertical"
         android:padding="4dp"
-        android:text="鼠"
+        android:text=""
         android:textColor="@drawable/color_constellation_conjugate_check" />
 
 </LinearLayout>

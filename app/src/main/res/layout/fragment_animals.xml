@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="请随意选择两个生肖进行配对" />
+            android:text="请随意选择一到两个生肖进行配对" />
 
         <com.luo.magiclamp.frame.ui.scroll.ScrollGridView
             android:id="@+id/gv_animals_check"
@@ -59,14 +59,14 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:paddingTop="10dp"
-            android:text="白羊座 天蝎座" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_animals_content_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="男鼠＋女虎：如果她能够现实一点，让你的心中有无所顾虑，结果还能勉强平顺和气。"
+            android:text=""
             android:textSize="16sp" />
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="男虎＋女鼠：可以生活在一起，但她必须要宽容。"
+            android:text=""
             android:textSize="16sp" />
 
     </LinearLayout>

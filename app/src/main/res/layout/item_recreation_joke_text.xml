@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:singleLine="true"
-        android:text="今天上厕所忘带纸了"
+        android:text=""
         android:textColor="@color/gray_33"
         android:textSize="16sp" />
 
@@ -24,7 +24,7 @@
         android:id="@+id/tv_item_joke_text_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="今天上厕所忘带纸了，好在我够机智，打电话说：喂，给我来份外卖啊！\r\n外卖小哥说：好的，请问先生您的地址在哪？\r\n我说：就在你家店的东边的公厕右手边的第三个坑，记得多带点餐巾纸啊。。。"
+        android:text=""
         android:textSize="16sp" />
 
     <Space

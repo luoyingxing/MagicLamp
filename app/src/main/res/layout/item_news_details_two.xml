@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="中国将培养3000万足球儿童 计划2050年击败德万足球儿童中3000万足球儿童"
+        android:text=""
         android:textColor="@color/gray_33"
         android:textSize="17sp" />
 
@@ -36,10 +36,9 @@
                 android:id="@+id/iv_item_news_details_img_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/bg_main_top"
+                android:src="@mipmap/bg_image_defualt"
                 luo:single="false" />
 
         </RelativeLayout>
@@ -60,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/bg_main_top"
+                android:src="@mipmap/bg_image_defualt"
                 luo:single="false" />
         </RelativeLayout>
 
@@ -81,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/bg_main_top"
+                android:src="@mipmap/bg_image_defualt"
                 luo:single="false" />
 
         </RelativeLayout>
@@ -101,7 +100,7 @@
             android:id="@+id/tv_item_news_details_source_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="神灯体育"
+            android:text="神灯APP"
             android:textSize="13sp" />
 
         <Space
@@ -114,7 +113,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/icon_news_discuss"
             android:gravity="center"
-            android:text="888"
+            android:text="0"
             android:textSize="13sp" />
 
     </LinearLayout>

@@ -57,7 +57,7 @@
             android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:text="诸葛"
+            android:text=""
             android:textColor="@color/gray_21"
             android:textSize="18sp" />
 
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8dp"
-            android:text="周朝时，有姬姓虞国人，入秦后，授予百里作采邑，其后代子孙就以封地名为姓，称百里氏。"
+            android:text=""
             android:textSize="16sp" />
 
     </LinearLayout>

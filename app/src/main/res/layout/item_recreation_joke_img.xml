@@ -13,7 +13,7 @@
         android:maxLines="2"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="今天上厕所忘带纸了"
+        android:text=""
         android:textColor="@color/gray_33"
         android:textSize="16sp" />
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
-        android:src="@mipmap/bg_main_top" />
+        android:src="@mipmap/bg_image_defualt" />
 
     <Space
         android:layout_width="match_parent"

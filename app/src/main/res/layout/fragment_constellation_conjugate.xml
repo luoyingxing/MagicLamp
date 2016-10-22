@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="请随意选择两个星座进行匹配" />
+            android:text="请随意选择一到两个星座进行匹配" />
 
         <com.luo.magiclamp.frame.ui.scroll.ScrollGridView
             android:id="@+id/gv_constellation_conjugate_check"
@@ -59,7 +59,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:paddingTop="10dp"
-            android:text="白羊座 天蝎座" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_constellation_conjugate_content_one"
@@ -69,7 +69,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="10dp"
-            android:text="友情：★★★★\n爱情：★★★\n婚姻：★★★\n亲情：★★★"
+            android:text=""
             android:textSize="16sp" />
 
         <TextView
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="天秤座是个最爱靓的的星座，与一个和自己一样有气质的人谈情，是不是很棒？！^o^\r\n　 对于靓的追求，可谓天生一对。你们初相识时就会觉得大家的思想行为很接近，大家都是充满活力的人，在活动和拍施的过程都很开心。而且两人对朋友都很重视，会一起扩充生活圈子拥有共同的朋友。\r\n　　但要注意由于互相都喜欢用自己心中的尺去量别人，你们一定要找到大家之间的平衡点，否则，你们心里面对另一半看不顺眼时又刻意迁就，可能造成双方的误解。组织家庭上，面对最大的问题就是遇到要决定一些家事，大家都犹疑不决，结果无办法去抉择！你想想，如果连买一座灯都要搞一头半个月，整个屋子的装修要搞到什么时候呀! 　　\r\n性方面是互相吸引的一对，大家都希望可以在Sex里面令到对方满意。"
+            android:text=""
             android:textSize="16sp" />
 
     </LinearLayout>

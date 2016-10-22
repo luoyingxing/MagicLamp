@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="菲总统杜特尔特称不再同美国进行联合军演菲总统杜特尔特称不再同美国进行联合军演"
+            android:text=""
             android:textColor="@color/gray_21"
             android:textSize="19sp" />
 
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="新浪体育 2016-10-13"
+            android:text=""
             android:textColor="@color/gray_72"
             android:textSize="13sp" />
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@mipmap/bg_main_top" />
+            android:src="@mipmap/bg_image_defualt" />
 
         <Space
             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="6dp"
-            android:text="洛伦扎纳不再准备明年的美菲联合军演洛伦扎纳不再准备明年的美菲联合军演"
+            android:text=""
             android:textSize="17sp" />
 
         <Space
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@mipmap/bg_main_top" />
+            android:src="@mipmap/bg_image_defualt" />
 
         <Space
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@mipmap/bg_main_top" />
+            android:src="@mipmap/bg_image_defualt" />
 
         <Space
             android:layout_width="match_parent"

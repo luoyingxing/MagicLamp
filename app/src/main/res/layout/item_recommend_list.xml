@@ -14,7 +14,7 @@
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
         android:singleLine="true"
-        android:text="韩国品牌的傲慢与沦落：手机爆炸猛于核爆"
+        android:text=""
         android:textColor="@color/gray_21"
         android:textSize="17sp" />
 
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@mipmap/bg_main_top" />
+        android:src="@mipmap/bg_image_defualt" />
 
     <TextView
         android:id="@+id/tv_item_recommend_source"
@@ -32,6 +32,6 @@
         android:gravity="center"
         android:paddingBottom="6dp"
         android:paddingTop="6dp"
-        android:text="海外探客" />
+        android:text="神灯APP" />
 
 </LinearLayout>

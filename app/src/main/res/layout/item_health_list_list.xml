@@ -14,7 +14,7 @@
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
         android:singleLine="true"
-        android:text="健康养生"
+        android:text=""
         android:textColor="@color/gray_21"
         android:textSize="17sp" />
 
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@mipmap/bg_main_top" />
+        android:src="@mipmap/bg_image_defualt" />
 
     <TextView
         android:id="@+id/tv_item_health_list_list_description"
@@ -34,7 +34,7 @@
         android:maxLines="2"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        android:text="健健康养生健康养生康养生健康养生健康养生生健康养生健康养生康养生" />
+        android:text="" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/icon_health_visit"
             android:gravity="center"
-            android:text="88" />
+            android:text="0" />
 
         <TextView
             android:id="@+id/tv_item_health_list_list_collect"
@@ -56,7 +56,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="88" />
+            android:text="0" />
 
         <TextView
             android:id="@+id/tv_item_health_list_list_discuss"
@@ -64,14 +64,14 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/icon_news_discuss"
             android:gravity="center"
-            android:text="88" />
+            android:text="0" />
 
         <TextView
             android:id="@+id/tv_item_health_list_list_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="216-10-17 08:44" />
+            android:text="" />
 
     </LinearLayout>
 

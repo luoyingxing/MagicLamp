@@ -10,8 +10,7 @@
         android:id="@+id/iv_item_recreation_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher" />
+        android:contentDescription="@string/app_name" />
 
     <Space
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
         android:id="@+id/tv_item_recreation_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="神灯聊天"
+        android:text=""
         android:textSize="14sp" />
 
     <Space

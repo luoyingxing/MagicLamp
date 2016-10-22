@@ -42,8 +42,7 @@
                 android:id="@+id/iv_constellation_chart_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:src="@mipmap/icon_constellation_chart_aries" />
+                android:contentDescription="@string/app_name" />
 
             <Space
                 android:layout_width="10dp"
@@ -54,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
-                android:text="白羊座"
+                android:text=""
                 android:textSize="13sp" />
 
         </LinearLayout>
@@ -87,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="综合指数（99%）" />
+                    android:text="综合指数（0%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -99,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="99" />
+                    android:progress="0" />
 
             </TableRow>
 
@@ -115,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="健康指数（99%）" />
+                    android:text="健康指数（0%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -127,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="99" />
+                    android:progress="0" />
 
             </TableRow>
 
@@ -143,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="爱情指数（99%）" />
+                    android:text="爱情指数（0%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -155,7 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="99" />
+                    android:progress="0" />
 
             </TableRow>
 
@@ -171,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="财运指数（99%）" />
+                    android:text="财运指数（0%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -183,7 +182,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="99" />
+                    android:progress="0" />
 
             </TableRow>
 
@@ -199,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="工作指数（99%）" />
+                    android:text="工作指数（0%）" />
 
                 <Space
                     android:layout_width="16dp"
@@ -211,7 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_weight="1"
-                    android:progress="99" />
+                    android:progress="0" />
 
             </TableRow>
 
