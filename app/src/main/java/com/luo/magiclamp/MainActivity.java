@@ -187,7 +187,6 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             @Override
             public void onResult(int i, UpdateInfo updateInfo) {
                 //自动更新回调方法
-                mLog.e("自动更新 -- " + updateInfo.getUpdateInfo());
             }
         });
     }
