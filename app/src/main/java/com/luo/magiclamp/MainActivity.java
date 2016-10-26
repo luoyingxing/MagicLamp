@@ -39,7 +39,8 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             R.drawable.tab_icon_selector_recreation,
             R.drawable.tab_icon_selector_health,
             R.drawable.tab_icon_selector_personal};
-    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
+//    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
+    private String[] mTabText = { "娱乐", "健康", "个人"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
@@ -63,17 +64,17 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.fl_main);
+//        mTabHost.addTab(mTabHost.newTabSpec(mTabText[0]).setIndicator(getIndicatorView(0)),
+//                NewsFragment.class, null);
+//        mTabHost.addTab(mTabHost.newTabSpec(mTabText[1]).setIndicator(getIndicatorView(1)),
+//                RecommendFragment.class, null);
+//        mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
+//                FocusFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[0]).setIndicator(getIndicatorView(0)),
-                NewsFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(mTabText[1]).setIndicator(getIndicatorView(1)),
-                RecommendFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
-                FocusFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(mTabText[3]).setIndicator(getIndicatorView(3)),
                 RecreationFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(mTabText[4]).setIndicator(getIndicatorView(4)),
+        mTabHost.addTab(mTabHost.newTabSpec(mTabText[1]).setIndicator(getIndicatorView(1)),
                 HealthFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(mTabText[5]).setIndicator(getIndicatorView(5)),
+        mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
                 PersonalFragment.class, null);
         mTabHost.getTabWidget().setDividerDrawable(android.R.color.white);
 
@@ -132,32 +133,32 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         }
 
         switch (getTabHost().getCurrentTab()) {
+//            case 0:
+//                setTopImage(R.drawable.main_iamge_bg);
+//                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
+//                mLog.e("新闻");
+//                break;
+//            case 1:
+//                setTopImage(R.mipmap.bg_image_defualt);
+//                setTopImageParams(180);
+//                mLog.e("精选");
+//                break;
+//            case 2:
+//                setTopImage(R.drawable.main_iamge_bg);
+//                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
+//                mLog.e("热点");
+//                break;
             case 0:
-                setTopImage(R.drawable.main_iamge_bg);
-                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
-                mLog.e("新闻");
-                break;
-            case 1:
-                setTopImage(R.mipmap.bg_image_defualt);
-                setTopImageParams(180);
-                mLog.e("精选");
-                break;
-            case 2:
-                setTopImage(R.drawable.main_iamge_bg);
-                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
-                mLog.e("热点");
-                break;
-            case 3:
                 setTopImage(R.mipmap.bg_image_defualt);
                 setTopImageParams(100);
                 mLog.e("娱乐");
                 break;
-            case 4:
+            case 1:
                 setTopImage(R.drawable.main_iamge_bg);
                 setTopImageParams(100);
                 mLog.e("健康");
                 break;
-            case 5:
+            case 2:
                 setTopImage(R.drawable.main_iamge_bg);
                 setTopImageParams(100);
                 mLog.e("个人");
