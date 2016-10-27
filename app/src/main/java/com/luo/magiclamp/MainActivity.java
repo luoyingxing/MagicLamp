@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             R.drawable.tab_icon_selector_health,
             R.drawable.tab_icon_selector_personal};
 //    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
-    private String[] mTabText = { "娱乐", "健康", "个人"};
+    private String[] mTabText = {"娱乐", "健康", "个人"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
