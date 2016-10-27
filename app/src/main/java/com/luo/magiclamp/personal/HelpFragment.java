@@ -48,15 +48,15 @@ public class HelpFragment extends BaseFragment {
 
         String content = "<h3>" + getResources().getString(R.string.personal_help_title) + "</h3>\n" +
                 "<br>\n" +
-                "<font color=#ea8010>" + getResources().getString(R.string.personal_help_news) + "</font>\n" +
-                "</br>\n" +
-                "<br>\n" +
-                "<font color=#9d55b8>" + getResources().getString(R.string.personal_help_recommend) + "</font>\n" +
-                "</br>\n" +
-                "<br>\n" +
-                "<font color=#f4c600>" + getResources().getString(R.string.personal_help_focus) + "</font>\n" +
-                "</br>\n" +
-                "<br>\n" +
+//                "<font color=#ea8010>" + getResources().getString(R.string.personal_help_news) + "</font>\n" +
+//                "</br>\n" +
+//                "<br>\n" +
+//                "<font color=#9d55b8>" + getResources().getString(R.string.personal_help_recommend) + "</font>\n" +
+//                "</br>\n" +
+//                "<br>\n" +
+//                "<font color=#f4c600>" + getResources().getString(R.string.personal_help_focus) + "</font>\n" +
+//                "</br>\n" +
+//                "<br>\n" +
                 "<font color=#56abe4>" + getResources().getString(R.string.personal_help_recreation) + "</font>\n" +
                 "</br>\n" +
                 "<br>\n" +
