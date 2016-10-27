@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iflytek.autoupdate.IFlytekUpdate;
 import com.iflytek.autoupdate.IFlytekUpdateListener;
@@ -21,6 +22,11 @@ import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.ui.scroll.ScrollListView;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.utils.Log;
 
 import java.util.ArrayList;
 
@@ -80,6 +86,7 @@ public class PersonalFragment extends BaseFragment {
                 switch (position) {
                     case 0:
                         showToast("暂无任何工具");
+                        share();
                         break;
                     case 1:
                         Intent intent2 = new Intent(getActivity(), BaseActivity.class);
@@ -179,5 +186,45 @@ public class PersonalFragment extends BaseFragment {
         }
     }
 
+    public static String url = "http://www.ux11148841.icoc.me/";
+    public static String text = "“神灯”是一款集娱乐、健康和工具于一体的APP。";
+    public static String title = "神灯APP";
+    public static String imageurl = "http://11617157.s21i-11.faiusr.com/4/ABUIABAEGAAg1ISzwAUowJavmwIw0AU4gAo!160x160.png";
 
+    private void share() {
+//        UmengTool.getSignature(getActivity());
+//        UmengTool.checkWx(getActivity());
+        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
+                .withTitle(title)
+                .withText(text + "——来自神灯APP")
+                .withMedia(new UMImage(getActivity(), imageurl))
+                .withTargetUrl("http://www.ux11148841.icoc.me/")
+                .setCallback(umShareListener)
+                .open();
+    }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Log.d("plat", "platform" + platform);
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(getActivity(), " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(getActivity(), " 分享失败啦", Toast.LENGTH_SHORT).show();
+            if (t != null) {
+                Log.d("throw", "throw:" + t.getMessage());
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(getActivity(), " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
 }
