@@ -1,6 +1,7 @@
 package com.luo.magiclamp;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
@@ -15,7 +16,9 @@ import android.widget.Toast;
 import com.iflytek.autoupdate.IFlytekUpdate;
 import com.iflytek.autoupdate.IFlytekUpdateListener;
 import com.iflytek.autoupdate.UpdateConstants;
+import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
+import com.iflytek.autoupdate.UpdateType;
 import com.luo.magiclamp.Recommend.RecommendFragment;
 import com.luo.magiclamp.focus.FocusFragment;
 import com.luo.magiclamp.frame.BaseActivity;
@@ -39,7 +42,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             R.drawable.tab_icon_selector_recreation,
             R.drawable.tab_icon_selector_health,
             R.drawable.tab_icon_selector_personal};
-//    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
+    //    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
     private String[] mTabText = {"娱乐", "健康", "个人"};
     private String mCurrentTabTag;
 
@@ -174,20 +177,28 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
 
     private void updateApp() {
         //初始化自动更新对象
-        IFlytekUpdate updManager = IFlytekUpdate.getInstance(mInstance);
+        final IFlytekUpdate updManager = IFlytekUpdate.getInstance(mInstance);
         //开启调试模式,默认不开启
         updManager.setDebugMode(true);
         //开启wifi环境下检测更新,仅对自动更新有效,强制更新则生效
         updManager.setParameter(UpdateConstants.EXTRA_WIFIONLY, "true");
         //设置通知栏使用应用icon
-        updManager.setParameter(UpdateConstants.EXTRA_NOTI_ICON, "true");
+        updManager.setParameter(UpdateConstants.EXTRA_NOTI_ICON, "false");
         //设置更新提示类型,默认为通知栏提示
         updManager.setParameter(UpdateConstants.EXTRA_STYLE, UpdateConstants.UPDATE_UI_DIALOG);
         // 启动自动更新
         updManager.autoUpdate(mInstance, new IFlytekUpdateListener() {
             @Override
-            public void onResult(int i, UpdateInfo updateInfo) {
-                //自动更新回调方法
+            public void onResult(int code, UpdateInfo result) {
+                if (code == UpdateErrorCode.OK && result != null) {
+//                    if (result.getUpdateType() == UpdateType.NoNeed) {
+//                        showToast("已经是最新版本！");
+//                        return;
+//                    }
+                    updManager.showUpdateInfo(mInstance, result);
+                } else {
+//                    showToast("请求更新失败！");
+                }
             }
         });
     }

@@ -16,7 +16,10 @@ import android.widget.Toast;
 
 import com.iflytek.autoupdate.IFlytekUpdate;
 import com.iflytek.autoupdate.IFlytekUpdateListener;
+import com.iflytek.autoupdate.UpdateConstants;
+import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
+import com.iflytek.autoupdate.UpdateType;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.BaseActivity;
@@ -67,7 +70,7 @@ public class PersonalFragment extends BaseFragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                showToast("正在检查更新...");
+                showToast(msg.obj);
             }
         };
     }
@@ -106,11 +109,27 @@ public class PersonalFragment extends BaseFragment {
         });
     }
 
+    private IFlytekUpdate updManager;
+
     private void updateApp() {
-        IFlytekUpdate.getInstance(mActivity).forceUpdate(mActivity, new IFlytekUpdateListener() {
+        updManager = IFlytekUpdate.getInstance(getActivity());
+        updManager.setParameter(UpdateConstants.EXTRA_STYLE, UpdateConstants.UPDATE_UI_DIALOG);
+        updManager.autoUpdate(getActivity(), new IFlytekUpdateListener() {
             @Override
-            public void onResult(int i, UpdateInfo updateInfo) {
-                mHandler.sendEmptyMessage(88);
+            public void onResult(int code, UpdateInfo result) {
+                if (code == UpdateErrorCode.OK && result != null) {
+                    if (result.getUpdateType() == UpdateType.NoNeed) {
+                        Message message = new Message();
+                        message.obj = "已经是最新版本！";
+                        mHandler.sendMessage(message);
+                        return;
+                    }
+                    updManager.showUpdateInfo(getActivity(), result);
+                } else {
+                    Message message = new Message();
+                    message.obj = "请求更新失败！";
+                    mHandler.sendMessage(message);
+                }
             }
         });
     }
