@@ -119,14 +119,14 @@ public class PersonalFragment extends BaseFragment {
             public void onResult(int code, UpdateInfo result) {
                 if (code == UpdateErrorCode.OK && result != null) {
                     if (result.getUpdateType() == UpdateType.NoNeed) {
-                        Message message = new Message();
+                        Message message = mHandler.obtainMessage();
                         message.obj = "已经是最新版本！";
                         mHandler.sendMessage(message);
                         return;
                     }
                     updManager.showUpdateInfo(getActivity(), result);
                 } else {
-                    Message message = new Message();
+                    Message message = mHandler.obtainMessage();
                     message.obj = "请求更新失败！";
                     mHandler.sendMessage(message);
                 }
