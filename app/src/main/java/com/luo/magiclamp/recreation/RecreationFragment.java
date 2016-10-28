@@ -28,6 +28,9 @@ import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
 import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,12 +297,15 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                         viewHolderText = new ViewHolderText();
                         viewHolderText.titleTV = (TextView) convertView.findViewById(R.id.tv_item_joke_text_title);
                         viewHolderText.contentTV = (TextView) convertView.findViewById(R.id.tv_item_joke_text_content);
+                        viewHolderText.shareTV = (TextView) convertView.findViewById(R.id.tv_item_joke_text_share);
                         convertView.setTag(viewHolderText);
 
                         JokeList joke = getItem(position);
 
                         viewHolderText.titleTV.setText(joke.getTitle());
                         viewHolderText.contentTV.setText(Html.fromHtml(joke.getText()));
+                        viewHolderText.shareTV.setOnTouchListener(RecreationFragment.this);
+                        viewHolderText.shareTV.setOnClickListener(new ItemListener(joke));
 
                         break;
                     case 1:
@@ -307,12 +313,16 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                         viewHolderImg = new ViewHolderImg();
                         viewHolderImg.titleTV = (TextView) convertView.findViewById(R.id.tv_item_joke_img_title);
                         viewHolderImg.imageView = (NewsDetailImageView) convertView.findViewById(R.id.tv_item_joke_img_image);
+                        viewHolderImg.shareTV = (TextView) convertView.findViewById(R.id.tv_item_joke_img_share);
+
                         convertView.setTag(viewHolderImg);
 
                         JokeList jokeImg = getItem(position);
 
                         viewHolderImg.titleTV.setText(jokeImg.getTitle());
                         viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
+                        viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
+                        viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
 
                         break;
                 }
@@ -325,6 +335,8 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         viewHolderText.titleTV.setText(joke.getTitle());
                         viewHolderText.contentTV.setText(Html.fromHtml(joke.getText()));
+                        viewHolderText.shareTV.setOnTouchListener(RecreationFragment.this);
+                        viewHolderText.shareTV.setOnClickListener(new ItemListener(joke));
 
                         break;
                     case 1:
@@ -334,6 +346,8 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         viewHolderImg.titleTV.setText(jokeImg.getTitle());
                         viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
+                        viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
+                        viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
                         break;
                 }
             }
@@ -345,13 +359,61 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         class ViewHolderText {
             TextView titleTV;
             TextView contentTV;
+            TextView shareTV;
         }
 
         class ViewHolderImg {
             TextView titleTV;
             NewsDetailImageView imageView;
+            TextView shareTV;
+        }
+
+    }
+
+
+    private class ItemListener implements View.OnClickListener {
+        private JokeList mJokeList;
+
+        public ItemListener(JokeList jokeList) {
+            this.mJokeList = jokeList;
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.tv_item_joke_text_share:
+                    share(mJokeList, TEXT);
+                    break;
+                case R.id.tv_item_joke_img_share:
+                    share(mJokeList, IMG);
+                    break;
+            }
         }
     }
+
+    private static final int TEXT = 1;
+    private static final int IMG = 2;
+
+    private void share(JokeList jokeList, int type) {
+        String text;
+        UMImage image;
+
+        if (type == TEXT) {
+            text = jokeList.getText() + " — 来自神灯APP";
+            image = new UMImage(getActivity(), ApiURL.APP_WEB_ADDRESS_IMAGE);
+        } else {
+            text = " — 来自神灯APP娱乐笑话";
+            image = new UMImage(getActivity(), jokeList.getImg());
+        }
+
+        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
+                .withTitle(jokeList.getTitle())
+                .withText(text)
+                .withMedia(image)
+                .withTargetUrl(ApiURL.APP_LOAD_ADDRESS)
+                .open();
+    }
+
 
     class Title {
         private int imageId;

@@ -5,7 +5,8 @@ package com.luo.magiclamp;
  * Created by luoyingxing on 16/10/09.
  */
 public class ApiURL {
-    public static String SERVER_HOST = "";
+    public static String APP_LOAD_ADDRESS = "http://a.app.qq.com/o/simple.jsp?pkgname=com.luo.magiclamp";
+    public static String APP_WEB_ADDRESS_IMAGE = "http://11617157.s21i-11.faiusr.com/4/ABUIABAEGAAghI7IwAUopYn6ngMwtgY4mAM.png";
 
     public static final String API_NEWS_GET_NEWS = "http://api.dagoogle.cn/news/get-news"; //新闻
 
