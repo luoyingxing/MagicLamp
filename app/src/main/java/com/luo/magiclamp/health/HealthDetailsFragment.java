@@ -10,9 +10,13 @@ import android.widget.TextView;
 import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.HealthDetails;
+import com.luo.magiclamp.entity.JokeList;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.scroll.ScrollWebView;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import cz.msebera.android.httpclient.util.EncodingUtils;
 
@@ -64,6 +68,15 @@ public class HealthDetailsFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mActivity.setTitle("详情");
+        mActivity.getRightImage().setImageResource(R.mipmap.icon_share_white);
+        mActivity.setOnRightImageClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mHealthDetails != null) {
+                    share();
+                }
+            }
+        });
     }
 
     private void init() {
@@ -79,12 +92,15 @@ public class HealthDetailsFragment extends BaseFragment {
         mDiscussTV = (TextView) mRootView.findViewById(R.id.tv_health_details_discuss);
     }
 
+    private HealthDetails mHealthDetails;
+
     private void loadDetails() {
         showDialog();
         new ApiRequest<HealthDetails>(ApiURL.API_HEALTH_DETAILS, true) {
             @Override
             protected void onSuccess(HealthDetails result) {
                 if (result != null) {
+                    mHealthDetails = result;
                     show(result.getMessage());
                     mTitleTV.setText(result.getTitle());
                     mVisitTV.setText("" + result.getCount());
@@ -115,6 +131,15 @@ public class HealthDetailsFragment extends BaseFragment {
                 "</head> \n" +
                 "<body>" + EncodingUtils.getString(content.getBytes(), "UTF-8") + "</body> \n </html>";
         mWebView.loadDataWithBaseURL(null, strUrl, "text/html; charset=UTF-8", null, null);
+    }
+
+    private void share() {
+        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
+                .withTitle(mHealthDetails.getTitle())
+                .withText(mHealthDetails.getTitle())
+                .withMedia(new UMImage(getActivity(), mHealthDetails.getImg()))
+                .withTargetUrl(mHealthDetails.getUrl())
+                .open();
     }
 
 }
