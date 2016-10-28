@@ -86,7 +86,7 @@ public class PersonalFragment extends BaseFragment {
                 switch (position) {
                     case 0:
                         showToast("暂无任何工具");
-                        share();
+//                        share();
                         break;
                     case 1:
                         Intent intent2 = new Intent(getActivity(), BaseActivity.class);
