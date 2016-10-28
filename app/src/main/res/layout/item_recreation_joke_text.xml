@@ -18,7 +18,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="3dp" />
+        android:layout_height="5dp" />
 
     <TextView
         android:id="@+id/tv_item_joke_text_content"
