@@ -1,0 +1,2 @@
+# MagicLamp
+init project
