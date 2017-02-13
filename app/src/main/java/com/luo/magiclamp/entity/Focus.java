@@ -9,31 +9,54 @@ import java.util.List;
  * Created by luoyingxing on 16/10/19.
  */
 public class Focus implements Serializable {
-    private boolean status; //true
-    private int total; //1724
-    private List<FocusDetails> tngou;
+    private String reason;
+    private Result result;
+    private int error_code;
 
-    public boolean isStatus() {
-        return status;
+    public String getReason() {
+        return reason;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    public int getTotal() {
-        return total;
+    public Result getResult() {
+        return result;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setResult(Result result) {
+        this.result = result;
     }
 
-    public List<FocusDetails> getTngou() {
-        return tngou;
+    public int getError_code() {
+        return error_code;
     }
 
-    public void setTngou(List<FocusDetails> tngou) {
-        this.tngou = tngou;
+    public void setError_code(int error_code) {
+        this.error_code = error_code;
+    }
+
+    public static class Result {
+        private String stat;
+        private List<FocusDetails> data;
+
+        public String getStat() {
+            return stat;
+        }
+
+        public void setStat(String stat) {
+            this.stat = stat;
+        }
+
+        public List<FocusDetails> getData() {
+            return data;
+        }
+
+        public void setData(List<FocusDetails> data) {
+            this.data = data;
+        }
+
+
     }
 }

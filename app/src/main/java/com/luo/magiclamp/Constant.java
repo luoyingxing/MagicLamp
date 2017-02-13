@@ -31,6 +31,10 @@ public class Constant {
      */
     public static final String API_TURING_KEY = "879a6cb3afb84dbf4fc84a1df2ab7319";
     /**
+     * focus key
+     */
+    public static final String API_FOCUS_KEY = "1e055d822e828e1f0d78ef05cde6f5f2";
+    /**
      * turing id
      */
     public static final String API_TURING_ID = "eb2edb736";

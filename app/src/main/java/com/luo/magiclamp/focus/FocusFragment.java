@@ -13,8 +13,7 @@ import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.view.ViewPagerIndicator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * FocusFragment
@@ -26,6 +25,15 @@ public class FocusFragment extends BaseFragment {
 
     private ViewPager mViewPager;
     private ViewPagerIndicator mIndicator;
+
+    /**
+     * top(头条，默认),shehui(社会),guonei(国内),guoji(国际),yule(娱乐),
+     * tiyu(体育)junshi(军事),keji(科技),caijing(财经),shishang(时尚)
+     */
+    private String[] mTitle = new String[]{"头条", "社会", "国内", "国际", "娱乐", "体育",
+            "军事", "科技", "财经", "时尚",};
+    private String[] mTitleKey = new String[]{"top", "shehui", "guonei", "guoji", "yule", "tiyu",
+            "junshi", "keji", "caijing", "shishang",};
 
     public FocusFragment() {
     }
@@ -53,37 +61,9 @@ public class FocusFragment extends BaseFragment {
     }
 
     private void loadTitleList() {
-        showDialog();
-        new ApiRequest<Focus>(ApiURL.API_FOCUS_CLASSIFY, true) {
-            @Override
-            protected void onSuccess(Focus result) {
-                if (result.getTngou() != null) {
-                    setAdapter(result);
-                }
-            }
-
-            @Override
-            protected void onFinish(int what) {
-                hideDialog();
-            }
-
-        }.get();
-    }
-
-    private void setAdapter(Focus result) {
-        List<Integer> mId = new ArrayList<>();
-        List<String> mTitles = new ArrayList<>();
-        mId.add(0);
-        mTitles.add("最新");
-
-        for (int i = 0; i < result.getTngou().size(); i++) {
-            mTitles.add(result.getTngou().get(i).getName().substring(0, 2));
-            mId.add(result.getTngou().get(i).getId());
-        }
-
-        FocusViewPagerAdapter mAdapter = new FocusViewPagerAdapter(getContext(), mId);
+        FocusViewPagerAdapter mAdapter = new FocusViewPagerAdapter(getContext(), Arrays.asList(mTitleKey));
         //设置Tab上的标题
-        mIndicator.setTabItemTitles(mTitles);
+        mIndicator.setTabItemTitles(Arrays.asList(mTitle));
         mViewPager.setAdapter(mAdapter);
         //设置关联的ViewPager
         mIndicator.setViewPager(mViewPager, 0);

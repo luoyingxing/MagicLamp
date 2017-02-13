@@ -21,16 +21,16 @@ public class FocusViewPagerAdapter extends PagerAdapter {
     private Context mContext;
 
     private int mViesCount;
-    private List<Integer> mIdList = new ArrayList<>();
+    private List<String> mTitleList = new ArrayList<>();
 
-    public FocusViewPagerAdapter(Context context, List<Integer> ids) {
+    public FocusViewPagerAdapter(Context context, List<String> title) {
         this.mContext = context;
-        this.mIdList = ids;
+        this.mTitleList = title;
         init();
     }
 
     private void init() {
-        mViesCount = mIdList.size();
+        mViesCount = mTitleList.size();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class FocusViewPagerAdapter extends PagerAdapter {
         View mPagerView = LayoutInflater.from(mContext).inflate(R.layout.item_views_adapter, null, false);
         ViewGroup viewGroup = (ViewGroup) mPagerView.findViewById(R.id.rl_fragment_news_rootView);
 
-        FocusView focusView = new FocusView(mContext, mIdList.get(position));
+        FocusView focusView = new FocusView(mContext, mTitleList.get(position));
         views = focusView.getRootView();
 
         if (views != null) {

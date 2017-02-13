@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
@@ -21,8 +22,7 @@ import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
-import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
-import com.luo.magiclamp.utils.TimeUtils;
+import com.luo.magiclamp.frame.ui.view.NewsImageView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,9 +37,7 @@ public class FocusView implements Serializable {
     private static final String TAG = FocusView.class.getSimpleName();
     private View mRootView;
     private Context mContext;
-    private int mFocusId = 0;
-
-    private int mPage = 1;
+    private String mTitle;
 
     private ListViewAdapter mListViewAdapter;
 
@@ -48,9 +46,9 @@ public class FocusView implements Serializable {
     public FocusView() {
     }
 
-    public FocusView(Context context, int id) {
+    public FocusView(Context context, String title) {
         this.mContext = context;
-        this.mFocusId = id;
+        this.mTitle = title;
         init();
     }
 
@@ -84,7 +82,7 @@ public class FocusView implements Serializable {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, BaseActivity.class);
                 intent.putExtra(Constant.ARGS_FRAGMENT_NAME, FocusDetailsFragment.class.getName());
-                intent.putExtra(FocusDetailsFragment.PARAM, mListViewAdapter.getItem(position).getId());
+                intent.putExtra(FocusDetailsFragment.PARAM, mListViewAdapter.getItem(position).getUrl());
                 mContext.startActivity(intent);
             }
         });
@@ -92,16 +90,14 @@ public class FocusView implements Serializable {
         viewHolder.pullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-                Log.e(TAG, "onRefresh");
                 mListViewAdapter.clear();
-                mPage = 1;
                 loadFocus();
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-                Log.e(TAG, "onLoadMore");
-                loadFocus();
+                Toast.makeText(mContext, "没有更多了", Toast.LENGTH_SHORT).show();
+                viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
     }
@@ -113,57 +109,144 @@ public class FocusView implements Serializable {
         }
 
         @Override
+        public int getItemViewType(int position) {
+            return position % 2 == 0 ? 0 : 1;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 2;
+        }
+
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
+            ViewHolderOne viewHolderOne;
+            ViewHolderTwo viewHolderTwo;
 
+            int type = getItemViewType(position);
             if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_focus_list, null);
-                viewHolder = new ViewHolder();
-                viewHolder.titleTV = (TextView) convertView.findViewById(R.id.tv_item_focus_title);
-                viewHolder.imageView = (NewsDetailImageView) convertView.findViewById(R.id.iv_item_focus_image);
-                viewHolder.descriptionTV = (TextView) convertView.findViewById(R.id.tv_item_focus_description);
-                viewHolder.sourceTV = (TextView) convertView.findViewById(R.id.tv_item_focus_source);
-                viewHolder.timeTV = (TextView) convertView.findViewById(R.id.tv_item_focus_time);
-                convertView.setTag(viewHolder);
+
+                switch (type) {
+                    case 0:
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_focus_details_one, null);
+                        viewHolderOne = new ViewHolderOne();
+                        viewHolderOne.titleTV = (TextView) convertView.findViewById(R.id.tv_item_focus_details_title);
+                        viewHolderOne.imageView = (NewsImageView) convertView.findViewById(R.id.iv_item_focus_details_img);
+                        viewHolderOne.sourceTV = (TextView) convertView.findViewById(R.id.tv_item_focus_details_source_one);
+                        viewHolderOne.dataTV = (TextView) convertView.findViewById(R.id.tv_item_focus_details_data_one);
+                        convertView.setTag(viewHolderOne);
+
+                        FocusDetails focusOne = getItem(position);
+
+                        viewHolderOne.titleTV.setText(focusOne.getTitle());
+
+                        if (TextUtils.isEmpty(focusOne.getThumbnail_pic_s())) {
+                            viewHolderOne.imageView.setImageResource(R.mipmap.bg_image_defualt);
+                        } else {
+                            viewHolderOne.imageView.setHttpUri(Uri.parse(focusOne.getThumbnail_pic_s()));
+                        }
+
+                        viewHolderOne.sourceTV.setText(focusOne.getAuthor_name());
+                        viewHolderOne.dataTV.setText(focusOne.getDate());
+
+                        break;
+                    case 1:
+                        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_focus_details_two, null);
+                        viewHolderTwo = new ViewHolderTwo();
+                        viewHolderTwo.titleTV = (TextView) convertView.findViewById(R.id.tv_item_focus_details_title_two);
+                        viewHolderTwo.imageViewOne = (NewsImageView) convertView.findViewById(R.id.iv_item_focus_details_img_one);
+                        viewHolderTwo.imageViewTwo = (NewsImageView) convertView.findViewById(R.id.iv_item_focus_details_img_two);
+                        viewHolderTwo.imageViewThree = (NewsImageView) convertView.findViewById(R.id.iv_item_focus_details_img_three);
+                        viewHolderTwo.sourceTV = (TextView) convertView.findViewById(R.id.tv_item_focus_details_source_two);
+                        viewHolderTwo.dataTV = (TextView) convertView.findViewById(R.id.tv_item_focus_details_data_two);
+                        convertView.setTag(viewHolderTwo);
+
+                        FocusDetails focusTwo = getItem(position);
+
+                        viewHolderTwo.titleTV.setText(focusTwo.getTitle());
+                        viewHolderTwo.sourceTV.setText(focusTwo.getAuthor_name());
+                        viewHolderTwo.dataTV.setText(focusTwo.getDate());
+
+                        if (!TextUtils.isEmpty(focusTwo.getThumbnail_pic_s())) {
+                            viewHolderTwo.imageViewOne.setHttpUri(Uri.parse(focusTwo.getThumbnail_pic_s()));
+                        }
+
+                        if (!TextUtils.isEmpty(focusTwo.getThumbnail_pic_s02())) {
+                            viewHolderTwo.imageViewTwo.setHttpUri(Uri.parse(focusTwo.getThumbnail_pic_s02()));
+                        }
+
+                        if (!TextUtils.isEmpty(focusTwo.getThumbnail_pic_s03())) {
+                            viewHolderTwo.imageViewThree.setHttpUri(Uri.parse(focusTwo.getThumbnail_pic_s03()));
+                        }
+
+                        break;
+                }
             } else {
-                viewHolder = (ViewHolder) convertView.getTag();
+                switch (type) {
+                    case 0:
+                        viewHolderOne = (ViewHolderOne) convertView.getTag();
+
+                        FocusDetails focusOne = getItem(position);
+
+                        viewHolderOne.titleTV.setText(focusOne.getTitle());
+
+                        if (!TextUtils.isEmpty(focusOne.getThumbnail_pic_s())) {
+                            viewHolderOne.imageView.setHttpUri(Uri.parse(focusOne.getThumbnail_pic_s()));
+                        }
+
+                        break;
+                    case 1:
+                        viewHolderTwo = (ViewHolderTwo) convertView.getTag();
+
+                        FocusDetails newsTwo = getItem(position);
+
+                        viewHolderTwo.titleTV.setText(newsTwo.getTitle());
+                        viewHolderTwo.sourceTV.setText(newsTwo.getAuthor_name());
+                        viewHolderTwo.dataTV.setText(newsTwo.getDate());
+
+                        if (!TextUtils.isEmpty(newsTwo.getThumbnail_pic_s())) {
+                            viewHolderTwo.imageViewOne.setHttpUri(Uri.parse(newsTwo.getThumbnail_pic_s()));
+                        }
+
+                        if (!TextUtils.isEmpty(newsTwo.getThumbnail_pic_s02())) {
+                            viewHolderTwo.imageViewTwo.setHttpUri(Uri.parse(newsTwo.getThumbnail_pic_s02()));
+                        }
+
+                        if (!TextUtils.isEmpty(newsTwo.getThumbnail_pic_s03())) {
+                            viewHolderTwo.imageViewThree.setHttpUri(Uri.parse(newsTwo.getThumbnail_pic_s03()));
+                        }
+
+                        break;
+                }
             }
 
-            FocusDetails details = getItem(position);
-
-            viewHolder.titleTV.setText(details.getTitle());
-
-            if (details.getImg().equalsIgnoreCase("/top/default.jpg")) {
-                viewHolder.imageView.setImageResource(R.mipmap.bg_image_defualt);
-            } else {
-                viewHolder.imageView.setHttpUri(Uri.parse(ApiURL.API_HEALTH_LIST_IMAGE + details.getImg()));
-            }
-
-            viewHolder.descriptionTV.setText(details.getDescription());
-            viewHolder.sourceTV.setText(details.getFromname());
-            viewHolder.timeTV.setText(TimeUtils.showTime(details.getTime()));
 
             return convertView;
         }
 
-        class ViewHolder {
+        class ViewHolderOne {
             TextView titleTV;
-            NewsDetailImageView imageView;
-            TextView descriptionTV;
             TextView sourceTV;
-            TextView timeTV;
+            TextView dataTV;
+            NewsImageView imageView;
+        }
+
+        class ViewHolderTwo {
+            TextView titleTV;
+            TextView sourceTV;
+            TextView dataTV;
+            NewsImageView imageViewOne;
+            NewsImageView imageViewTwo;
+            NewsImageView imageViewThree;
         }
 
     }
 
     private void loadFocus() {
-        new ApiRequest<Focus>(ApiURL.API_FOCUS_LIST, true) {
+        new ApiRequest<Focus>(ApiURL.API_FOCUS_NEW) {
             @Override
             protected void onSuccess(Focus result) {
-                if (result.getTngou().size() == Constant.PAGE_SIZE_DEFAULT) {
-                    mPage++;
-                }
-                mListViewAdapter.addAll(result.getTngou());
+                mListViewAdapter.addAll(result.getResult().getData());
             }
 
             @Override
@@ -172,9 +255,8 @@ public class FocusView implements Serializable {
                 viewHolder.pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
-        }.addParam("id", mFocusId)
-                .addParam("page", mPage)
-                .addParam("rows", Constant.PAGE_SIZE_DEFAULT)
+        }.addParam("type", mTitle)
+                .addParam("key", Constant.API_FOCUS_KEY)
                 .get();
 
     }

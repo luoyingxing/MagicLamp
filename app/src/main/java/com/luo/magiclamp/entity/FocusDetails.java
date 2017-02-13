@@ -8,117 +8,22 @@ import java.io.Serializable;
  * Created by luoyingxing on 16/10/19.
  */
 public class FocusDetails implements Serializable {
-    private String name; //民生热点
-    private int seq; //1
-    private int count;
-    private String description;
-    private int fcount;
-    private String fromname;
-    private String fromurl;
-    private int id;
-    private String img;
-    private String keywords;
-    private int rcount;
-    private long time;
+    private String uniquekey;
     private String title;
-    private int topclass;
+    private String date;
+    private String category;
+    private String author_name;
     private String url;
-    private String message;
+    private String thumbnail_pic_s;
+    private String thumbnail_pic_s02;
+    private String thumbnail_pic_s03;
 
-    public String getName() {
-        return name;
+    public String getUniquekey() {
+        return uniquekey;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getSeq() {
-        return seq;
-    }
-
-    public void setSeq(int seq) {
-        this.seq = seq;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getFcount() {
-        return fcount;
-    }
-
-    public void setFcount(int fcount) {
-        this.fcount = fcount;
-    }
-
-    public String getFromname() {
-        return fromname;
-    }
-
-    public void setFromname(String fromname) {
-        this.fromname = fromname;
-    }
-
-    public String getFromurl() {
-        return fromurl;
-    }
-
-    public void setFromurl(String fromurl) {
-        this.fromurl = fromurl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
-
-    public int getRcount() {
-        return rcount;
-    }
-
-    public void setRcount(int rcount) {
-        this.rcount = rcount;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
+    public void setUniquekey(String uniquekey) {
+        this.uniquekey = uniquekey;
     }
 
     public String getTitle() {
@@ -129,12 +34,28 @@ public class FocusDetails implements Serializable {
         this.title = title;
     }
 
-    public int getTopclass() {
-        return topclass;
+    public String getDate() {
+        return date;
     }
 
-    public void setTopclass(int topclass) {
-        this.topclass = topclass;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
     }
 
     public String getUrl() {
@@ -145,11 +66,27 @@ public class FocusDetails implements Serializable {
         this.url = url;
     }
 
-    public String getMessage() {
-        return message;
+    public String getThumbnail_pic_s() {
+        return thumbnail_pic_s;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setThumbnail_pic_s(String thumbnail_pic_s) {
+        this.thumbnail_pic_s = thumbnail_pic_s;
+    }
+
+    public String getThumbnail_pic_s02() {
+        return thumbnail_pic_s02;
+    }
+
+    public void setThumbnail_pic_s02(String thumbnail_pic_s02) {
+        this.thumbnail_pic_s02 = thumbnail_pic_s02;
+    }
+
+    public String getThumbnail_pic_s03() {
+        return thumbnail_pic_s03;
+    }
+
+    public void setThumbnail_pic_s03(String thumbnail_pic_s03) {
+        this.thumbnail_pic_s03 = thumbnail_pic_s03;
     }
 }

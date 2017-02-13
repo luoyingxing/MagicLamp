@@ -9,11 +9,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.R;
-import com.luo.magiclamp.entity.FocusDetails;
 import com.luo.magiclamp.frame.BaseFragment;
-import com.luo.magiclamp.frame.network.ApiRequest;
 
 /**
  * FocusDetailsFragment
@@ -21,9 +18,9 @@ import com.luo.magiclamp.frame.network.ApiRequest;
  * Created by luoyingxing on 16/10/19.
  */
 public class FocusDetailsFragment extends BaseFragment {
-    public static final String PARAM = "id";
+    public static final String PARAM = "url";
     private View mRootView;
-    private int mId = 0;
+    private String mUrl;
     private ProgressBar mProgressBar;
     private WebView mWebView;
 
@@ -41,8 +38,8 @@ public class FocusDetailsFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mId = getArguments().getInt(PARAM);
-            mLog.e("mId = " + mId);
+            mUrl = getArguments().getString(PARAM);
+            mLog.e("mUrl = " + mUrl);
         }
     }
 
@@ -67,7 +64,6 @@ public class FocusDetailsFragment extends BaseFragment {
         mWebView = (WebView) mRootView.findViewById(R.id.wv_focus_details);
 
         mWebView.requestFocusFromTouch();
-
         mWebView.getSettings().setJavaScriptEnabled(true);
 
         mWebView.setWebViewClient(new WebViewClient() {
@@ -93,14 +89,7 @@ public class FocusDetailsFragment extends BaseFragment {
     }
 
     private void loadFocus() {
-        new ApiRequest<FocusDetails>(ApiURL.API_FOCUS_DETAILS, true) {
-            @Override
-            protected void onSuccess(FocusDetails result) {
-                mWebView.loadUrl(result.getFromurl());
-            }
-
-        }.addParam("id", mId)
-                .get();
+        mWebView.loadUrl(mUrl);
     }
 
     @Override

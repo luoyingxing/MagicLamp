@@ -30,4 +30,6 @@ public class ApiURL {
     public static final String API_FOCUS_DETAILS = "http://apis.baidu.com/tngou/top/show"; //天狗热点详情
 
     public static final String API_RECOMMEND = "http://v.juhe.cn/weixin/query"; //微信精选
+
+    public static final String API_FOCUS_NEW = "http://v.juhe.cn/toutiao/index"; //新闻头条
 }
