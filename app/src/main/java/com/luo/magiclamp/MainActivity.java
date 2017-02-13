@@ -1,7 +1,6 @@
 package com.luo.magiclamp;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import com.iflytek.autoupdate.IFlytekUpdateListener;
 import com.iflytek.autoupdate.UpdateConstants;
 import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
-import com.iflytek.autoupdate.UpdateType;
 import com.luo.magiclamp.Recommend.RecommendFragment;
 import com.luo.magiclamp.focus.FocusFragment;
 import com.luo.magiclamp.frame.BaseActivity;
@@ -36,13 +34,13 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
     private ImageView mImageView;
 
     private long mExitTime;
-    private int[] mTabIcon = {R.drawable.tab_icon_selector_news,
+    private int[] mTabIcon = {R.drawable.tab_icon_selector_focus,
             R.drawable.tab_icon_selector_recommend,
-            R.drawable.tab_icon_selector_focus,
+            R.drawable.tab_icon_selector_news,
             R.drawable.tab_icon_selector_recreation,
             R.drawable.tab_icon_selector_health,
             R.drawable.tab_icon_selector_personal};
-    private String[] mTabText = {"新闻", "精选", "热点", "娱乐", "健康", "个人"};
+    private String[] mTabText = {"热点", "精选", "新闻", "娱乐", "健康", "个人"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
@@ -67,11 +65,11 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.fl_main);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[0]).setIndicator(getIndicatorView(0)),
-                NewsFragment.class, null);
+                FocusFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[1]).setIndicator(getIndicatorView(1)),
                 RecommendFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
-                FocusFragment.class, null);
+                NewsFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[3]).setIndicator(getIndicatorView(3)),
                 RecreationFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[4]).setIndicator(getIndicatorView(4)),
@@ -138,7 +136,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             case 0:
                 setTopImage(R.drawable.main_iamge_bg);
                 setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
-                mLog.e("新闻");
+                mLog.e("热点");
                 break;
             case 1:
                 setTopImage(R.mipmap.bg_image_defualt);
@@ -148,7 +146,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             case 2:
                 setTopImage(R.drawable.main_iamge_bg);
                 setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
-                mLog.e("热点");
+                mLog.e("新闻");
                 break;
             case 3:
                 setTopImage(R.mipmap.bg_image_defualt);
