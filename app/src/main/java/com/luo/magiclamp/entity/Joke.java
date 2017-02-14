@@ -8,34 +8,49 @@ import java.io.Serializable;
  * Created by luoyingxing on 16/10/14.
  */
 public class Joke implements Serializable {
-    private int showapi_res_code;
-    private String showapi_res_error;
-    private JokeBody showapi_res_body;
+    private String content;
+    private String hashId;
+    private String unixtime;
+    private String updatetime;
+    private String url;
 
-    public Joke() {
+    public String getContent() {
+        return content;
     }
 
-    public int getShowApiResCode() {
-        return showapi_res_code;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setShowApiResCode(int code) {
-        this.showapi_res_code = code;
+    public String getHashId() {
+        return hashId;
     }
 
-    public String getShowApiResError() {
-        return showapi_res_error;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public void setShowApiResError(String error) {
-        this.showapi_res_error = error;
+    public String getUnixTime() {
+        return unixtime;
     }
 
-    public JokeBody getShowApiResBody() {
-        return showapi_res_body;
+    public void setUnixTime(String unixTime) {
+        this.unixtime = unixTime;
     }
 
-    public void setShowApiResBody(JokeBody body) {
-        this.showapi_res_body = body;
+    public String getUpdateTime() {
+        return updatetime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updatetime = updateTime;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -58,5 +58,9 @@ public class Constant {
      * recommend key
      */
     public static final String API_KEY_RECOMMEND = "3992ea829db75d176a0f0ddde168bc5a";
+    /**
+     * recreation key
+     */
+    public static final String API_KEY_RECREATION = "b5f18ce50bb44505a41fc9b3aea7fa45";
 
 }

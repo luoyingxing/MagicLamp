@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Joke;
-import com.luo.magiclamp.entity.JokeList;
+import com.luo.magiclamp.entity.JokeBody;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
@@ -118,7 +119,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         mGridView.setAdapter(mGridViewAdapter);
         mGridView.setOnItemClickListener(new ItemClickListener());
 
-        mListViewAdapter = new ListViewAdapter(getActivity(), new ArrayList<JokeList>());
+        mListViewAdapter = new ListViewAdapter(getActivity(), new ArrayList<Joke>());
         mListView.setAdapter(mListViewAdapter);
     }
 
@@ -132,18 +133,18 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         mGridViewAdapter.addAll(mTitleList);
     }
 
-    private List<JokeList> mJokeList = new ArrayList<>();
-    private List<JokeList> mTextJokeList = new ArrayList<>();
-    private List<JokeList> mImgJokeList = new ArrayList<>();
+    private List<Joke> mJokeList = new ArrayList<>();
+    private List<Joke> mTextJokeList = new ArrayList<>();
+    private List<Joke> mImgJokeList = new ArrayList<>();
 
     private void loadTextJoke() {
         showDialog();
-        new ApiRequest<Joke>(ApiURL.API_RECREATION_JOKE_TEXT, true) {
+        new ApiRequest<JokeBody>(ApiURL.API_RECREATION_JOKE_TEXT) {
             @Override
-            protected void onSuccess(Joke result) {
+            protected void onSuccess(JokeBody body) {
                 mTextJokeList.clear();
-                mLog.e("text -- " + result.getShowApiResBody().getContentlist().size());
-                mTextJokeList.addAll(result.getShowApiResBody().getContentlist());
+                mLog.e("text -- " + body.getResult().size());
+                mTextJokeList.addAll(body.getResult());
             }
 
             @Override
@@ -151,18 +152,19 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 loadImgJoke();
             }
 
-        }.addParam("page", mPage)
-                .post();
+        }.addParam("key", Constant.API_KEY_RECREATION)
+                .addParam("page", mPage)
+                .get();
     }
 
     private void loadImgJoke() {
-        new ApiRequest<Joke>(ApiURL.API_RECREATION_JOKE_IMG, true) {
+        new ApiRequest<JokeBody>(ApiURL.API_RECREATION_JOKE_IMG, true) {
             @Override
-            protected void onSuccess(Joke result) {
+            protected void onSuccess(JokeBody body) {
                 mPage++;
                 mImgJokeList.clear();
-                mLog.e("Img -- " + result.getShowApiResBody().getContentlist().size());
-                mImgJokeList.addAll(result.getShowApiResBody().getContentlist());
+                mLog.e("Img -- " + body.getResult().size());
+                mImgJokeList.addAll(body.getResult());
                 showJoke();
             }
 
@@ -173,8 +175,9 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
-        }.addParam("page", mPage)
-                .post();
+        }.addParam("key", Constant.API_KEY_RECREATION)
+                .addParam("page", mPage)
+                .get();
     }
 
     private void showJoke() {
@@ -267,15 +270,15 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
     }
 
 
-    private class ListViewAdapter extends ArrayAdapter<JokeList> {
+    private class ListViewAdapter extends ArrayAdapter<Joke> {
 
-        public ListViewAdapter(Context context, List<JokeList> jokeLists) {
+        public ListViewAdapter(Context context, List<Joke> jokeLists) {
             super(context, 0, jokeLists);
         }
 
         @Override
         public int getItemViewType(int position) {
-            return getItem(position).getType() == 1 ? 0 : 1;
+            return TextUtils.isEmpty(getItem(position).getUrl()) ? 0 : 1;
         }
 
         @Override
@@ -300,10 +303,10 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                         viewHolderText.shareTV = (TextView) convertView.findViewById(R.id.tv_item_joke_text_share);
                         convertView.setTag(viewHolderText);
 
-                        JokeList joke = getItem(position);
+                        Joke joke = getItem(position);
 
-                        viewHolderText.titleTV.setText(joke.getTitle());
-                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getText()));
+//                        viewHolderText.titleTV.setText(joke.getContent());
+                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getContent()));
                         viewHolderText.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderText.shareTV.setOnClickListener(new ItemListener(joke));
 
@@ -317,10 +320,10 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         convertView.setTag(viewHolderImg);
 
-                        JokeList jokeImg = getItem(position);
+                        Joke jokeImg = getItem(position);
 
-                        viewHolderImg.titleTV.setText(jokeImg.getTitle());
-                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
+                        viewHolderImg.titleTV.setText(jokeImg.getContent());
+                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getUrl()));
                         viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
 
@@ -331,10 +334,10 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                     case 0:
                         viewHolderText = (ViewHolderText) convertView.getTag();
 
-                        JokeList joke = getItem(position);
+                        Joke joke = getItem(position);
 
-                        viewHolderText.titleTV.setText(joke.getTitle());
-                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getText()));
+//                        viewHolderText.titleTV.setText(joke.getContent());
+                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getContent()));
                         viewHolderText.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderText.shareTV.setOnClickListener(new ItemListener(joke));
 
@@ -342,16 +345,15 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                     case 1:
                         viewHolderImg = (ViewHolderImg) convertView.getTag();
 
-                        JokeList jokeImg = getItem(position);
+                        Joke jokeImg = getItem(position);
 
-                        viewHolderImg.titleTV.setText(jokeImg.getTitle());
-                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
+                        viewHolderImg.titleTV.setText(jokeImg.getContent());
+                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getUrl()));
                         viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
                         break;
                 }
             }
-
 
             return convertView;
         }
@@ -372,20 +374,20 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
 
     private class ItemListener implements View.OnClickListener {
-        private JokeList mJokeList;
+        private Joke mJoke;
 
-        public ItemListener(JokeList jokeList) {
-            this.mJokeList = jokeList;
+        public ItemListener(Joke joke) {
+            this.mJoke = joke;
         }
 
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.tv_item_joke_text_share:
-                    share(mJokeList, TEXT);
+                    share(mJoke, TEXT);
                     break;
                 case R.id.tv_item_joke_img_share:
-                    share(mJokeList, IMG);
+                    share(mJoke, IMG);
                     break;
             }
         }
@@ -394,20 +396,20 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
     private static final int TEXT = 1;
     private static final int IMG = 2;
 
-    private void share(JokeList jokeList, int type) {
+    private void share(Joke joke, int type) {
         String text;
         UMImage image;
 
         if (type == TEXT) {
-            text = jokeList.getText() + " — 来自神灯APP";
+            text = joke.getContent() + " — 来自神灯APP";
             image = new UMImage(getActivity(), ApiURL.APP_WEB_ADDRESS_IMAGE);
         } else {
             text = " — 来自神灯APP娱乐笑话";
-            image = new UMImage(getActivity(), jokeList.getImg());
+            image = new UMImage(getActivity(), joke.getUrl());
         }
 
         new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
-                .withTitle(jokeList.getTitle())
+                .withTitle(joke.getContent())
                 .withText(text)
                 .withMedia(image)
                 .withTargetUrl(ApiURL.APP_LOAD_ADDRESS)
