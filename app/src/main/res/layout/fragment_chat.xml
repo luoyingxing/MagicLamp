@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/bg_chat_edit_view"
-            android:maxLength="50" />
+            android:maxLength="30" />
 
         <Space
             android:layout_width="8dp"

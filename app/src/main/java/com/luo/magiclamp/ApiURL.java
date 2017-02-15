@@ -14,6 +14,7 @@ public class ApiURL {
     public static final String API_RECREATION_JOKE_IMG = "http://api.avatardata.cn/Joke/NewstImg"; //图片笑话
 
     public static final String API_CHAT_TURING = "http://apis.baidu.com/turing/turing/turing"; //图灵机器人
+    public static final String API_CHAT_JUHE = "http://op.juhe.cn/robot/index"; //问答机器人
     public static final String API_CHAT_CONSTELLATION_CHART = "http://api.avatardata.cn/Constellation/Query"; //星座运势
     public static final String API_CHAT_CONSTELLATION_CONJUGATE = "http://api.avatardata.cn/XingZuoPeiDui/Lookup"; //星座配对
     public static final String API_CHAT_ANIMALS = "http://api.avatardata.cn/ShengXiaoPeiDui/Lookup"; //生肖配对

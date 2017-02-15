@@ -39,6 +39,10 @@ public class Constant {
      */
     public static final String API_TURING_ID = "eb2edb736";
     /**
+     * juhe key
+     */
+    public static final String API_JUHE_KEY = "bcbd8fba6d3cfb68d525b2b2fb3be495";
+    /**
      * constellation chart key
      */
     public static final String API_KEY_CONSTELLATON_CHART = "9cf1b4ca6d7a47b885ab01173b6fffcc";

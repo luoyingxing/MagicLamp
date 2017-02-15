@@ -19,6 +19,7 @@ import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Chat;
+import com.luo.magiclamp.entity.ChatPack;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
 
@@ -85,7 +86,7 @@ public class ChatFragment extends BaseFragment implements View.OnTouchListener {
     private void setAdapter() {
         mListViewAdapter = new ListViewAdapter(getActivity());
         mListView.setAdapter(mListViewAdapter);
-        mListViewAdapter.add(new Chat("主人您来啦，要问宝宝什么问题呢？", 0));
+        mListViewAdapter.add(new Chat("主人您来啦，要问小神灯什么问题呢？", 0));
     }
 
     @Override
@@ -107,22 +108,23 @@ public class ChatFragment extends BaseFragment implements View.OnTouchListener {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        new ApiRequest<Chat>(ApiURL.API_CHAT_TURING, true) {
+        new ApiRequest<ChatPack>(ApiURL.API_CHAT_JUHE) {
 
             @Override
-            protected void onSuccess(Chat result) {
-                mListViewAdapter.add(result);
-                mListView.setSelection(mListViewAdapter.getCount() - 1);
+            protected void onSuccess(ChatPack chatPack) {
+                if (chatPack.getResult() != null) {
+                    mListViewAdapter.add(chatPack.getResult());
+                    mListView.setSelection(mListViewAdapter.getCount() - 1);
+                }
             }
 
             @Override
             protected void onFinish(int what) {
             }
 
-        }.addParam("key", Constant.API_TURING_KEY)
-                .addParam("userid", Constant.API_TURING_ID)
+        }.addParam("key", Constant.API_JUHE_KEY)
                 .addParam("info", infoString)
-                .post();
+                .get();
     }
 
 
