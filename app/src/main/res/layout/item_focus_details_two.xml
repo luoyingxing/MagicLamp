@@ -108,7 +108,6 @@
             android:id="@+id/tv_item_focus_details_data_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/icon_news_discuss"
             android:gravity="center"
             android:text="0"
             android:textSize="13sp" />

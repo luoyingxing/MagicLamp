@@ -27,32 +27,24 @@
             android:textColor="@color/gray_33"
             android:textSize="17sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_item_focus_details_source_one"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="神灯APP"
+            android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/tv_item_focus_details_source_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="神灯APP"
-                android:textSize="13sp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp" />
 
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/tv_item_focus_details_data_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/icon_news_discuss"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="13sp" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_item_focus_details_data_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="13sp" />
 
     </LinearLayout>
 
