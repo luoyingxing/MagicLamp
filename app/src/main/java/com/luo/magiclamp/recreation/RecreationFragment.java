@@ -154,6 +154,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
         }.addParam("key", Constant.API_KEY_RECREATION)
                 .addParam("page", mPage)
+                .addParam("pagesize", Constant.PAGE_SIZE_DEFAULT)
                 .get();
     }
 
@@ -177,6 +178,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
         }.addParam("key", Constant.API_KEY_RECREATION)
                 .addParam("page", mPage)
+                .addParam("pagesize", Constant.PAGE_SIZE_DEFAULT)
                 .get();
     }
 
