@@ -17,7 +17,7 @@ import com.iflytek.autoupdate.IFlytekUpdateListener;
 import com.iflytek.autoupdate.UpdateConstants;
 import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
-import com.luo.magiclamp.Recommend.RecommendFragment;
+import com.luo.magiclamp.recommend.RecommendFragment;
 import com.luo.magiclamp.focus.FocusFragment;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.health.HealthFragment;

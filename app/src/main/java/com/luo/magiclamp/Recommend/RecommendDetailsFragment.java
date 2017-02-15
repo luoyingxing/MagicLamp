@@ -1,4 +1,4 @@
-package com.luo.magiclamp.Recommend;
+package com.luo.magiclamp.recommend;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
