@@ -63,6 +63,8 @@ public class HealthFragment extends BaseFragment {
 
     private void findView() {
         mListView = (ListView) mRootView.findViewById(R.id.lv_health_list);
+        View emptyView = mRootView.findViewById(R.id.ll_health_empty);
+        mListView.setEmptyView(emptyView);
     }
 
     private void setAdapter() {
