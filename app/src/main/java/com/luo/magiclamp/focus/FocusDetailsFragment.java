@@ -10,7 +10,11 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.luo.magiclamp.R;
+import com.luo.magiclamp.entity.FocusDetails;
 import com.luo.magiclamp.frame.BaseFragment;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 /**
  * FocusDetailsFragment
@@ -20,6 +24,7 @@ import com.luo.magiclamp.frame.BaseFragment;
 public class FocusDetailsFragment extends BaseFragment {
     public static final String PARAM = "url";
     private View mRootView;
+    private FocusDetails mFocusDetails;
     private String mUrl;
     private ProgressBar mProgressBar;
     private WebView mWebView;
@@ -38,7 +43,8 @@ public class FocusDetailsFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mUrl = getArguments().getString(PARAM);
+            mFocusDetails = (FocusDetails) getArguments().getSerializable(PARAM);
+            mUrl = mFocusDetails != null ? mFocusDetails.getUrl() : null;
             mLog.e("mUrl = " + mUrl);
         }
     }
@@ -50,6 +56,15 @@ public class FocusDetailsFragment extends BaseFragment {
         mActivity.getTitleView().setTextColor(getResources().getColor(R.color.white));
         mActivity.setTitle("详情");
         mActivity.getActionbarLayout().setBackgroundColor(getResources().getColor(R.color.theme_color));
+        mActivity.getRightImage().setImageResource(R.mipmap.icon_share_white);
+        mActivity.setOnRightImageClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mFocusDetails != null) {
+                    share();
+                }
+            }
+        });
     }
 
     private void init() {
@@ -107,5 +122,14 @@ public class FocusDetailsFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         mWebView.reload();
+    }
+
+    private void share() {
+        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
+                .withTitle(mFocusDetails.getTitle())
+                .withText(mFocusDetails.getCategory() + "  " + mFocusDetails.getAuthor_name())
+                .withMedia(new UMImage(getActivity(), mFocusDetails.getThumbnail_pic_s()))
+                .withTargetUrl(mFocusDetails.getUrl())
+                .open();
     }
 }

@@ -82,7 +82,7 @@ public class FocusView implements Serializable {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, BaseActivity.class);
                 intent.putExtra(Constant.ARGS_FRAGMENT_NAME, FocusDetailsFragment.class.getName());
-                intent.putExtra(FocusDetailsFragment.PARAM, mListViewAdapter.getItem(position).getUrl());
+                intent.putExtra(FocusDetailsFragment.PARAM, mListViewAdapter.getItem(position));
                 mContext.startActivity(intent);
             }
         });
