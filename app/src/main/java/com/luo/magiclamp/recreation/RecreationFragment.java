@@ -142,9 +142,11 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         new ApiRequest<JokeBody>(ApiURL.API_RECREATION_JOKE_TEXT) {
             @Override
             protected void onSuccess(JokeBody body) {
-                mTextJokeList.clear();
-                mLog.e("text -- " + body.getResult().size());
-                mTextJokeList.addAll(body.getResult());
+                if (body.getResult()!=null){
+                    mTextJokeList.clear();
+                    mLog.e("text -- " + body.getResult().size());
+                    mTextJokeList.addAll(body.getResult());
+                }
             }
 
             @Override
@@ -162,11 +164,13 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         new ApiRequest<JokeBody>(ApiURL.API_RECREATION_JOKE_IMG, true) {
             @Override
             protected void onSuccess(JokeBody body) {
-                mPage++;
-                mImgJokeList.clear();
-                mLog.e("Img -- " + body.getResult().size());
-                mImgJokeList.addAll(body.getResult());
-                showJoke();
+                if (body.getResult()!=null){
+                    mPage++;
+                    mImgJokeList.clear();
+                    mLog.e("Img -- " + body.getResult().size());
+                    mImgJokeList.addAll(body.getResult());
+                    showJoke();
+                }
             }
 
             @Override
