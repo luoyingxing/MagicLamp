@@ -90,7 +90,7 @@ public class RecommendFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), BaseActivity.class);
                 intent.putExtra(Constant.ARGS_FRAGMENT_NAME, RecommendDetailsFragment.class.getName());
-                intent.putExtra(RecommendDetailsFragment.PARAM, mListViewAdapter.getItem(position).getUrl());
+                intent.putExtra(RecommendDetailsFragment.PARAM, mListViewAdapter.getItem(position));
                 startActivity(intent);
             }
         });
