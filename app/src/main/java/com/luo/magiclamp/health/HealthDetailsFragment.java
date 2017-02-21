@@ -96,7 +96,8 @@ public class HealthDetailsFragment extends BaseFragment {
 
     private void loadDetails() {
         showDialog();
-        new ApiRequest<HealthDetails>(ApiURL.API_HEALTH_DETAILS, true) {
+        new ApiRequest<HealthDetails>(ApiURL.API_HEALTH_DETAILS) {
+
             @Override
             protected void onSuccess(HealthDetails result) {
                 if (result != null) {

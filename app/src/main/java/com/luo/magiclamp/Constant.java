@@ -66,5 +66,9 @@ public class Constant {
      * recreation key
      */
     public static final String API_KEY_RECREATION = "b5f18ce50bb44505a41fc9b3aea7fa45";
+    /**
+     *  cartoon key
+     */
+    public static final String API_KEY_CARTOON = "0686865578744d48901334c561133c1a";
 
 }

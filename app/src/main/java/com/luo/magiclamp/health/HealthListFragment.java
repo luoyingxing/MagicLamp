@@ -120,7 +120,7 @@ public class HealthListFragment extends BaseFragment {
 
     private void loadHealthData() {
         showDialog();
-        new ApiRequest<Health>(ApiURL.API_HEALTH_LIST, true) {
+        new ApiRequest<Health>(ApiURL.API_HEALTH_LIST) {
             @Override
             protected void onSuccess(Health result) {
                 if (result.getHealthDetails() != null) {
