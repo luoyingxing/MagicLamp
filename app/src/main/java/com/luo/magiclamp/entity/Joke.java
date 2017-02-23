@@ -8,49 +8,65 @@ import java.io.Serializable;
  * Created by luoyingxing on 16/10/14.
  */
 public class Joke implements Serializable {
-    private String content;
-    private String hashId;
-    private String unixtime;
-    private String updatetime;
-    private String url;
+    /**
+     * id : 585e403c6e36392559c741ef
+     * title : 姿势我已经很老练了，就差个女友了！
+     * img : http://www.zbjuran.com/uploads/allimg/161224/10-1612241H504D9.gif
+     * type : 3
+     * ct : 2016-12-24 17:30:36.985
+     */
+    private String id;
+    private String title;
+    private String text;
+    private String img;
+    private int type;
+    private String ct;
 
-    public String getContent() {
-        return content;
+    public String getId() {
+        return id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getHashId() {
-        return hashId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setHashId(String hashId) {
-        this.hashId = hashId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getUnixTime() {
-        return unixtime;
+    public String getText() {
+        return text;
     }
 
-    public void setUnixTime(String unixTime) {
-        this.unixtime = unixTime;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getUpdateTime() {
-        return updatetime;
+    public String getImg() {
+        return img;
     }
 
-    public void setUpdateTime(String updateTime) {
-        this.updatetime = updateTime;
+    public void setImg(String img) {
+        this.img = img;
     }
 
-    public String getUrl() {
-        return url;
+    public int getType() {
+        return type;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getCt() {
+        return ct;
+    }
+
+    public void setCt(String ct) {
+        this.ct = ct;
     }
 }

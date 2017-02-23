@@ -23,6 +23,7 @@ import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Joke;
 import com.luo.magiclamp.entity.JokeBody;
+import com.luo.magiclamp.entity.JokePack;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
@@ -139,13 +140,13 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
     private void loadTextJoke() {
         showDialog();
-        new ApiRequest<JokeBody>(ApiURL.API_RECREATION_JOKE_TEXT) {
+        new ApiRequest<JokePack>(ApiURL.API_RECREATION_JOKE_TEXT) {
             @Override
-            protected void onSuccess(JokeBody body) {
-                if (body.getResult()!=null){
+            protected void onSuccess(JokePack pack) {
+                if (pack.getShowapi_res_body().getContentlist() != null) {
                     mTextJokeList.clear();
-                    mLog.e("text -- " + body.getResult().size());
-                    mTextJokeList.addAll(body.getResult());
+                    mLog.e("text -- " + pack.getShowapi_res_body().getContentlist().size());
+                    mTextJokeList.addAll(pack.getShowapi_res_body().getContentlist());
                 }
             }
 
@@ -154,21 +155,22 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 loadImgJoke();
             }
 
-        }.addParam("key", Constant.API_KEY_RECREATION)
+        }.addParam("showapi_sign", Constant.API_KEY_SHOW)
+                .addParam("showapi_appid", Constant.API_KEY_SHOW_ID)
                 .addParam("page", mPage)
-                .addParam("pagesize", Constant.PAGE_SIZE_DEFAULT)
+                .addParam("maxResult", Constant.PAGE_SIZE_DEFAULT)
                 .get();
     }
 
     private void loadImgJoke() {
-        new ApiRequest<JokeBody>(ApiURL.API_RECREATION_JOKE_IMG, true) {
+        new ApiRequest<JokePack>(ApiURL.API_RECREATION_JOKE_IMG, true) {
             @Override
-            protected void onSuccess(JokeBody body) {
-                if (body.getResult()!=null){
+            protected void onSuccess(JokePack pack) {
+                if (pack.getShowapi_res_body().getContentlist() != null) {
                     mPage++;
                     mImgJokeList.clear();
-                    mLog.e("Img -- " + body.getResult().size());
-                    mImgJokeList.addAll(body.getResult());
+                    mLog.e("Img -- " + pack.getShowapi_res_body().getContentlist().size());
+                    mImgJokeList.addAll(pack.getShowapi_res_body().getContentlist());
                     showJoke();
                 }
             }
@@ -180,9 +182,10 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                 mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
-        }.addParam("key", Constant.API_KEY_RECREATION)
+        }.addParam("showapi_sign", Constant.API_KEY_SHOW)
+                .addParam("showapi_appid", Constant.API_KEY_SHOW_ID)
                 .addParam("page", mPage)
-                .addParam("pagesize", Constant.PAGE_SIZE_DEFAULT)
+                .addParam("maxResult", Constant.PAGE_SIZE_DEFAULT)
                 .get();
     }
 
@@ -284,7 +287,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
         @Override
         public int getItemViewType(int position) {
-            return TextUtils.isEmpty(getItem(position).getUrl()) ? 0 : 1;
+            return TextUtils.isEmpty(getItem(position).getImg()) ? 0 : 1;
         }
 
         @Override
@@ -311,8 +314,8 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         Joke joke = getItem(position);
 
-//                        viewHolderText.titleTV.setText(joke.getContent());
-                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getContent()));
+                        viewHolderText.titleTV.setText(joke.getTitle());
+                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getText()));
                         viewHolderText.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderText.shareTV.setOnClickListener(new ItemListener(joke));
 
@@ -328,8 +331,8 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         Joke jokeImg = getItem(position);
 
-                        viewHolderImg.titleTV.setText(jokeImg.getContent());
-                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getUrl()));
+                        viewHolderImg.titleTV.setText(jokeImg.getTitle());
+                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
                         viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
 
@@ -342,8 +345,8 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         Joke joke = getItem(position);
 
-//                        viewHolderText.titleTV.setText(joke.getContent());
-                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getContent()));
+                        viewHolderText.titleTV.setText(joke.getTitle());
+                        viewHolderText.contentTV.setText(Html.fromHtml(joke.getText()));
                         viewHolderText.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderText.shareTV.setOnClickListener(new ItemListener(joke));
 
@@ -353,8 +356,8 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
                         Joke jokeImg = getItem(position);
 
-                        viewHolderImg.titleTV.setText(jokeImg.getContent());
-                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getUrl()));
+                        viewHolderImg.titleTV.setText(jokeImg.getTitle());
+                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
                         viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
                         break;
@@ -407,18 +410,18 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
         UMImage image;
 
         if (type == TEXT) {
-            text = joke.getContent() + " — 来自神灯APP";
+            text = joke.getText() + " — 来自神灯APP";
             image = new UMImage(getActivity(), ApiURL.APP_WEB_ADDRESS_IMAGE);
         } else {
-            text = " — 来自神灯APP娱乐笑话";
-            image = new UMImage(getActivity(), joke.getUrl());
+            text = joke.getTitle() + " — 来自神灯APP娱乐笑话";
+            image = new UMImage(getActivity(), joke.getImg());
         }
 
         new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
-                .withTitle(joke.getContent())
+                .withTitle(joke.getTitle())
                 .withText(text)
                 .withMedia(image)
-                .withTargetUrl(ApiURL.APP_LOAD_ADDRESS)
+                .withTargetUrl(TextUtils.isEmpty(joke.getImg()) ? ApiURL.APP_LOAD_ADDRESS : joke.getImg())
                 .open();
     }
 

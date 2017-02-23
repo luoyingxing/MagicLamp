@@ -10,8 +10,9 @@ public class ApiURL {
 
     public static final String API_NEWS_GET_NEWS = "http://api.dagoogle.cn/news/get-news"; //新闻
 
-    public static final String API_RECREATION_JOKE_TEXT = "http://api.avatardata.cn/Joke/NewstJoke"; //文本笑话
-    public static final String API_RECREATION_JOKE_IMG = "http://api.avatardata.cn/Joke/NewstImg"; //图片笑话
+    public static final String API_RECREATION_JOKE_TEXT = "http://route.showapi.com/341-1"; //文本笑话
+    public static final String API_RECREATION_JOKE_IMG = "http://route.showapi.com/341-2"; //图片笑话
+    public static final String API_RECREATION_JOKE_GIF = "http://route.showapi.com/341-3"; //动态图笑话
 
     public static final String API_CHAT_TURING = "http://apis.baidu.com/turing/turing/turing"; //图灵机器人
     public static final String API_CHAT_JUHE = "http://op.juhe.cn/robot/index"; //问答机器人

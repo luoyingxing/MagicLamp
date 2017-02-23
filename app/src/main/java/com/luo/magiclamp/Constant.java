@@ -69,6 +69,10 @@ public class Constant {
     /**
      *  show api key
      */
-    public static final String API_KEY_CARTOON = "0686865578744d48901334c561133c1a";
+    public static final String API_KEY_SHOW = "0686865578744d48901334c561133c1a";
+    /**
+     *  show appid
+     */
+    public static final String API_KEY_SHOW_ID = "32441";
 
 }
