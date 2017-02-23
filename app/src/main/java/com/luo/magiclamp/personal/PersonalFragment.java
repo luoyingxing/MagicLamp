@@ -20,6 +20,7 @@ import com.iflytek.autoupdate.UpdateConstants;
 import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
 import com.iflytek.autoupdate.UpdateType;
+import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.frame.BaseActivity;
@@ -89,7 +90,6 @@ public class PersonalFragment extends BaseFragment {
                 switch (position) {
                     case 0:
                         showToast("暂无任何工具");
-//                        share();
                         break;
                     case 1:
                         Intent intent2 = new Intent(getActivity(), BaseActivity.class);
@@ -100,6 +100,9 @@ public class PersonalFragment extends BaseFragment {
                         updateApp();
                         break;
                     case 3:
+                        share();
+                        break;
+                    case 4:
                         Intent intent4 = new Intent(getActivity(), BaseActivity.class);
                         intent4.putExtra(Constant.ARGS_FRAGMENT_NAME, HelpFragment.class.getName());
                         startActivity(intent4);
@@ -139,6 +142,7 @@ public class PersonalFragment extends BaseFragment {
         items.add(new Item("我的工具", R.mipmap.icon_personal_tools));
         items.add(new Item("关于软件", R.mipmap.icon_personal_about));
         items.add(new Item("检测更新", R.mipmap.icon_personal_update));
+        items.add(new Item("一键分享", R.mipmap.icon_personal_share));
         items.add(new Item("帮助", R.mipmap.icon_personal_help));
         mListAdapter.clear();
         mListAdapter.addAll(items);
@@ -205,10 +209,8 @@ public class PersonalFragment extends BaseFragment {
         }
     }
 
-    public static String url = "http://www.ux11148841.icoc.me/";
-    public static String text = "“神灯”是一款集娱乐、健康和工具于一体的APP。";
+    public static String text = "“神灯”是一款集新闻、娱乐、健康和工具于一体的APP。 —— 来自神灯APP";
     public static String title = "神灯APP";
-    public static String imageurl = "http://11617157.s21i-11.faiusr.com/4/ABUIABAEGAAg1ISzwAUowJavmwIw0AU4gAo!160x160.png";
 
     private void share() {
 //        UmengTool.getSignature(getActivity());
@@ -216,8 +218,8 @@ public class PersonalFragment extends BaseFragment {
         new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
                 .withTitle(title)
                 .withText(text + "——来自神灯APP")
-                .withMedia(new UMImage(getActivity(), imageurl))
-                .withTargetUrl("http://www.ux11148841.icoc.me/")
+                .withMedia(new UMImage(getActivity(), ApiURL.APP_WEB_ADDRESS_IMAGE))
+                .withTargetUrl(ApiURL.APP_LOAD_ADDRESS)
                 .setCallback(umShareListener)
                 .open();
     }
