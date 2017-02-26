@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pl_cartoon_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/pull_refresh_head" />
+
+    <com.luo.magiclamp.frame.ui.pullableview.PullListView
+        android:id="@+id/lv_cartoon_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/white"
+        android:dividerHeight="12dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="10dp"
+        android:scrollbarStyle="outsideOverlay" />
+
+    <include layout="@layout/pull_load_more" />
+
+</com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout>

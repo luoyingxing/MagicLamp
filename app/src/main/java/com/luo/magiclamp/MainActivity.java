@@ -17,11 +17,11 @@ import com.iflytek.autoupdate.IFlytekUpdateListener;
 import com.iflytek.autoupdate.UpdateConstants;
 import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
+import com.luo.magiclamp.cartoon.CartoonFragment;
 import com.luo.magiclamp.recommend.RecommendFragment;
 import com.luo.magiclamp.focus.FocusFragment;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.health.HealthFragment;
-import com.luo.magiclamp.news.NewsFragment;
 import com.luo.magiclamp.personal.PersonalFragment;
 import com.luo.magiclamp.recreation.RecreationFragment;
 import com.luo.magiclamp.utils.WindowUtils;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
             R.drawable.tab_icon_selector_recreation,
             R.drawable.tab_icon_selector_health,
             R.drawable.tab_icon_selector_personal};
-    private String[] mTabText = {"热点", "精选", "新闻", "娱乐", "健康", "个人"};
+    private String[] mTabText = {"热点", "精选", "内涵", "娱乐", "健康", "个人"};
     private String mCurrentTabTag;
 
     public static MainActivity getInstance() {
@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[1]).setIndicator(getIndicatorView(1)),
                 RecommendFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[2]).setIndicator(getIndicatorView(2)),
-                NewsFragment.class, null);
+                CartoonFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[3]).setIndicator(getIndicatorView(3)),
                 RecreationFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(mTabText[4]).setIndicator(getIndicatorView(4)),
@@ -145,8 +145,8 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 break;
             case 2:
                 setTopImage(R.drawable.main_iamge_bg);
-                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
-                mLog.e("新闻");
+                setTopImageParams(100);
+                mLog.e("内涵");
                 break;
             case 3:
                 setTopImage(R.mipmap.bg_image_defualt);

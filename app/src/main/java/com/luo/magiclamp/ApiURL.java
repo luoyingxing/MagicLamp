@@ -34,4 +34,6 @@ public class ApiURL {
     public static final String API_RECOMMEND = "http://v.juhe.cn/weixin/query"; //微信精选
 
     public static final String API_FOCUS_NEW = "http://v.juhe.cn/toutiao/index"; //新闻头条
+
+    public static final String API_CARTOON_LIST = "http://route.showapi.com/978-2"; //内涵漫画列表
 }
