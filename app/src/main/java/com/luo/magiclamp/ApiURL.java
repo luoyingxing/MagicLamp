@@ -36,4 +36,5 @@ public class ApiURL {
     public static final String API_FOCUS_NEW = "http://v.juhe.cn/toutiao/index"; //新闻头条
 
     public static final String API_CARTOON_LIST = "http://route.showapi.com/978-2"; //内涵漫画列表
+    public static final String API_CARTOON_DETAIL = "http://route.showapi.com/978-1"; //内涵漫画详情
 }

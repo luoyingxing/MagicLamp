@@ -1,18 +1,19 @@
 package com.luo.magiclamp.cartoon;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.luo.magiclamp.ApiURL;
+import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Cartoon;
+import com.luo.magiclamp.entity.CartoonDetail;
 import com.luo.magiclamp.frame.BaseFragment;
+import com.luo.magiclamp.frame.network.ApiRequest;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -27,7 +28,7 @@ public class CartoonDetailsFragment extends BaseFragment {
     private View mRootView;
     private Cartoon mCartoon;
     private ProgressBar mProgressBar;
-    private WebView mWebView;
+    private CartoonImageView mImageView;
 
     public CartoonDetailsFragment() {
     }
@@ -71,57 +72,32 @@ public class CartoonDetailsFragment extends BaseFragment {
         loadFocus();
     }
 
-    private int mJumpCount = 0;  //记录跳转的次数，标记页面
-
     private void findView() {
         mProgressBar = (ProgressBar) mRootView.findViewById(R.id.pb_cartoon_details);
-        mWebView = (WebView) mRootView.findViewById(R.id.wv_cartoon_details);
-
-        mWebView.requestFocusFromTouch();
-        mWebView.getSettings().setJavaScriptEnabled(true);
-
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                mJumpCount++;
-                mLog.e("mJumpCount =  " + mJumpCount);
-                return true;
-            }
-
-        });
-
-        mWebView.setWebChromeClient(new WebChromeClient() {
-
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                mProgressBar.setProgress(newProgress);
-            }
-
-        });
+        mImageView = (CartoonImageView) mRootView.findViewById(R.id.cv_cartoon_details);
     }
 
     private void loadFocus() {
-        mWebView.loadUrl(mCartoon.getLink());
+        showDialog();
+        new ApiRequest<CartoonDetail>(ApiURL.API_CARTOON_DETAIL) {
+            @Override
+            protected void onSuccess(CartoonDetail result) {
+                if (result != null) {
+                    mImageView.setHttpUri(Uri.parse(result.getShowapi_res_body().getImg()));
+                }
+            }
+
+            @Override
+            protected void onFinish(int what) {
+                hideDialog();
+            }
+
+        }.addParam("showapi_appid", Constant.API_KEY_SHOW_ID)
+                .addParam("showapi_sign", Constant.API_KEY_SHOW)
+                .addParam("id", mCartoon.getId())
+                .get();
     }
 
-    @Override
-    public boolean onBackPressed() {
-        if (mJumpCount > 1) {
-            mWebView.goBack();
-            mJumpCount--;
-        } else {
-            mActivity.goBack();
-        }
-        return true;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mWebView.reload();
-    }
 
     private void share() {
         new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)

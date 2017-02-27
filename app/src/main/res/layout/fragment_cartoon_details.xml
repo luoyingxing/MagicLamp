@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbarStyle="outsideOverlay">
 
-    <ProgressBar
-        android:id="@+id/pb_cartoon_details"
-        style="@style/WebView_ProgressBar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="3dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <WebView
-        android:id="@+id/wv_cartoon_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <ProgressBar
+            android:id="@+id/pb_cartoon_details"
+            style="@style/WebView_ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
 
-</LinearLayout>
+        <com.luo.magiclamp.cartoon.CartoonImageView
+            android:id="@+id/cv_cartoon_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>
