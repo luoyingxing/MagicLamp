@@ -2,26 +2,29 @@ package com.luo.magiclamp.cartoon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Cartoon;
 import com.luo.magiclamp.entity.CartoonPack;
+import com.luo.magiclamp.entity.GirlImagePack;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
+import com.luo.magiclamp.utils.FrescoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,9 +111,10 @@ public class CartoonFragment extends BaseFragment {
         new ApiRequest<CartoonPack>(ApiURL.API_CARTOON_LIST) {
             @Override
             protected void onSuccess(CartoonPack result) {
-                if (result != null) {
-                    mPage++;
-                    mListViewAdapter.addAll(result.getShowapi_res_body().getPagebean().getContentlist());
+                if (result != null &&
+                        result.getShowapi_res_body() != null &&
+                        result.getShowapi_res_body().getPagebean() != null) {
+                    loadCartoonImage(result);
                 }
             }
 
@@ -125,6 +129,59 @@ public class CartoonFragment extends BaseFragment {
                 .addParam("showapi_sign", Constant.API_KEY_SHOW)
                 .addParam("page", mPage)
                 .get();
+    }
+
+    private void loadCartoonImage(final CartoonPack cartoonPack) {
+        showDialog();
+        new ApiRequest<GirlImagePack>(ApiURL.API_GIRL_IMAGE) {
+            @Override
+            protected void onSuccess(GirlImagePack result) {
+                update(cartoonPack, result);
+            }
+
+            @Override
+            protected void onFinish(int what) {
+                mPullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+            }
+
+            @Override
+            protected void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
+                super.onFailed(what, url, tag, exception, responseCode, networkMillis);
+                update(cartoonPack, null);
+            }
+
+        }.addParam("showapi_appid", Constant.API_KEY_SHOW_ID)
+                .addParam("showapi_sign", Constant.API_KEY_SHOW)
+                .addParam("num", cartoonPack.getShowapi_res_body().getPagebean().getContentlist().size())
+                .addParam("page", mPage)
+                .get();
+    }
+
+    private void update(CartoonPack cartoonPack, GirlImagePack girlImagePack) {
+        mPage++;
+        List<Cartoon> cartoonList = new ArrayList<>();
+        List<Cartoon> list = cartoonPack.getShowapi_res_body().getPagebean().getContentlist();
+        if (girlImagePack != null &&
+                girlImagePack.getShowapi_res_body() != null &&
+                girlImagePack.getShowapi_res_body().getNewslist() != null) {
+
+            int count = girlImagePack.getShowapi_res_body().getNewslist().size();
+
+            for (int i = 0; i < list.size(); i++) {
+                Cartoon cartoon = list.get(i);
+                if (i < count) {
+                    cartoon.setImage(girlImagePack.getShowapi_res_body().getNewslist().get(i).getPicUrl());
+                } else {
+                    cartoon.setImage(girlImagePack.getShowapi_res_body().getNewslist().get(0).getPicUrl());
+                }
+
+                cartoonList.add(cartoon);
+            }
+
+        }
+        hideDialog();
+        mListViewAdapter.addAll(cartoonList);
     }
 
 
@@ -142,7 +199,7 @@ public class CartoonFragment extends BaseFragment {
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_cartoon_list, null);
                 viewHolder = new ViewHolder();
                 viewHolder.linearLayout = (LinearLayout) convertView.findViewById(R.id.ll_item_cartoon_list_root);
-                viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_item_cartoon_list_image);
+                viewHolder.imageView = (SimpleDraweeView) convertView.findViewById(R.id.iv_item_cartoon_list_image);
                 viewHolder.titleTV = (TextView) convertView.findViewById(R.id.tv_item_cartoon_list_title);
                 convertView.setTag(viewHolder);
             } else {
@@ -152,6 +209,7 @@ public class CartoonFragment extends BaseFragment {
             Cartoon cartoon = getItem(position);
 
 //            viewHolder.linearLayout.setBackgroundResource(mLayoutBg[position % 5]);
+            FrescoUtils.loadImage(Uri.parse(cartoon.getImage()), viewHolder.imageView);
             viewHolder.titleTV.setText(cartoon.getTitle());
 
             return convertView;
@@ -160,7 +218,7 @@ public class CartoonFragment extends BaseFragment {
 
         class ViewHolder {
             LinearLayout linearLayout;
-            ImageView imageView;
+            SimpleDraweeView imageView;
             TextView titleTV;
         }
     }

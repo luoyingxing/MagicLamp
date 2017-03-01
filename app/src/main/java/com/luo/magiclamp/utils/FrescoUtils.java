@@ -74,6 +74,7 @@ public class FrescoUtils {
                 new GenericDraweeHierarchyBuilder(MainApplication.getAppContext().getResources())
                         .setFadeDuration(300)
                         .setPlaceholderImage(MainApplication.getAppContext().getResources().getDrawable(R.drawable.image_fresco_loading), ScalingUtils.ScaleType.CENTER_INSIDE)
+                        .setFailureImage(MainApplication.getAppContext().getResources().getDrawable(R.mipmap.bg_image_defualt), ScalingUtils.ScaleType.CENTER_INSIDE)
                         .setActualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                         .build();
         view.setHierarchy(hierarchy);

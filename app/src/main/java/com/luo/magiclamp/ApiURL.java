@@ -37,4 +37,6 @@ public class ApiURL {
 
     public static final String API_CARTOON_LIST = "http://route.showapi.com/978-2"; //内涵漫画列表
     public static final String API_CARTOON_DETAIL = "http://route.showapi.com/978-1"; //内涵漫画详情
+
+    public static final String API_GIRL_IMAGE = "http://route.showapi.com/197-1"; //内涵漫画配图列表
 }
