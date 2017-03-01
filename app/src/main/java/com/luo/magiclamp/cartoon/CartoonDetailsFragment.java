@@ -2,6 +2,8 @@ package com.luo.magiclamp.cartoon;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +92,12 @@ public class CartoonDetailsFragment extends BaseFragment {
 
             @Override
             protected void onFinish(int what) {
-                hideDialog();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mHandler.sendEmptyMessage(1);
+                    }
+                }, 5000);
             }
 
         }.addParam("showapi_appid", Constant.API_KEY_SHOW_ID)
@@ -99,6 +106,13 @@ public class CartoonDetailsFragment extends BaseFragment {
                 .get();
     }
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            hideDialog();
+        }
+    };
 
     private void share() {
         new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.MORE)
