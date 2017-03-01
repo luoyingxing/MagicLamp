@@ -82,7 +82,7 @@ public class CartoonDetailsFragment extends BaseFragment {
         new ApiRequest<CartoonDetail>(ApiURL.API_CARTOON_DETAIL) {
             @Override
             protected void onSuccess(CartoonDetail result) {
-                if (result != null) {
+                if (result != null && result.getShowapi_res_body() != null) {
                     mImageView.setHttpUri(Uri.parse(result.getShowapi_res_body().getImg()));
                 }
             }
