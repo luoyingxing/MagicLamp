@@ -2,7 +2,6 @@ package com.luo.magiclamp.cartoon;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +21,10 @@ import com.luo.magiclamp.entity.GirlImagePack;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.tool.FrescoBuilder;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
-import com.luo.magiclamp.utils.FrescoUtils;
+import com.luo.magiclamp.utils.DpiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +43,6 @@ public class CartoonFragment extends BaseFragment {
     private ListViewAdapter mListViewAdapter;
 
     private int mPage = 1;
-
-    private int[] mLayoutBg = new int[]{R.drawable.bg_blue_color, R.drawable.bg_green_color,
-            R.drawable.bg_purple_color, R.drawable.bg_yellow_color, R.drawable.bg_orange_color};
-
-    private int[] mTitleBg = new int[]{R.color.bg_blue_color, R.color.bg_green_color,
-            R.color.bg_purple_color, R.color.bg_yellow_color, R.color.bg_orange_color};
 
     public CartoonFragment() {
     }
@@ -207,9 +201,14 @@ public class CartoonFragment extends BaseFragment {
             }
 
             Cartoon cartoon = getItem(position);
+            assert cartoon != null;
+            new FrescoBuilder(mActivity, viewHolder.imageView, cartoon.getImage()) {
+                @Override
+                public double reSize(int imageWidth) {
+                    return ((DpiUtils.getWidth() - DpiUtils.dipTopx(20)) * 1.0) / imageWidth;
+                }
+            }.builder();
 
-//            viewHolder.linearLayout.setBackgroundResource(mLayoutBg[position % 5]);
-            FrescoUtils.loadImage(Uri.parse(cartoon.getImage()), viewHolder.imageView);
             viewHolder.titleTV.setText(cartoon.getTitle());
 
             return convertView;

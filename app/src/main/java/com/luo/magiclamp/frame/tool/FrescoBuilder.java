@@ -2,6 +2,7 @@ package com.luo.magiclamp.frame.tool;
 
 import android.content.Context;
 import android.graphics.drawable.Animatable;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -93,6 +94,7 @@ public class FrescoBuilder {
         double ratio = reSize(imgW);
         int lastW = (int) (imgW * ratio);
         int lastH = (int) (imgH * ratio);
+        Log.e("reSize", "w:" + lastW + " , h:" + lastH);
         ViewGroup.LayoutParams lp = imageView.getLayoutParams();
         lp.width = lastW;
         lp.height = lastH;
