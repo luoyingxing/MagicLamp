@@ -1,15 +1,14 @@
 package com.luo.magiclamp.cartoon;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.luo.magiclamp.ApiURL;
@@ -21,9 +20,10 @@ import com.luo.magiclamp.entity.GirlImagePack;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.recycler.ViewHolder;
+import com.luo.magiclamp.frame.recycler.XAdapter;
+import com.luo.magiclamp.frame.recycler.XRecyclerView;
 import com.luo.magiclamp.frame.tool.FrescoBuilder;
-import com.luo.magiclamp.frame.ui.pullableview.PullListView;
-import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
 import com.luo.magiclamp.utils.DpiUtils;
 
 import java.util.ArrayList;
@@ -38,9 +38,8 @@ import java.util.List;
 
 public class CartoonFragment extends BaseFragment {
     private View mRootView;
-    private PullListView mListView;
-    private PullToRefreshLayout mPullToRefreshLayout;
-    private ListViewAdapter mListViewAdapter;
+    private XRecyclerView mRecyclerView;
+    private XAdapter mAdapter;
 
     private int mPage = 1;
 
@@ -66,36 +65,44 @@ public class CartoonFragment extends BaseFragment {
     }
 
     private void findView() {
-        mPullToRefreshLayout = (PullToRefreshLayout) mRootView.findViewById(R.id.pl_cartoon_content);
-        mListView = (PullListView) mRootView.findViewById(R.id.lv_cartoon_content);
-
-        mPullToRefreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-                mLog.e("onRefresh");
-                mListViewAdapter.clear();
-                mPage = 1;
-                loadCartoonData();
-            }
-
-            @Override
-            public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-                mLog.e("onLoadMore");
-                loadCartoonData();
-            }
-        });
+        mRecyclerView = (XRecyclerView) mRootView.findViewById(R.id.xv_cartoon_content);
     }
 
     private void setAdapter() {
-        mListViewAdapter = new ListViewAdapter(mActivity, new ArrayList<Cartoon>());
-        mListView.setAdapter(mListViewAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mAdapter = new XAdapter<Cartoon>(mActivity, new ArrayList<Cartoon>(), R.layout.item_cartoon_list) {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void convert(final ViewHolder holder, Cartoon cartoon) {
+                holder.setText(R.id.tv_item_cartoon_list_title, cartoon.getTitle());
+                SimpleDraweeView imageView = holder.getView(R.id.iv_item_cartoon_list_image);
+
+                new FrescoBuilder(mActivity, imageView, cartoon.getImage()) {
+                    @Override
+                    public double reSize(int imageWidth) {
+                        return ((DpiUtils.getWidth() - DpiUtils.dipTopx(14)) * 1.0) / 2 / imageWidth;
+                    }
+                }.builder();
+
+            }
+        };
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new SpaceItemDecoration(4));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mAdapter.setOnItemClickListener(new XAdapter.OnItemClickListeners<Cartoon>() {
+            @Override
+            public void onItemClick(ViewHolder holder, Cartoon item, int position) {
                 Intent intent = new Intent(mActivity, BaseActivity.class);
-                intent.putExtra(CartoonDetailsFragment.PARAM, mListViewAdapter.getItem(position));
+                intent.putExtra(CartoonDetailsFragment.PARAM, item);
                 intent.putExtra(Constant.ARGS_FRAGMENT_NAME, CartoonDetailsFragment.class.getName());
                 startActivity(intent);
+            }
+        });
+
+        mRecyclerView.setOnLoadMoreListener(new XRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                mLog.e("onLoadMore");
+                loadCartoonData();
             }
         });
     }
@@ -115,8 +122,6 @@ public class CartoonFragment extends BaseFragment {
             @Override
             protected void onFinish(int what) {
                 hideDialog();
-                mPullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-                mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
         }.addParam("showapi_appid", Constant.API_KEY_SHOW_ID)
@@ -131,12 +136,6 @@ public class CartoonFragment extends BaseFragment {
             @Override
             protected void onSuccess(GirlImagePack result) {
                 update(cartoonPack, result);
-            }
-
-            @Override
-            protected void onFinish(int what) {
-                mPullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-                mPullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
@@ -172,53 +171,35 @@ public class CartoonFragment extends BaseFragment {
 
                 cartoonList.add(cartoon);
             }
-
         }
         hideDialog();
-        mListViewAdapter.addAll(cartoonList);
+        mAdapter.addAll(cartoonList);
     }
 
+    public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+        int mSpace;
 
-    private class ListViewAdapter extends ArrayAdapter<Cartoon> {
-
-        public ListViewAdapter(Context context, List<Cartoon> cartoonList) {
-            super(context, 0, cartoonList);
+        /**
+         * @param space 传入的值，其单位视为dp
+         */
+        public SpaceItemDecoration(int space) {
+            this.mSpace = DpiUtils.dipTopx(space);
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int itemCount = mAdapter.getItemCount();
+            int pos = parent.getChildAdapterPosition(view);
 
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_cartoon_list, null);
-                viewHolder = new ViewHolder();
-                viewHolder.linearLayout = (LinearLayout) convertView.findViewById(R.id.ll_item_cartoon_list_root);
-                viewHolder.imageView = (SimpleDraweeView) convertView.findViewById(R.id.iv_item_cartoon_list_image);
-                viewHolder.titleTV = (TextView) convertView.findViewById(R.id.tv_item_cartoon_list_title);
-                convertView.setTag(viewHolder);
+            outRect.left = 0;
+            outRect.top = 0;
+            outRect.bottom = 0;
+
+            if (pos != (itemCount - 1)) {
+                outRect.right = mSpace;
             } else {
-                viewHolder = (ViewHolder) convertView.getTag();
+                outRect.right = 0;
             }
-
-            Cartoon cartoon = getItem(position);
-            assert cartoon != null;
-            new FrescoBuilder(mActivity, viewHolder.imageView, cartoon.getImage()) {
-                @Override
-                public double reSize(int imageWidth) {
-                    return ((DpiUtils.getWidth() - DpiUtils.dipTopx(20)) * 1.0) / imageWidth;
-                }
-            }.builder();
-
-            viewHolder.titleTV.setText(cartoon.getTitle());
-
-            return convertView;
-        }
-
-
-        class ViewHolder {
-            LinearLayout linearLayout;
-            SimpleDraweeView imageView;
-            TextView titleTV;
         }
     }
 }

@@ -140,12 +140,12 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 break;
             case 1:
                 setTopImage(R.mipmap.bg_image_defualt);
-                setTopImageParams(180);
+                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
                 mLog.e("精选");
                 break;
             case 2:
                 setTopImage(R.drawable.main_iamge_bg);
-                setTopImageParams(100);
+                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
                 mLog.e("内涵");
                 break;
             case 3:
@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity implements TabHost.OnTabChangeLis
                 break;
             case 4:
                 setTopImage(R.drawable.main_iamge_bg);
-                setTopImageParams(100);
+                setTopImageParams(WindowUtils.getStatusBarHeight(getApplicationContext()));
                 mLog.e("健康");
                 break;
             case 5:
