@@ -54,7 +54,12 @@ public class BaseFragment extends HandleFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         mLog.v("onActivityCreated()");
         super.onActivityCreated(savedInstanceState);
+
         mActivity.setTitle(getClass().getSimpleName());
+        mActivity.getRightImage().setImageDrawable(null);
+        mActivity.setOnRightImageClick(null);
+        mActivity.getRightText().setText("");
+        mActivity.setOnRightTextClick(null);
     }
 
     @Override
@@ -88,10 +93,6 @@ public class BaseFragment extends HandleFragment {
         hideIME();
         hideDialog();
         MyNoHttp.cancelAll();
-        mActivity.getRightImage().setImageDrawable(null);
-        mActivity.setOnRightImageClick(null);
-        mActivity.getRightText().setText("");
-        mActivity.setOnRightTextClick(null);
     }
 
     @Override
