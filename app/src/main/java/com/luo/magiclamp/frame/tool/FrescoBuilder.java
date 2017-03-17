@@ -41,8 +41,8 @@ public class FrescoBuilder {
         GenericDraweeHierarchy hierarchy =
                 new GenericDraweeHierarchyBuilder(mContext.getResources())
                         .setFadeDuration(1000)
-                        .setPlaceholderImage(mContext.getResources().getDrawable(R.drawable.image_fresco_loading), ScalingUtils.ScaleType.CENTER_INSIDE)
-                        .setFailureImage(mContext.getResources().getDrawable(R.mipmap.bg_image_defualt), ScalingUtils.ScaleType.CENTER_INSIDE)
+                        .setPlaceholderImage(mContext.getResources().getDrawable(R.drawable.image_empty_fresco), ScalingUtils.ScaleType.CENTER_INSIDE)
+                        .setFailureImage(mContext.getResources().getDrawable(R.mipmap.image_load_failed_empty), ScalingUtils.ScaleType.CENTER_INSIDE)
                         .setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
                         .build();
         DraweeHolder mDrawHolder = DraweeHolder.create(hierarchy, mContext);
@@ -75,6 +75,7 @@ public class FrescoBuilder {
                     }
                 })
                 .setOldController(mDrawHolder.getController())
+                .setAutoPlayAnimations(true)
                 .build();
 
         imageView.setController(controller);
