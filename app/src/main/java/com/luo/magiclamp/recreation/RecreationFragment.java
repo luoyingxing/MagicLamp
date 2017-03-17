@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -18,18 +17,19 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.luo.magiclamp.ApiURL;
 import com.luo.magiclamp.Constant;
 import com.luo.magiclamp.R;
 import com.luo.magiclamp.entity.Joke;
-import com.luo.magiclamp.entity.JokeBody;
 import com.luo.magiclamp.entity.JokePack;
 import com.luo.magiclamp.frame.BaseActivity;
 import com.luo.magiclamp.frame.BaseFragment;
 import com.luo.magiclamp.frame.network.ApiRequest;
+import com.luo.magiclamp.frame.tool.FrescoBuilder;
 import com.luo.magiclamp.frame.ui.pullableview.PullListView;
 import com.luo.magiclamp.frame.ui.pullableview.PullToRefreshLayout;
-import com.luo.magiclamp.frame.ui.view.NewsDetailImageView;
+import com.luo.magiclamp.utils.DpiUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -324,7 +324,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                         convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_recreation_joke_img, null);
                         viewHolderImg = new ViewHolderImg();
                         viewHolderImg.titleTV = (TextView) convertView.findViewById(R.id.tv_item_joke_img_title);
-                        viewHolderImg.imageView = (NewsDetailImageView) convertView.findViewById(R.id.tv_item_joke_img_image);
+                        viewHolderImg.imageView = (SimpleDraweeView) convertView.findViewById(R.id.tv_item_joke_img_image);
                         viewHolderImg.shareTV = (TextView) convertView.findViewById(R.id.tv_item_joke_img_share);
 
                         convertView.setTag(viewHolderImg);
@@ -332,9 +332,14 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                         Joke jokeImg = getItem(position);
 
                         viewHolderImg.titleTV.setText(jokeImg.getTitle());
-                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
                         viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
+                        new FrescoBuilder(mActivity, viewHolderImg.imageView, jokeImg.getImg()) {
+                            @Override
+                            public double reSize(int imageWidth) {
+                                return ((DpiUtils.getWidth() - DpiUtils.dipTopx(20)) * 1.0) / imageWidth;
+                            }
+                        }.builder();
 
                         break;
                 }
@@ -357,9 +362,14 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
                         Joke jokeImg = getItem(position);
 
                         viewHolderImg.titleTV.setText(jokeImg.getTitle());
-                        viewHolderImg.imageView.setHttpUri(Uri.parse(jokeImg.getImg()));
                         viewHolderImg.shareTV.setOnTouchListener(RecreationFragment.this);
                         viewHolderImg.shareTV.setOnClickListener(new ItemListener(jokeImg));
+                        new FrescoBuilder(mActivity, viewHolderImg.imageView, jokeImg.getImg()) {
+                            @Override
+                            public double reSize(int imageWidth) {
+                                return ((DpiUtils.getWidth() - DpiUtils.dipTopx(20)) * 1.0) / imageWidth;
+                            }
+                        }.builder();
                         break;
                 }
             }
@@ -375,7 +385,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
 
         class ViewHolderImg {
             TextView titleTV;
-            NewsDetailImageView imageView;
+            SimpleDraweeView imageView;
             TextView shareTV;
         }
 
@@ -426,7 +436,7 @@ public class RecreationFragment extends BaseFragment implements View.OnTouchList
     }
 
 
-    class Title {
+    private class Title {
         private int imageId;
         private String title;
 

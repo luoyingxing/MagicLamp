@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp" />
 
-    <com.luo.magiclamp.frame.ui.view.NewsDetailImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/tv_item_joke_img_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
