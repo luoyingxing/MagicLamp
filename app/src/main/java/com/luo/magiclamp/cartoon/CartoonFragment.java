@@ -78,14 +78,14 @@ public class CartoonFragment extends BaseFragment {
                 new FrescoBuilder(mActivity, imageView, cartoon.getImage()) {
                     @Override
                     public double reSize(int imageWidth) {
-                        return ((DpiUtils.getWidth() - DpiUtils.dipTopx(14)) * 1.0) / 2 / imageWidth;
+                        return ((DpiUtils.getWidth() - DpiUtils.dipTopx(8)) * 1.0) / 2 / imageWidth;
                     }
                 }.builder();
 
             }
         };
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new SpaceItemDecoration(4));
+        mRecyclerView.addItemDecoration(new SpaceItemDecoration(2));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mAdapter.setOnItemClickListener(new XAdapter.OnItemClickListeners<Cartoon>() {
@@ -191,9 +191,9 @@ public class CartoonFragment extends BaseFragment {
             int itemCount = mAdapter.getItemCount();
             int pos = parent.getChildAdapterPosition(view);
 
-            outRect.left = 0;
-            outRect.top = 0;
-            outRect.bottom = 0;
+            outRect.left = mSpace;
+            outRect.top = mSpace;
+            outRect.bottom = mSpace;
 
             if (pos != (itemCount - 1)) {
                 outRect.right = mSpace;

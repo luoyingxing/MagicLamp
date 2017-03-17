@@ -42,6 +42,7 @@ public class BaseFragment extends HandleFragment {
     public void onCreate(Bundle savedInstanceState) {
         mLog.v("onCreate()");
         super.onCreate(savedInstanceState);
+        MyNoHttp.cancelAll();
     }
 
     @Override
@@ -92,7 +93,6 @@ public class BaseFragment extends HandleFragment {
         super.onDestroyView();
         hideIME();
         hideDialog();
-        MyNoHttp.cancelAll();
     }
 
     @Override
