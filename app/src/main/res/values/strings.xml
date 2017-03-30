@@ -42,10 +42,10 @@
     <string name="about_us_string_11">All Rights Reserved</string>
     <string name="about_us_string_12">版本号&#160;V</string>
 
-    <string name="personal_help_title">“神灯”是一款集新闻、精选、热点、娱乐、健康和工具于一体的APP。[PS]您可将您的需求或建议发送至开发者邮箱：luoyingxing@126.com，我们会根据您的宝贵建议进行完善。</string>
-    <string name="personal_help_news">[新闻]可以看到当前滚动的新闻时事。</string>
+    <string name="personal_help_title">“神灯”是一款集热点、精选、内涵、娱乐、健康和工具于一体的APP。[PS]您可将您的需求或建议发送至开发者邮箱：luoyingxing@126.com，我们会根据您的宝贵建议进行完善。</string>
+    <string name="personal_help_news">[热点]可以查看到当前热点的新闻时事。</string>
     <string name="personal_help_recommend">[精选]可以浏览一些精选的视频或段子，愉悦你的心情。</string>
-    <string name="personal_help_focus">[热点]可以查看到当前热点的新闻时事。</string>
+    <string name="personal_help_focus">[内涵]这里有无尽的内涵段子，打开你的脑洞。</string>
     <string name="personal_help_recreation">[娱乐]这里有你喜欢的文本笑话和图文笑话，让你爆笑一刻。</string>
     <string name="personal_help_health">[健康]在这里，你可以了解到各种健康知识。</string>
     <string name="personal_help_personal">[个人]这里有个私人工具箱，你可以通过反馈或者联系开发者进行增加您想要的工具模块，满足您的需求。</string>
