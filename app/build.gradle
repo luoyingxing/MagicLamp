@@ -12,14 +12,7 @@ android {
         versionName "1.1.3"
     }
 
-    signingConfigs {
-        release {
-            storeFile file("magiclamp.jks")
-            storePassword "15986049088"
-            keyAlias "luoyingxing"
-            keyPassword "15986049088"
-        }
-    }
+
 
     buildTypes {
         debug {
